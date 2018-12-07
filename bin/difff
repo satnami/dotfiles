@@ -1,0 +1,12 @@
+#!/bin/bash
+
+#Diff using meld for better view
+
+if [ -z "$1" ] && [ -z "$2" ]
+then
+  echo "Usage: difff x y";
+  echo "x, y folder/file"
+  exit 1
+fi
+
+meld $1 $2 &

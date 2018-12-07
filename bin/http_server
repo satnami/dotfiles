@@ -1,0 +1,7 @@
+#!/bin/bash
+
+port=5000
+dir=$1
+php -S localhost:$port -t $dir
+#ruby -run -e httpd . -p $port
+#python -m SimpleHTTPServer $port

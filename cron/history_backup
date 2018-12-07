@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+#notify-send Announcements "I'm starting to backup your history"
+
+NOW=$(date +"%d_%m_%Y")
+FILE="history_$NOW.log"
+LOCATION="~/history_logs"
+
+mkdir -p $LOCATION
+
+sudo -u satnami bash << EOF
+ cp ~/.bash_history "$LOCATION/satnami_bash_$FILE"
+ cp ~/.zsh_history "$LOCATION/satnami_zsh_$FILE"
+EOF
+
+sudo -u root bash << EOF
+ cp /root/.bash_history "$LOCATION/root_bash_$FILE"
+ cp /root/.zsh_history "$LOCATION/root_zsh_$FILE"
+EOF

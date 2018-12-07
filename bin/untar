@@ -1,0 +1,22 @@
+#!/bin/bash
+
+if [ -z "$1" ]
+then
+  echo "Usage: untar (*.gz | *.tar | .bz2)";
+  exit 1
+fi
+
+
+filename=$1
+extension="${filename##*.}"
+
+if [ "$extension" == "gz" ]; then
+    tar -zxvf $filename
+elif [ "$extension" == "tar" ]; then
+    tar -xvf $filename
+elif [ "$extension" == "bz2" ]; then
+    tar jxf $filename
+else
+    echo "Usage: untar (*.gz | *.tar | .bz2)";
+    echo "       unknown extension (.$extension)"
+fi
