@@ -1,0 +1,12 @@
+127.0.0.1	localhost
+127.0.0.1	satnami.localhost
+127.0.0.1	metabase.localhost
+127.0.0.1	shipyard.localhost
+127.0.0.1   portainer.localhost
+127.0.0.1	postgres.localhost
+127.0.0.1	tick.localhost
+127.0.0.1	netdata.localhost
+127.0.0.1	wallabag.localhost
+127.0.0.1	localstack.localhost
+127.0.0.1	sentry.localhost
+127.0.0.1	openproject.localhost

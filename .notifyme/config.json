@@ -1,0 +1,9 @@
+{
+  "instapush_app_id": "",
+  "instapush_app_secret": "",
+  "twilio_sid": "",
+  "twilio_auth_token": "",
+  "twilio_phone_number": "",
+  "phone_number": "",
+  "message": ""
+}

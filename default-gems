@@ -1,0 +1,30 @@
+bundler
+
+# Misc
+lolcat
+terminal-notifier
+
+# UML
+railroad
+railroady
+jekyll
+
+# Code smell & analyzer
+reek
+rubocop
+
+# Development
+pry
+yaml-lint
+aescrypt
+httparty
+puma 3.10.0
+
+# Framework
+thin
+foreman
+sinatra
+rails
+
+# Haste Client
+haste
