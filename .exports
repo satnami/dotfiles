@@ -1,0 +1,74 @@
+#!/usr/bin/env bash
+
+#export TERM="screen-256color"
+
+#export HASTE_SERVER="https://satnami-hastebin.herokuapp.com"
+
+#parse_git_branch() {
+#     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+#}
+#export PS1="\e[0;32m\u@\h \[\033[32m\]\w\[\033[33m\]\$(parse_git_branch)\[\033[00m\] $\e[m"
+
+#Minishift#
+#export MINISHIFT_USERNAME=
+#export MINISHIFT_PASSWORD=
+
+#Maven#
+#export M2_HOME=/opt/maven
+#export PATH=${M2_HOME}/bin:${PATH}
+
+### Added by the Heroku Toolbelt
+#export PATH="/usr/local/heroku/bin:$PATH"
+
+# Add Rbenv PATH for scripting.
+#export RBENV_ROOT="$HOME/.rbenv"
+#export PATH="$RBENV_ROOT/bin:$PATH"
+#eval "$(rbenv init -)"
+#export PATH="$RBENV_ROOT/plugins/ruby-build/bin:$PATH"
+
+# Add RVM to PATH for scripting.
+#export PATH="$HOME/.rvm/bin:$PATH"
+
+#export PATH="$HOME/Sla-Projects/ERIF/tools/assembler:$PATH"
+
+#export ANT_HOME=/usr/share/ant
+
+#export JAVA_HOME=/usr/lib/jvm/java-1.6.0-openjdk-amd64
+#export JAVA_HOME=/usr/lib/jvm/java-8-oracle
+#export JAVA_HOME=/usr/lib/jvm/java-6-oracle
+
+#export JBOSS_HOME=/usr/local/share/jboss/jboss-5.0.1-GA
+
+#export ORACLE_HOME=/u01/app/oracle/product/11.2.0/xe
+
+#export ORACLE_SID=XE
+#export NLS_LANG=`$ORACLE_HOME/bin/nls_lang.sh`
+#export ORACLE_BASE=/u01/app/oracle
+#export LD_LIBRARY_PATH=$ORACLE_HOME/lib:$LD_LIBRARY_PATH
+#export PATH=$ORACLE_HOME/bin:$PATH
+#export PATH=$HOME/bin:$PATH
+
+#export ANDROID_HOME="$HOME/Android/Sdk"
+#export PATH="$ANDROID_HOME/tools:$PATH"
+
+#export PATH="$HOME/activator-dist-1.3.10/bin:$PATH"
+
+#export PATH="$HOME/.yarn/bin:$PATH"
+
+#export PATH="$HOME/.cargo/bin:$PATH"
+
+#export SCALA_HOME=/usr/local/scala-2.12.2
+#export PATH="$SCALA_HOME/bin:$PATH"
+
+#export FLUTTER_HOME=/usr/local/flutter
+#export PATH="$FLUTTER_HOME/bin:$PATH"
+
+#export GOOGLE_CLOUD_SDK_HOME=$HOME/google-cloud-sdk
+#export PATH="$GOOGLE_CLOUD_SDK_HOME/bin:$PATH"
+
+#export PATH="$HOME/.fabric8/bin:$PATH"
+
+#export PATH="$HOME/jruby-9.1.7.0/bin/:$PATH"
+
+#export _JAVA_OPTIONS="-Xms1024m -Xmx2G -Xss256m -XX:MaxPermSize=4G"
+#export ANT_OPTS="-Xmx2g -XX:MaxPermSize=512m"
