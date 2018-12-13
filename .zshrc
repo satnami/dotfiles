@@ -1,6 +1,3 @@
-# If you come from bash you might have to change your $PATH.
-#export PATH=$HOME/bin:/usr/local/bin:$PATH
-
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -13,8 +10,8 @@ POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status root_indicator history time)
 DISABLE_AUTO_TITLE="true"
 POWERLEVEL9K_SHORTEN_STRATEGY="truncate_middle"
 POWERLEVEL9K_SHORTEN_DIR_LENGTH=4
-
 POWERLEVEL9K_STATUS_VERBOSE=false
+
 export DEFAULT_USER="$USER"
 
 # Set list of themes to pick from when loading at random
@@ -81,7 +78,7 @@ export EDITOR='micro'
 # export ARCHFLAGS="-arch x86_64"
 
 # ssh
-# export SSH_KEY_PATH="~/.ssh/rsa_id"
+export SSH_KEY_PATH="$HOME/.ssh/id_rsa"
 
 source "$HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh"
 source "/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
