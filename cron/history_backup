@@ -4,16 +4,14 @@
 
 NOW=$(date +"%d_%m_%Y")
 FILE="history_$NOW.log"
-LOCATION="~/history_logs"
+LOCATION="$HOME/history_logs"
 
 mkdir -p $LOCATION
 
 sudo -u satnami bash << EOF
- cp ~/.bash_history "$LOCATION/satnami_bash_$FILE"
- cp ~/.zsh_history "$LOCATION/satnami_zsh_$FILE"
+ cp "$HOME/.bash_history" "$LOCATION/satnami_bash_$FILE"
+ cp "$HOME/.zsh_history" "$LOCATION/satnami_zsh_$FILE"
 EOF
 
-sudo -u root bash << EOF
- cp /root/.bash_history "$LOCATION/root_bash_$FILE"
- cp /root/.zsh_history "$LOCATION/root_zsh_$FILE"
-EOF
+
+#find -E . -regex '.*(zsh|bash|redis|psql)*(.|-|_)history' -maxdepth 1 -type f -exec basename {} \;

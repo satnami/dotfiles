@@ -1,3 +1,8 @@
+export TERM="xterm-256color"
+
+# If you come from bash you might have to change your $PATH.
+#export PATH=$HOME/bin:/usr/local/bin:$PATH
+
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -13,6 +18,8 @@ POWERLEVEL9K_SHORTEN_DIR_LENGTH=4
 POWERLEVEL9K_STATUS_VERBOSE=false
 
 export DEFAULT_USER="$USER"
+
+export MAILTO="mssatnami@gmail.com"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -80,9 +87,21 @@ export EDITOR='micro'
 # ssh
 export SSH_KEY_PATH="$HOME/.ssh/id_rsa"
 
-source "$HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh"
-source "/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+[ -f "$HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh" ] && source "$HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
 [ -f "$HOME/.bash_profile" ] && source "$HOME/.bash_profile"
 
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
 [ -f "$HOME/.fzf.zsh" ] && source "$HOME/.fzf.zsh"
+
+[ -f "$HOME/.config/up/up.sh" ] && source "$HOME/.config/up/up.sh"
+
+[ -f "$HOME/.zplug/init.zsh" ] && source "$HOME/.zplug/init.zsh"
+
+[ -f "$HOME/.history_preexec.sh" ] && source "$HOME/.history_preexec.sh"
+
+source ~/.zplug/init.zsh
+
+zplug "changyuheng/fz", defer:1
+zplug "rupa/z", use:z.sh
