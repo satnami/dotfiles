@@ -1,31 +1,35 @@
 #!/usr/bin/env bash
 
-
 # some more ls aliases
-alias ll='ls -alF'
+alias ll='ls -alhF'
 alias la='ls -A'
 alias l='ls -CF'
-alias ls='ls -a -lrt'
-alias lsd='ls -a -lrt -d */'
+alias ls='ls -a -lrth'
+alias lsd='ls -a -lrth -d */'
 
 alias clear='clear; echo; echo; seq 1 $(tput cols) | sort -R | spark; echo; echo'
 alias cl="clear"
 alias mkdir="mkdir -p"
 alias rmd='rm -r'
-alias ..="cd .."
 alias ~="cd ~"
+alias ..="cd .."
+alias ...="cd ../.."
 alias ddownload="cd ~/Downloads"
 alias ddesktop="cd ~/Desktop"
 alias dapps="cd ~/Apps"
 alias dsource="cd ~/Source"
+alias dsla="cd ~/Sla-Projects"
+alias dalacrity="cd ~/Sla-Projects/Alacrity"
 alias dhistory="cd ~/history_logs"
 
 alias chmox='chmod +x'
 
 alias gclone='git clone'
 
-alias party='curl parrot.live'
-alias partys='curl parrot.live --max-time 2'
+alias party.live='curl parrot.live'
+alias partys.live='curl parrot.live --max-time 2'
+
+alias party="imgcat ~/parrot.gif"
 
 alias h='function hdi(){ howdoi $* -c -n 5; }; hdi'
 
@@ -37,6 +41,9 @@ alias scrcpy='docker run --rm -i -t --privileged --name satnami-scrcpy -v /dev/b
 
 alias top='htop'
 alias file_manager='mc'
+alias fm='nnn'
+
+alias httpt='wuzz'
 
 alias duplicates='echo "Start finding duplicates" && find . ! -empty -type f -exec md5sum {} + | sort | uniq -w32 -dD'
 
@@ -44,6 +51,8 @@ alias duplicates='echo "Start finding duplicates" && find . ! -empty -type f -ex
 alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date'
 
 alias path='echo $PATH | tr -s ":" "\n"'
+
+alias reload="exec $SHELL"
 
 # Add an "alert" alias for long running commands.  Use like so: `sleep 10; alert`
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
