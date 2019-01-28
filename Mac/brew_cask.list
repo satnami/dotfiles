@@ -1,0 +1,23 @@
+Homebrew Cask provides a friendly CLI workflow for the administration
+of macOS applications distributed as binaries.
+
+Commands:
+
+    audit      verifies installability of Casks
+    cat        dump raw source of the given Cask to the standard output
+    create     creates the given Cask and opens it in an editor
+    doctor     checks for configuration issues
+    edit       edits the given Cask
+    fetch      downloads remote application files to local cache
+    home       opens the homepage of the given Cask
+    info       displays information about the given Cask
+    install    installs the given Cask
+    list       with no args, lists installed Casks; given installed Casks, lists staged files
+    outdated   list the outdated installed Casks
+    reinstall  reinstalls the given Cask
+    style      checks Cask style using RuboCop
+    uninstall  uninstalls the given Cask
+    upgrade    upgrades all outdated casks
+    zap        zaps all files associated with the given Cask
+
+See also "man brew-cask"
