@@ -14,6 +14,7 @@ alias rmd='rm -r'
 alias ~="cd ~"
 alias ..="cd .."
 alias ...="cd ../.."
+alias ....="cd ../../.."
 alias ddownload="cd ~/Downloads"
 alias ddesktop="cd ~/Desktop"
 alias dapps="cd ~/Apps"
@@ -38,6 +39,8 @@ alias makecpp='function makecpp(){ g++ $1 -o $2;  }; makecpp'
 alias sdump='genact -m memdump'
 
 alias scrcpy='docker run --rm -i -t --privileged --name satnami-scrcpy -v /dev/bus/usb:/dev/bus/usb  -v /tmp/.X11-unix:/tmp/.X11-unix  -e DISPLAY=$DISPLAY  pierlo1/scrcpy:intel'
+
+alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
 
 alias top='htop'
 alias file_manager='mc'
@@ -75,3 +78,6 @@ alias disk='df -h'
 
 alias dockersh='function dockersh(){ docker exec -it $1 /bin/sh; }; dockersh'
 alias dockerbash='function dockerbash(){ docker exec -it $1 /bin/bash; }; dockerbash'
+
+# Recursively remove .DS_Store files
+alias cleanupds="find . -type f -name '*.DS_Store' -ls -delete"
