@@ -1,15 +1,19 @@
 [github]
-    user = satnami
+	user = satnami
 [user]
 	name = Mhd Sami Almouhtaseb
 	email = mssatnami@gmail.com
-	signingkey = 478090F9
+	signingkey = C7975D90478090F9
 [color]
 	ui = true
 [core]
 	autocrlf = false
 	safecrlf = true
+	excludesfile = ~/.gitignore_global
 [alias]
+	pl = push
+	ps = push
+	l = log --pretty=oneline -n 20 --graph --abbrev-commit
 	aa = add --all
 	co = checkout
 	br = branch
@@ -24,20 +28,33 @@
 	psou = push origin upstream
 	tags = tag -l
 	remotes = remote -v
-	branches = branch -v
+	branches = branch -a
 	branchesr = for-each-ref --sort=-committerdate --format=\"%(color:green)%(authordate:relative)\t%(color:red)%(authorname)\t%(color:white)%(color:bold)%(refname:short)\" refs/remotes
 	stashs = stash list
 	dummy = ' add . && git commit -m "." && git push origin master'
 	open = !vim `~/git-open.sh`
+	contributors = shortlog --summary --numbered
 [commit]
 #	gpgsign = true
 [push]
 	default = current
-[gpg]
-	program = /usr/bin/gpg
 [pull]
 	default = current
 [credential]
 	helper = osxkeychain
+[help]
+	autocorrect = 1
 #[url "git@github.com:"]
-#	insteadOf = https://github.com/
+#	insteadOf = "https://github.com"
+#[url "git@github.com:"]
+#	insteadOf = "gh:"
+#	pushInsteadOf = "github:"
+#	pushInsteadOf = "git://github.com/"
+#[url "git://github.com/"]
+#	insteadOf = "github:"
+#[url "git@gist.github.com:"]
+#	insteadOf = "gst:"
+#	pushInsteadOf = "gist:"
+#	pushInsteadOf = "git://gist.github.com/"
+#[url "git://gist.github.com/"]
+#	insteadOf = "gist:"
