@@ -19,6 +19,7 @@ cloc
 cmake
 cmatrix
 cocoapods
+codeclimate
 consul
 coreutils
 cowsay
@@ -28,8 +29,10 @@ curl
 dbus
 dbus-glib
 docker-machine
+docker-machine-driver-hyperkit
 docker-machine-driver-xhyve
 dockutil
+dos2unix
 ergo
 exa
 exercism
@@ -47,6 +50,7 @@ gdbm
 gdk-pixbuf
 geoip
 gettext
+gifsicle
 git
 git-crypt
 git-extras
@@ -90,6 +94,7 @@ jemalloc
 jid
 jpeg
 jq
+kops
 kubernetes-cli
 kubernetes-helm
 lame
@@ -117,6 +122,7 @@ libuv
 libvorbis
 libvpx
 libvterm
+libxml2
 libyaml
 libzip
 little-cms2
@@ -126,6 +132,7 @@ lz4
 lzo
 m-cli
 make
+mas
 micro
 midnight-commander
 moreutils
@@ -179,6 +186,7 @@ rbenv
 rbenv-default-gems
 rbenv-gemset
 readline
+reattach-to-user-namespace
 redis
 ruby
 ruby-build
@@ -190,6 +198,7 @@ screenresolution
 sdl2
 sfnt2woff
 sfnt2woff-zopfli
+skaffold
 sl
 snappy
 socat
@@ -201,6 +210,7 @@ subversion
 task
 terminal-notifier
 terraform
+the_silver_searcher
 thefuck
 theora
 tig
@@ -208,11 +218,14 @@ tldr
 tmux
 traefik
 tree
+ttyrec
 unibilium
 unrar
 utf8proc
+v8
 vim
 watch
+watchman
 webp
 wget
 wifi-password
@@ -222,6 +235,7 @@ woff2
 x264
 x265
 xhyve
+xml2
 xsv
 xvid
 xz
