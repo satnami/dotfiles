@@ -2,6 +2,8 @@
 
 #export TERM="screen-256color"
 
+export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
+
 export HASTE_SERVER="https://satnami-hastebin.herokuapp.com"
 
 #parse_git_branch() {
@@ -11,31 +13,42 @@ export HASTE_SERVER="https://satnami-hastebin.herokuapp.com"
 
 export GOPATH=$HOME/go
 export GOROOT=/usr/local/opt/go/libexec
-export PATH=$PATH:$GOPATH/bin
-export PATH=$PATH:$GOROOT/bin
+export PATH=$PATH:$GOPATH/bin:$GOROOT/bin
 
-export PATH=$(brew --prefix openvpn)/sbin:$PATH
+export PATH=$PATH:$(brew --prefix openvpn)/sbin
+
+export GPG_TTY=$(tty)
+
+export PATH=$PATH:/usr/local/opt/inetutils/libexec/gnubin
 
 #Minishift#
 #export MINISHIFT_USERNAME=
 #export MINISHIFT_PASSWORD=
 
-#Maven#
+# Maven
 #export M2_HOME=/opt/maven
-#export PATH=${M2_HOME}/bin:${PATH}
+#export PATH=${PATH}:${M2_HOME}/bin
 
-### Added by the Heroku Toolbelt
-#export PATH="/usr/local/heroku/bin:$PATH"
+# Added by the Heroku Toolbelt
+#export PATH="$PATH:/usr/local/heroku/bin"
 
 # Add Rbenv PATH for scripting.
-#export RBENV_ROOT="$HOME/.rbenv"
-#export PATH="$RBENV_ROOT/bin:$PATH"
-#export PATH="$RBENV_ROOT/plugins/ruby-build/bin:$PATH"
+export RBENV_ROOT="$HOME/.rbenv"
+export RBENV_ROOT=$(rbenv root)
+export PATH=$PATH:$RBENV_ROOT/shims
+#export PATH="$PATH:$RBENV_ROOT/plugins/ruby-build/bin"
+
+# Add Pyenv PATH for scripting.
+# export PYENV_ROOT="$HOME/.pyenv"
+export PYENV_ROOT=$(pyenv root)
+export PATH=$PATH:$PYENV_ROOT/shims
 
 # Add RVM to PATH for scripting.
-#export PATH="$HOME/.rvm/bin:$PATH"
+#export PATH="$PATH:$HOME/.rvm/bin"
 
-#export PATH="$HOME/Sla-Projects/ERIF/tools/assembler:$PATH"
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
 
 #export ANT_HOME=/usr/share/ant
 
@@ -51,30 +64,29 @@ export PATH=$(brew --prefix openvpn)/sbin:$PATH
 #export NLS_LANG=`$ORACLE_HOME/bin/nls_lang.sh`
 #export ORACLE_BASE=/u01/app/oracle
 #export LD_LIBRARY_PATH=$ORACLE_HOME/lib:$LD_LIBRARY_PATH
-#export PATH=$ORACLE_HOME/bin:$PATH
-#export PATH=$HOME/bin:$PATH
+#export PATH=$PATH:$ORACLE_HOME/bin
 
 #export ANDROID_HOME="$HOME/Android/Sdk"
-#export PATH="$ANDROID_HOME/tools:$PATH"
+#export PATH="$PATH:$ANDROID_HOME/tools"
 
-#export PATH="$HOME/activator-dist-1.3.10/bin:$PATH"
+#export PATH="$PATH:$HOME/.yarn/bin"
 
-#export PATH="$HOME/.yarn/bin:$PATH"
-
-#export PATH="$HOME/.cargo/bin:$PATH"
+#export PATH="$PATH:$HOME/.cargo/bin"
 
 #export SCALA_HOME=/usr/local/scala-2.12.2
-#export PATH="$SCALA_HOME/bin:$PATH"
+#export PATH="$PATH:$SCALA_HOME/bin"
 
 #export FLUTTER_HOME=/usr/local/flutter
-#export PATH="$FLUTTER_HOME/bin:$PATH"
+#export PATH="$PATH:$FLUTTER_HOME/bin"
 
 #export GOOGLE_CLOUD_SDK_HOME=$HOME/google-cloud-sdk
-#export PATH="$GOOGLE_CLOUD_SDK_HOME/bin:$PATH"
+#export PATH="$PATH:$GOOGLE_CLOUD_SDK_HOME/bin"
 
-#export PATH="$HOME/.fabric8/bin:$PATH"
+export PATH="$PATH:$HOME/.fabric8/bin"
 
-#export PATH="$HOME/jruby-9.1.7.0/bin/:$PATH"
+#export PATH="$PATH:$HOME/jruby-9.1.7.0/bin/"
 
 #export _JAVA_OPTIONS="-Xms1024m -Xmx2G -Xss256m -XX:MaxPermSize=4G"
 #export ANT_OPTS="-Xmx2g -XX:MaxPermSize=512m"
+export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"
+export PATH="/usr/local/opt/libxml2/bin:$PATH"

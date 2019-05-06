@@ -3,6 +3,7 @@ export TERM="xterm-256color"
 # If you come from bash you might have to change your $PATH.
 #export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -11,7 +12,7 @@ ZSH_THEME="powerlevel9k/powerlevel9k"
 POWERLEVEL9K_MODE='nerdfont-complete'
 POWERLEVEL9K_PROMPT_ON_NEWLINE=true
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon dir vcs status rbenv)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status root_indicator history time)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status history time)
 DISABLE_AUTO_TITLE="true"
 POWERLEVEL9K_SHORTEN_STRATEGY="truncate_middle"
 POWERLEVEL9K_SHORTEN_DIR_LENGTH=4
@@ -67,8 +68,15 @@ COMPLETION_WAITING_DOTS="true"
 
 # Which plugins would you like to load?
 plugins=(
-  git git-extras colored-man colorize brew osx zsh-syntax-highlighting zsh-autosuggestions screen
+  colorize zsh-syntax-highlighting zsh-autosuggestions ssh-agent notify
 )
+
+zstyle :omz:plugins:ssh-agent agent-forwarding on
+zstyle :omz:plugins:ssh-agent identities id_rsa id_dsa id_rsa_sla id_rsa_bot
+zstyle :omz:plugins:ssh-agent lifetime
+
+zstyle ':notify:*' error-title "Command failed (in #{time_elapsed} seconds)"
+zstyle ':notify:*' success-title "Command finished (in #{time_elapsed} seconds)"
 
 source $ZSH/oh-my-zsh.sh
 
@@ -85,9 +93,7 @@ export EDITOR='micro'
 # export ARCHFLAGS="-arch x86_64"
 
 # ssh
-export SSH_KEY_PATH="$HOME/.ssh/id_rsa"
-
-[ -f "$HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh" ] && source "$HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh"
+# export SSH_KEY_PATH="$HOME/.ssh/id_rsa"
 
 [ -f "$HOME/.bash_profile" ] && source "$HOME/.bash_profile"
 
@@ -100,6 +106,8 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 [ -f "$HOME/.zplug/init.zsh" ] && source "$HOME/.zplug/init.zsh"
 
 [ -f "$HOME/.history_preexec.sh" ] && source "$HOME/.history_preexec.sh"
+
+[ -f $(dirname $(gem which colorls))/tab_complete.sh ] && source $(dirname $(gem which colorls))/tab_complete.sh
 
 source ~/.zplug/init.zsh
 

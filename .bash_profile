@@ -7,6 +7,8 @@ esac
 
 export PATH=$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH
 
+export PATH=$HOME/dotfiles/bin:$PATH
+
 # Load the shell dotfiles, and then some:
 # * ~/.extra can be used for other settings you don’t want to commit.
 for file in ~/.{path,bash_prompt,exports,aliases,functions,extra}; do
@@ -25,10 +27,11 @@ HISTCONTROL=ignoreboth
 HISTTIMEFORMAT="%y-%m-%d %H:%M:%S "
 PROMPT_COMMAND="history -a"
 
+# autocorrect typos in path names when using `cd`
+# shopt -s cdspell
+
 # (bash) append to the history file, don't overwrite it
 # shopt -s histappend
-# (bash) Autocorrect typos in path names when using `cd`
-# shopt -s cdspell;
 # (bash) check the window size after each command and, if necessary, update the values of LINES and COLUMNS.
 # shopt -s checkwinsize
 # If set, the pattern "**" used in a pathname expansion context will match all files and zero or more directories and subdirectories.
@@ -52,16 +55,14 @@ elif [ -f /etc/bash_completion ]; then
 	source /etc/bash_completion;
 fi;
 
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-# export SDKMAN_DIR="$HOME/.sdkman"
-# [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
+eval $(thefuck --alias)
+eval "$(rbenv init -)"
+if command -v pyenv 1>/dev/null 2>&1; then eval "$(pyenv init -)"; fi
+if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
+#eval $(minishift oc-env)
+#eval $(minishift docker-env)
 
 # fortune | cowsay -f stegosaurus | lolcat
 cowsay -f stegosaurus "Now I Am Become Death, The Destroyer Of Worlds"
 # echo 'Now I Am Become Death, The Destroyer Of Worlds' | parrotsay
 # espeak "Hey folks!"
-
-eval $(thefuck --alias)
-eval "$(rbenv init -)"
-eval "$(pyenv init -)"
-if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
