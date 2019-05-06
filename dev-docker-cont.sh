@@ -25,6 +25,8 @@ docker run --name satnami-yopass -p 1337:1337 -e 'MEMCACHED=memcache:11211' --li
 
 docker run --name satnami-vpnc --privileged -d satnami/vpnc
 
+# docker run --name satnami-trilium -p 5050:8080 -v ~/Apps/trilium-data:/root/trilium-data -d zadam/trilium:latest
+
 # docker run -d -p 9991:8080 -p 9990:9990 --name satnami-wildfly -it jboss/wildfly /opt/jboss/wildfly/bin/standalone.sh -bmanagement 0.0.0.0
 
 # export ACTION=remove && curl -sSL https://shipyard-project.com/deploy | bash -s
