@@ -45,6 +45,11 @@ filetype indent on
 
 autocmd FileType ruby compiler ruby
 
+
+set wildmenu
+set wildmode=list:longest
+set wildignore=*.dll,*.o,*.obj,*.bak,*.exe,*.pyc,*.swp,*.jpg,*.gif,*.png
+set lz
 set autoindent
 set cursorcolumn
 set cursorline
@@ -61,6 +66,8 @@ set hlsearch
 
 set wrap
 set linebreak
+
+set noswapfile
 
 syntax on
 color dracula
