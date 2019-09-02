@@ -2,6 +2,8 @@
 
 #export TERM="screen-256color"
 
+export PATH=$PATH:/usr/local/opt/postgresql@9.4/bin
+
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 
 export HASTE_SERVER="https://satnami-hastebin.herokuapp.com"
@@ -10,6 +12,8 @@ export HASTE_SERVER="https://satnami-hastebin.herokuapp.com"
 #     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 #}
 #export PS1="\e[0;32m\u@\h \[\033[32m\]\w\[\033[33m\]\$(parse_git_branch)\[\033[00m\] $\e[m"
+
+export PATH=$PATH:$(npm prefix -g)/lib/node_modules
 
 export GOPATH=$HOME/go
 export GOROOT=/usr/local/opt/go/libexec
@@ -66,8 +70,11 @@ export SDKMAN_DIR="$HOME/.sdkman"
 #export LD_LIBRARY_PATH=$ORACLE_HOME/lib:$LD_LIBRARY_PATH
 #export PATH=$PATH:$ORACLE_HOME/bin
 
-#export ANDROID_HOME="$HOME/Android/Sdk"
-#export PATH="$PATH:$ANDROID_HOME/tools"
+export ANDROID_HOME="$HOME/Library/Android/sdk"
+export PATH="$PATH:$ANDROID_HOME/tools"
+
+export FLUTTER_HOME="$HOME/Apps/flutter"
+export PATH=$PATH:$FLUTTER_HOME/bin
 
 #export PATH="$PATH:$HOME/.yarn/bin"
 
@@ -75,9 +82,6 @@ export SDKMAN_DIR="$HOME/.sdkman"
 
 #export SCALA_HOME=/usr/local/scala-2.12.2
 #export PATH="$PATH:$SCALA_HOME/bin"
-
-#export FLUTTER_HOME=/usr/local/flutter
-#export PATH="$PATH:$FLUTTER_HOME/bin"
 
 #export GOOGLE_CLOUD_SDK_HOME=$HOME/google-cloud-sdk
 #export PATH="$PATH:$GOOGLE_CLOUD_SDK_HOME/bin"

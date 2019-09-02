@@ -7,9 +7,9 @@
 [color]
 	ui = true
 [core]
-	autocrlf = false
-	safecrlf = true
-	excludesfile = ~/.gitignore_global
+	autocrlf = input
+	safecrlf = false
+	excludesfile = /Users/satnami/.gitignore_global
 [alias]
 	pl = push
 	ps = push
@@ -33,9 +33,9 @@
 	stashs = stash list
 	dummy = ' add . && git commit -m "." && git push origin master'
 	open = !vim `~/git-open.sh`
-	contributors = shortlog --summary --numbered
+  contributors = shortlog --summary --numbered
 [commit]
-#	gpgsign = true
+#  gpgsign = true
 [push]
 	default = current
 [pull]
@@ -45,11 +45,11 @@
 [help]
 	autocorrect = 1
 #[url "git@github.com:"]
-#	insteadOf = "https://github.com"
+#  insteadOf = "https://github.com"
 #[url "git@github.com:"]
-#	insteadOf = "gh:"
-#	pushInsteadOf = "github:"
-#	pushInsteadOf = "git://github.com/"
+#  insteadOf = "gh:"
+#  pushInsteadOf = "github:"
+#  pushInsteadOf = "git://github.com/"
 #[url "git://github.com/"]
 #	insteadOf = "github:"
 #[url "git@gist.github.com:"]
@@ -57,4 +57,10 @@
 #	pushInsteadOf = "gist:"
 #	pushInsteadOf = "git://gist.github.com/"
 #[url "git://gist.github.com/"]
-#	insteadOf = "gist:"
+#  insteadOf = "gist:"
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true

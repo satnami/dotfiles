@@ -9,6 +9,8 @@ alias la='ls -A'
 alias l='ls -CF'
 alias ls='ls -a -lrth'
 alias lsd='ls -a -lrth -d */'
+alias lt='du -sh * | sort -h'
+alias lcount='find . -type f | wc -l'
 
 alias clear='clear; echo; echo; seq 1 $(tput cols) | sort -R | spark | lolcat; echo; echo'
 alias c="clear"
@@ -35,6 +37,8 @@ alias -g T='|tail'
 alias -g H='|head'
 alias -g W='|wc -l'
 alias -g S='|sort'
+
+alias cpv='rsync -ah --info=progress2'
 
 alias chmox='chmod +x'
 
