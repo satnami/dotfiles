@@ -59,7 +59,7 @@ alias makecpp='__makecpp'
 
 alias sdump='genact -m memdump'
 
-alias scrcpy='docker run --rm -i -t --privileged --name satnami-scrcpy -v /dev/bus/usb:/dev/bus/usb  -v /tmp/.X11-unix:/tmp/.X11-unix  -e DISPLAY=$DISPLAY  pierlo1/scrcpy:intel'
+#alias scrcpy='docker run --rm -i -t --privileged --name satnami-scrcpy -v /dev/bus/usb:/dev/bus/usb  -v /tmp/.X11-unix:/tmp/.X11-unix  -e DISPLAY=$DISPLAY  pierlo1/scrcpy:intel'
 
 alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
 
@@ -104,6 +104,7 @@ alias egrep='egrep --color=auto'
 # Ruby & Rails
 alias bx='bundle exec'
 alias bxr='bundle exec rake'
+alias bxc='bundle exec cap'
 alias railss='bundle exec rails s'
 alias railsc='bundle exec rails c'
 
@@ -118,6 +119,9 @@ alias cap_minor='__cap_minor'
 
 function __cap_major(){ bundle exec cap $1 deploy:major; }
 alias cap_major='__cap_major'
+
+function __cap_rollback() { bundle exec cap $1 deploy:rollback; }
+alias cap_rollback='__cap_rollback'
 
 function __puma_start(){ bundle exec cap $1 puma:start; }
 alias puma_start='__puma_start'
@@ -140,6 +144,9 @@ alias httpdump="sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\\: .*|GE
 
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com" # or ip="curl ipinfo.io/ip"
 alias iplocate='function locate(){ curl https://www.iplocate.io/api/lookup/$1; echo; }; locate'
+
+function __wifi_pass(){ security find-generic-password -D "AirPort network password" -a $1 -g; }
+alias wifi_password='__wifi_pass'
 
 function __cheatsh(){ curl cht.sh/$1/$2; echo; }
 alias cheat='__cheatsh'
