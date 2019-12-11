@@ -1,3 +1,4 @@
 #!/bin/bash
 
-find . -type f ! -name '*.tar.gz' -exec tar -czvf "{}.tar.gz" "{}" \;
+#find . -type f ! -name '*.tar.gz' -exec tar -czvf "{}.tar.gz" "{}" \;
+find . -type d ! -name '*.tar.gz' ! -name '.' -maxdepth 1  -exec tar -czvf "{}.tar.gz" "{}" \;

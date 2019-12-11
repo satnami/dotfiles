@@ -43,3 +43,8 @@ nbproject
 .idea
 .project
 .settings
+
+# CI #
+######
+sonar.sh
+.scannerwork

@@ -1,0 +1,7 @@
+#!/bin/bash
+
+output=`aws sts get-session-token --serial-number $1 --token-code $2`
+
+export AWS_ACCESS_KEY_ID=`echo $output | jq -r '.Credentials.AccessKeyId'`
+export AWS_SECRET_ACCESS_KEY=`echo $output | jq -r '.Credentials.SecretAccessKey'`
+export AWS_SESSION_TOKEN=`echo $output | jq -r '.Credentials.SessionToken'`
