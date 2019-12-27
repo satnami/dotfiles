@@ -12,6 +12,7 @@ jekyll
 # Code smell & analyzer
 reek
 rubocop
+solargraph
 
 # Development
 pry
@@ -19,6 +20,10 @@ yaml-lint
 aescrypt
 httparty
 puma 3.10.0
+
+# Debug
+debase
+ruby-debug-ide
 
 # Framework
 thin
@@ -28,3 +33,4 @@ rails
 
 # Haste Client
 haste
+
