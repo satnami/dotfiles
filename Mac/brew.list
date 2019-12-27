@@ -32,6 +32,7 @@ ctop
 curl
 dbus
 dbus-glib
+dep
 docker-machine
 docker-machine-driver-hyperkit
 docker-machine-driver-xhyve
