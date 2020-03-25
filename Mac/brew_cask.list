@@ -1,3 +1,4 @@
+balenaetcher
 calibre
 cheatsheet
 db-browser-for-sqlite
@@ -12,13 +13,16 @@ insomnia
 iterm2
 java
 macvim
+meld
 micro-snitch
 minikube
 minishift
+podman
 postman
 sampler
 sketch
 skim
+stretchly
 the-unarchiver
 tuntap
 vagrant

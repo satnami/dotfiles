@@ -1,5 +1,6 @@
 ack
 adns
+adwaita-icon-theme
 ansible
 aom
 apr
@@ -30,6 +31,7 @@ cowsay
 ctags
 ctop
 curl
+dart
 dbus
 dbus-glib
 dep
@@ -38,9 +40,12 @@ docker-machine-driver-hyperkit
 docker-machine-driver-xhyve
 dockutil
 dos2unix
+entr
 ergo
 exa
 exercism
+faas-cli
+faktory
 fd
 ffmpeg
 findutils
@@ -68,10 +73,12 @@ glances
 glib
 gmp
 gnatsd
+gnumeric
 gnupg
 gnutls
 go
 goaccess
+goffice
 gotop
 graphite2
 grep
@@ -103,13 +110,16 @@ imapfilter
 inetutils
 ios-deploy
 irssi
+itstool
 jemalloc
 jid
 jpeg
 jq
+kind
 kops
 kubernetes-cli
 kubernetes-helm
+kyma-cli
 lame
 lazydocker
 leptonica
@@ -117,11 +127,13 @@ lesspipe
 libass
 libassuan
 libbluray
+libcroco
 libepoxy
 libevent
 libffi
 libgcrypt
 libgpg-error
+libgsf
 libidn
 libidn2
 libimobiledevice
@@ -131,6 +143,7 @@ libogg
 libplist
 libpng
 libpq
+librsvg
 libsamplerate
 libsndfile
 libsoxr
@@ -171,7 +184,6 @@ ncurses
 neofetch
 neovim
 nettle
-newman
 ninja
 nmap
 nnn
@@ -190,6 +202,7 @@ openvpn
 opus
 p11-kit
 p7zip
+packer
 pandoc
 pango
 parallel
@@ -217,6 +230,7 @@ pygtk
 pygtksourceview
 python
 python@2
+rarian
 rbenv
 rbenv-default-gems
 rbenv-gemset
@@ -227,6 +241,7 @@ rtmpdump
 rubberband
 ruby
 ruby-build
+runit
 s-lang
 sbt
 scrcpy
