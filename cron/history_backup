@@ -8,10 +8,15 @@ LOCATION="$HOME/history_logs"
 
 mkdir -p $LOCATION
 
+copy_history() {
 sudo -u satnami bash << EOF
- cp "$HOME/.bash_history" "$LOCATION/satnami_bash_$FILE"
- cp "$HOME/.zsh_history" "$LOCATION/satnami_zsh_$FILE"
+ cp "$HOME/$1" "$LOCATION/satnami_$1_$FILE"
 EOF
+}
 
+#sudo -u satnami bash << EOF
+# cp "$HOME/.bash_history" "$LOCATION/satnami_bash_$FILE"
+# cp "$HOME/.zsh_history" "$LOCATION/satnami_zsh_$FILE"
+#EOF
 
-#find -E . -regex '.*(zsh|bash|redis|psql)*(.|-|_)history' -maxdepth 1 -type f -exec basename {} \;
+find -E ~ -regex '.*(zsh|bash|redis|psql|python|rediscli|guard|node_repl)(.|-|_)(history).*$' -maxdepth 1 -type f -print0 | xargs -0 basename $1 | while read -r line; do copy_history "$line"; done
