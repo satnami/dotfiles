@@ -35,6 +35,7 @@ Plugin 'itchyny/lightline.vim'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'dracula/vim'
+Plugin 'sheerun/vim-polyglot'
 call vundle#end()
 
 set backspace=indent,eol,start

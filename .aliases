@@ -24,6 +24,7 @@ alias ....="cd ../../.."
 alias .....="cd ../../../.."
 alias ddownload="cd ~/Downloads"
 alias ddesktop="cd ~/Desktop"
+alias ddotfiles="cd ~/dotfiles"
 alias dapps="cd ~/Apps"
 alias dsource="cd ~/Source"
 alias dsla="cd ~/Sla-Projects"
@@ -50,8 +51,12 @@ alias party.live='curl parrot.live'
 alias partys.live='curl parrot.live --max-time 2'
 
 alias party="imgcat ~/parrot.gif"
+alias doodles.cheers="docker run -it --rm docker/doodle:cheers2019"
+alias doodles.birthday="docker run -it --rm docker/doodle:birthday2019"
+alias doodles.halloween="docker run -it --rm docker/doodle:halloween2019"
+alias doodles.summer="docker run -it --rm docker/doodle:summer2019"
 
-function hdi(){ howdoi $* -c -n 5; }
+function __hdi(){ howdoi $* -c -n 5; }
 alias h='__hdi'
 
 function __makecpp(){ g++ $1 -o $2; }
@@ -107,6 +112,8 @@ alias bxr='bundle exec rake'
 alias bxc='bundle exec cap'
 alias railss='bundle exec rails s'
 alias railsc='bundle exec rails c'
+alias rspec='bundle exec rspec'
+alias railsbin='bundle exec rails app:update:bin && bundle binstubs bundler --force'
 
 function __cap(){ bundle exec cap $1 deploy; }
 alias capd='__cap'
@@ -141,9 +148,14 @@ alias lookbusy="cat /dev/urandom | hexdump -C | grep \"34 32\""
 alias sniff="sudo ngrep -d 'en1' -t '^(GET|POST) ' 'tcp and port 80'"
 alias httpdump="sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\\: .*|GET \\/.*\""
 
+function __nmap_ciphers(){ nmap -sV --script ssl-enum-ciphers -p $2 $1; };
+alias nmap_ciphers="__nmap_ciphers"
 
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com" # or ip="curl ipinfo.io/ip"
 alias iplocate='function locate(){ curl https://www.iplocate.io/api/lookup/$1; echo; }; locate'
+alias local_ip="hostname -I | awk '{print $1}'" # for mac local_ip="ipconfig getifaddr en0"
+
+alias all_hosts_on_network="sudo nmap -sP $1"
 
 function __wifi_pass(){ security find-generic-password -D "AirPort network password" -a $1 -g; }
 alias wifi_password='__wifi_pass'
