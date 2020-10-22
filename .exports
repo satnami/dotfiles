@@ -2,7 +2,7 @@
 
 #export TERM="screen-256color"
 
-export PATH=$PATH:/usr/local/opt/postgresql@9.4/bin
+export PATH=$PATH:/usr/local/opt/postgresql@11/bin
 
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 
@@ -72,6 +72,8 @@ export SDKMAN_DIR="$HOME/.sdkman"
 
 export ANDROID_HOME="$HOME/Library/Android/sdk"
 export PATH="$PATH:$ANDROID_HOME/tools"
+export PATH="$PATH:$ANDROID_HOME/platform-tools"
+
 
 export FLUTTER_HOME="$HOME/Apps/flutter"
 export PATH=$PATH:$FLUTTER_HOME/bin

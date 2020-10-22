@@ -1,8 +1,9 @@
 export TERM="xterm-256color"
 
+#PS1="tada:~$ "
+
 # If you come from bash you might have to change your $PATH.
 #export PATH=$HOME/bin:/usr/local/bin:$PATH
-
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -127,3 +128,8 @@ zplug "rupa/z", use:z.sh
 # tabtab source for slss package
 # uninstall by removing these lines or running `tabtab uninstall slss`
 [[ -f /usr/local/Cellar/node/11.3.0_1/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.zsh ]] && . /usr/local/Cellar/node/11.3.0_1/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.zsh
+
+autoload -Uz compinit && compinit
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/local/Cellar/terraform/0.11.10/bin/terraform terraform

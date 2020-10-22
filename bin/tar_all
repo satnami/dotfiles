@@ -1,4 +1,10 @@
 #!/bin/bash
 
-#find . -type f ! -name '*.tar.gz' -exec tar -czvf "{}.tar.gz" "{}" \;
-find . -type d ! -name '*.tar.gz' ! -name '.' -maxdepth 1  -exec tar -czvf "{}.tar.gz" "{}" \;
+
+REMOVE_OR_NOT=""
+
+if [ "$1" == "1" ]; then
+    REMOVE_OR_NOT="--remove-files"
+fi
+
+find . -type d ! -name '*.tar.gz' ! -name '.' -maxdepth 1  -exec tar -czvf "{}.tar.gz" $REMOVE_OR_NOT "{}" \;
