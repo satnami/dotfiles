@@ -1,5 +1,6 @@
 albertyw/albertyw
 bramstein/webfonttools
+chef/chef
 cjbassi/gotop
 codeclimate/formulae
 contribsys/faktory
@@ -13,6 +14,10 @@ homebrew/cask-fonts
 homebrew/core
 homebrew/services
 jesseduffield/lazydocker
+josegonzalez/php
+mongodb/brew
 okteto/cli
 railwaycat/emacsmacport
 sambadevi/powerlevel9k
+snyk/tap
+ubuntu/microk8s
