@@ -39,6 +39,9 @@ alias -g H='|head'
 alias -g W='|wc -l'
 alias -g S='|sort'
 
+function __pbcopy_f(){ cat $1 | pbcopy; }
+alias pbcopy_f='__pbcopy_f'
+
 alias cpv='rsync -ah --info=progress2'
 
 alias chmox='chmod +x'
@@ -66,7 +69,9 @@ alias sdump='genact -m memdump'
 
 #alias scrcpy='docker run --rm -i -t --privileged --name satnami-scrcpy -v /dev/bus/usb:/dev/bus/usb  -v /tmp/.X11-unix:/tmp/.X11-unix  -e DISPLAY=$DISPLAY  pierlo1/scrcpy:intel'
 
-alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
+alias pubkey="cat ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
+alias pubkey_gen_pem"ssh-keygen -f  ~/.ssh/id_rsa.pub -m 'PEM' -e >  ~/.ssh/id_rsa_pkcs8.pem"
+alias pubkey_gen_pem8"ssh-keygen -f  ~/.ssh/id_rsa.pub -m 'pkcs8' -e >  ~/.ssh/id_rsa_pkcs8.pem"
 
 alias top='htop'
 alias file_manager='mc'
@@ -105,6 +110,8 @@ alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
+function __word_grep(){ word123456789="$1|$" && grep -E --color=auto $word123456789 $2 && unset word123456789 }
+alias wgrep='__word_grep'
 
 # Ruby & Rails
 alias bx='bundle exec'
@@ -112,8 +119,9 @@ alias bxr='bundle exec rake'
 alias bxc='bundle exec cap'
 alias railss='bundle exec rails s'
 alias railsc='bundle exec rails c'
-alias rspec='bundle exec rspec'
+alias bxrspec='bundle exec rspec'
 alias railsbin='bundle exec rails app:update:bin && bundle binstubs bundler --force'
+alias rails4bin='bundle exec rake rails:update:bin && bundle binstubs bundler --force'
 
 function __cap(){ bundle exec cap $1 deploy; }
 alias capd='__cap'
@@ -151,11 +159,14 @@ alias httpdump="sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\\: .*|GE
 function __nmap_ciphers(){ nmap -sV --script ssl-enum-ciphers -p $2 $1; };
 alias nmap_ciphers="__nmap_ciphers"
 
-alias ip="dig +short myip.opendns.com @resolver1.opendns.com" # or ip="curl ipinfo.io/ip"
+alias ipl="dig +short myip.opendns.com @resolver1.opendns.com" # or ip="curl ipinfo.io/ip"
 alias iplocate='function locate(){ curl https://www.iplocate.io/api/lookup/$1; echo; }; locate'
 alias local_ip="hostname -I | awk '{print $1}'" # for mac local_ip="ipconfig getifaddr en0"
 
 alias all_hosts_on_network="sudo nmap -sP $1"
+
+function __find_in_pdf(){ find * -iname '*.pdf' -exec pdfgrep $1 {} +; }
+alias find_in_pdf='__find_in_pdf'
 
 function __wifi_pass(){ security find-generic-password -D "AirPort network password" -a $1 -g; }
 alias wifi_password='__wifi_pass'
@@ -173,6 +184,9 @@ alias dockersh='__dockersh'
 
 function __dockerbash(){ docker exec -it $1 /bin/bash; }
 alias dockerbash='__dockerbash'
+
+function __dockerpasswd(){ docker exec -itu $2 $1 passwd; } # $2 user, $1 container name
+alias dockerpasswd='__dockerpasswd'
 
 # Lock the screen (when going AFK)
 alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
