@@ -1,0 +1,7 @@
+#!/bin/bash
+
+title=$(echo $1 | sed 's/ /%20/g')
+time_in_sec=$(echo $2 | sed 's/ /%20/g')
+msg=$(echo $3 | sed 's/ /%20/g')
+
+curl -s -o /dev/null "https://maker.ifttt.com/trigger/terminal_notification/with/key/$IFTTT_KEY?value1=$title&value2=$time_in_sec&value3=$msg"
