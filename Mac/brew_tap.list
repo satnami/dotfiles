@@ -1,12 +1,16 @@
 albertyw/albertyw
+batchcorp/public
+bibendi/dip
 bramstein/webfonttools
 chef/chef
+civo/tools
 cjbassi/gotop
 codeclimate/formulae
 contribsys/faktory
 cristianoliveira/tap
 dart-lang/dart
 denisidoro/tools
+hashicorp/tap
 heroku/brew
 homebrew/bundle
 homebrew/cask
@@ -15,7 +19,6 @@ homebrew/cask-versions
 homebrew/core
 homebrew/services
 jesseduffield/lazydocker
-josegonzalez/php
 mongodb/brew
 okteto/cli
 railwaycat/emacsmacport
