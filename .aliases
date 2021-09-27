@@ -9,7 +9,7 @@ alias la='ls -A'
 alias l='ls -CF'
 alias ls='ls -a -lrth'
 alias lsd='ls -a -lrth -d */'
-alias lt='du -sh * | sort -h'
+alias lth='du -sh * | sort -h'
 alias lcount='find . -type f | wc -l'
 alias lswatch='watch ls -a -ltrh -C'
 
@@ -69,6 +69,7 @@ alias makecpp='__makecpp'
 alias sdump='genact -m memdump'
 
 #alias scrcpy='docker run --rm -i -t --privileged --name satnami-scrcpy -v /dev/bus/usb:/dev/bus/usb  -v /tmp/.X11-unix:/tmp/.X11-unix  -e DISPLAY=$DISPLAY  pierlo1/scrcpy:intel'
+alias scrcpy='scrcpy -m 1920 -S'
 
 alias pubkey="cat ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
 alias pubkey_gen_pem"ssh-keygen -f  ~/.ssh/id_rsa.pub -m 'PEM' -e >  ~/.ssh/id_rsa_pkcs8.pem"
@@ -118,7 +119,7 @@ alias wgrep='__word_grep'
 alias bx='bundle exec'
 alias bxr='bundle exec rake'
 alias bxc='bundle exec cap'
-alias railss='bundle exec rails s'
+alias railss='RAILS_LOG_TO_STDOUT=1 bundle exec rails s'
 alias railsc='bundle exec rails c'
 alias bxrspec='bundle exec rspec'
 alias railsbin='bundle exec rails app:update:bin && bundle binstubs bundler --force'
