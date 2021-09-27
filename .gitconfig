@@ -10,6 +10,7 @@
 	autocrlf = input
 	safecrlf = false
 	excludesfile = /Users/satnami/.gitignore_global
+	ignorecase = false
 [alias]
 	pl = push
 	ps = push
@@ -67,3 +68,8 @@
 [filesystem "Oracle Corporation|11.0.1|/dev/disk1s1"]
 	timestampResolution = 9000 nanoseconds
 	minRacyThreshold = 0 nanoseconds
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
