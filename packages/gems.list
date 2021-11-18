@@ -3,6 +3,7 @@ bundler
 # Misc
 lolcat
 terminal-notifier
+colorls
 
 # UML
 railroad
