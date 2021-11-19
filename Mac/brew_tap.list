@@ -18,6 +18,7 @@ homebrew/cask-fonts
 homebrew/cask-versions
 homebrew/core
 homebrew/services
+jcamiel/hurl
 jesseduffield/lazydocker
 mongodb/brew
 okteto/cli
