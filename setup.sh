@@ -2,9 +2,8 @@
 
 # Download Item2
 
-# Ssh
+# SSH
 ssh -T git@github.com
-
 
 # Install HomeBrew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -45,6 +44,10 @@ curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/instal
 # Setup Brew
 cd ~/dotfiles/Mac
 brew bundle
+
+# Setup Vim
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+vim +PluginInstall +qall
 
 # Setup default local Gems
 git clone https://github.com/rbenv/rbenv-default-gems.git $(rbenv root)/plugins/rbenv-default-gems
