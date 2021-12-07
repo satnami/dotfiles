@@ -9,8 +9,8 @@ LOCATION="$HOME/history_logs"
 mkdir -p $LOCATION
 
 copy_history() {
-sudo -u satnami bash << EOF
- cp "$HOME/$1" "$LOCATION/satnami_$1_$FILE"
+sudo -u $USER bash << EOF
+ cp "$HOME/$1" "$LOCATION/$USER_$1_$FILE"
 EOF
 }
 
