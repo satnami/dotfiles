@@ -41,6 +41,13 @@ curl --create-dirs -o ~/.config/up/up.sh https://raw.githubusercontent.com/shann
 # Setup Zplug
 curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
 
+# Setup FZF
+brew install fzf
+$(brew --prefix)/opt/fzf/install
+#git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+#~/.fzf/install
+
+
 # Setup Brew
 cd ~/dotfiles/Mac
 brew bundle
