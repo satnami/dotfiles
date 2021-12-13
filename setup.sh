@@ -47,6 +47,10 @@ $(brew --prefix)/opt/fzf/install
 #git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 #~/.fzf/install
 
+# Setup Fonts
+git clone https://github.com/powerline/fonts.git
+cd fonts
+./install
 
 # Setup Brew
 cd ~/dotfiles/Mac
