@@ -56,6 +56,10 @@ cd fonts
 cd ~/dotfiles/Mac
 brew bundle
 
+# Setup SDKMAN
+curl -s "https://get.sdkman.io" | bash
+source "$HOME/.sdkman/bin/sdkman-init.sh"
+
 # Setup Vim
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 vim +PluginInstall +qall
