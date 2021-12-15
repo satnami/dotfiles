@@ -121,6 +121,8 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 
 [ -f "$HOME/.zplug/init.zsh" ] && source "$HOME/.zplug/init.zsh"
 
+[ -f "$(brew --prefix asdf)/libexec/asdf.sh" ] && source "$(brew --prefix asdf)/libexec/asdf.sh"
+
 [ -f "$HOME/.history_preexec.sh" ] && source "$HOME/.history_preexec.sh"
 
 [ -f $(dirname $(gem which colorls))/tab_complete.sh ] && source $(dirname $(gem which colorls))/tab_complete.sh
