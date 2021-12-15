@@ -1,0 +1,1 @@
+KERL_CONFIGURE_OPTIONS="--disable-dynamic-ssl-lib --with-ssl=/usr/local/opt/openssl@1.1" KERL_BUILD_DOCS=yes KERL_DOC_TARGETS="man chunks" KERL_INSTALL_HTMLDOCS=no KERL_INSTALL_MANPAGES=yes

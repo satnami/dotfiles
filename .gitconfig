@@ -34,7 +34,7 @@
 	stashs = stash list
 	dummy = ' add . && git commit -m . && git push origin master'
 	open = !vim `~/git-open.sh`
-        contributors = shortlog --summary --numbered
+	contributors = shortlog -e --summary --numbered
 [commit]
 #  gpgsign = true
 [push]

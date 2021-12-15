@@ -48,8 +48,8 @@ $(brew --prefix)/opt/fzf/install
 #~/.fzf/install
 
 # Setup Fonts
-git clone https://github.com/powerline/fonts.git
-cd fonts
+git clone https://github.com/powerline/fonts.git ~/powerline-fonts
+cd ~/powerline-fonts
 ./install
 
 # Setup Brew
@@ -72,3 +72,25 @@ cp ~/dotfiles/packages/gems.list $(rbenv root)/default-gems
 rbenv install 3.0.2
 rbenv global 3.0.2
 ruby -v
+
+# Setup Erlang
+brew install autoconf@2.69
+brew link --overwrite autoconf@2.69
+kerl update
+kerl build 22.3 22.3
+kerl install 22.3 ~/kerl/default
+source ~/kerl/default/activate
+brew install rebar3
+
+# Setup Erlang Language Server
+git clone https://github.com/erlang-ls/erlang_ls ~/kerl/erlang-ls
+cd ~/kerl/erlang-ls
+make
+ _build/default/bin/erlang_ls /usr/local/bin
+
+# Setup Erlang Style
+git clone https://github.com/inaka/elvis ~/kerl/elvis
+cd ~/kerl/elvis
+rebar3 compile
+rebar3 escriptize
+cp _build/default/bin/elvis /usr/local/bin
