@@ -8,9 +8,11 @@ apgdiff
 apr
 apr-util
 asciinema
+asdf
 assimp
 atk
 autoconf
+autoconf@2.69
 autojump
 automake
 aws-elasticbeanstalk
@@ -21,9 +23,11 @@ bat
 bdw-gc
 bench
 berkeley-db
+bison
 brew-cask-completion
 brotli
 c-ares
+ca-certificates
 cabextract
 cairo
 calc
@@ -56,6 +60,7 @@ dos2unix
 double-conversion
 entr
 ergo
+erlang
 exa
 exercism
 faas-cli
@@ -134,6 +139,7 @@ inetutils
 ios-deploy
 irssi
 itstool
+jansson
 jasper
 jed
 jemalloc
@@ -141,7 +147,9 @@ jid
 jpeg
 jq
 jrnl
+jshon
 k3d
+kerl
 kind
 kops
 krb5
@@ -179,6 +187,7 @@ libksba
 liblqr
 libmaxminddb
 libmetalink
+libnghttp2
 libogg
 libomp
 libplist
@@ -222,9 +231,12 @@ luajit
 lz4
 lzo
 m-cli
+m4
+macos-term-size
 make
 mas
 mcrypt
+meson
 mhash
 micro
 microk8s
@@ -246,6 +258,7 @@ nghttp2
 ninja
 nmap
 nnn
+node
 node@12
 node_exporter
 npth
@@ -261,6 +274,7 @@ openldap
 openshift-cli
 openssh
 openssl@1.1
+openssl@3
 openvpn
 opus
 p11-kit
@@ -298,6 +312,7 @@ pygtk
 pygtksourceview
 python-tabulate
 python@2
+python@3.10
 python@3.8
 python@3.9
 qt
@@ -308,6 +323,7 @@ rbenv-default-gems
 rbenv-gemset
 readline
 reattach-to-user-namespace
+rebar3
 redis
 ripgrep
 rtmpdump
@@ -341,6 +357,7 @@ ssh-copy-id
 stern
 stow
 subversion
+swig
 task
 tcl-tk
 terminal-notifier
@@ -361,10 +378,12 @@ ttyrec
 unbound
 unibilium
 unison
+unixodbc
 unrar
 unzip
 usbmuxd
 utf8proc
+util-macros
 v8
 vim
 watch
@@ -378,6 +397,7 @@ wine
 winetricks
 woff2
 wtfutil
+wxwidgets
 x264
 x265
 xhyve
@@ -385,6 +405,7 @@ xml2
 xmlto
 xorgproto
 xsv
+xtrans
 xvid
 xz
 yank
@@ -398,12 +419,14 @@ zsh-completions
 zsh-history-substring-search
 zsh-syntax-highlighting
 zstd
+alfred3
 appcleaner
 balenaetcher
 calibre
 cheatsheet
 chef-workstation
 chromedriver
+coconutbattery
 db-browser-for-sqlite
 ferdi
 flux
@@ -426,8 +449,8 @@ libreelec-usb-sd-creator
 macvim
 meld
 menumeters
-micro-snitch
 minishift
+multipass
 postman
 raspberry-pi-imager
 rectangle
@@ -439,6 +462,7 @@ spectacle
 stretchly
 the-unarchiver
 tuntap
+unetbootin
 vagrant
 vagrant-manager
 virtualbox
