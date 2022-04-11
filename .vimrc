@@ -50,6 +50,8 @@ filetype indent on
 
 autocmd FileType ruby compiler ruby
 
+autocmd BufRead,BufNewFile *.erl,*.es.*.hrl,*.yaws,*.xrl set expandtab
+au BufNewFile,BufRead *.erl,*.es,*.hrl,*.yaws,*.xrl setf erlang
 
 set wildmenu
 set wildmode=list:longest
