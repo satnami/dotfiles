@@ -62,8 +62,6 @@ if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -
 #eval $(minishift oc-env)
 #eval $(minishift docker-env)
 
-[ -f "$HOME/kerl/default/activate" ] && source "$HOME/kerl/default/activate"
-
 # fortune | cowsay -f stegosaurus | lolcat
 cowsay -f stegosaurus "Now I Am Become Death, The Destroyer Of Worlds"
 # echo 'Now I Am Become Death, The Destroyer Of Worlds' | parrotsay
