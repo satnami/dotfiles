@@ -9,7 +9,7 @@
 [core]
 	autocrlf = input
 	safecrlf = false
-	excludesfile = /Users/satnami/.gitignore_global
+	excludesfile = ~/.gitignore_global
 	ignorecase = false
 [alias]
 	pl = push
