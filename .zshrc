@@ -1,27 +1,25 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 export TERM="xterm-256color"
 
 #PS1="tada:~$ "
 
 # If you come from bash you might have to change your $PATH.
 #export PATH=$HOME/bin:/usr/local/bin:$PATH
+if [[ "$(uname -m)" == "arm64" ]]; then
+  export PATH="/opt/homebrew/bin:${PATH}"
+fi
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
-ZSH_THEME="powerlevel9k/powerlevel9k"
-
-POWERLEVEL9K_MODE='nerdfont-complete'
-POWERLEVEL9K_PROMPT_ON_NEWLINE=true
-POWERLEVEL9K_RPROMPT_ON_NEWLINE=true
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon dir vcs status rbenv)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status history time)
-DISABLE_AUTO_TITLE="true"
-POWERLEVEL9K_SHORTEN_STRATEGY="truncate_middle"
-POWERLEVEL9K_SHORTEN_DIR_LENGTH=4
-POWERLEVEL9K_STATUS_VERBOSE=false
-
-# POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX="↱"
-POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="λ "
+#ZSH_THEME="powerlevel9k/powerlevel9k"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 export DEFAULT_USER="$USER"
 
@@ -77,7 +75,7 @@ plugins=(
 )
 
 zstyle :omz:plugins:ssh-agent agent-forwarding on
-zstyle :omz:plugins:ssh-agent identities id_rsa id_dsa id_rsa_sla id_rsa_bot
+#zstyle :omz:plugins:ssh-agent identities id_rsa id_dsa id_rsa_sla id_rsa_bot
 zstyle :omz:plugins:ssh-agent lifetime
 
 zstyle ':notify:*' enable-on-ssh yes
@@ -92,7 +90,6 @@ zstyle ':notify:*' success-title "Command finished (in #{time_elapsed} seconds)"
 #zstyle ':notify:*' success-title "very #success. wow"
 #OR
 #zstyle ':notify:*' notifier #/dotfiles/bin/custom_terminal_notifier
-
 
 source $ZSH/oh-my-zsh.sh
 
@@ -146,3 +143,7 @@ autoload -Uz compinit && compinit
 
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/local/Cellar/terraform/0.11.10/bin/terraform terraform
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+#[[ ! -f ~/.p9k.zsh ]] || source ~/.p9k.zsh
