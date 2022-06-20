@@ -24,7 +24,8 @@ sh ~/dotfiles/dot_import.sh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 # Setup OhMyZSH Theme
-git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
+git clone https://github.com/bhilburn/powerlevel9k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel9k
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
 # Setup OhMyZSH plugins
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
@@ -94,3 +95,6 @@ cd ~/kerl/elvis
 rebar3 compile
 rebar3 escriptize
 cp _build/default/bin/elvis /usr/local/bin
+
+# Setup Npm libraries
+sh ~/dotfiles/packages/npm.list
