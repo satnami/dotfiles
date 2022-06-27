@@ -65,7 +65,7 @@ source "$HOME/.sdkman/bin/sdkman-init.sh"
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 vim +PluginInstall +qall
 
-# Setup default local Gems
+# Setup Ruby default gems
 git clone https://github.com/rbenv/rbenv-default-gems.git $(rbenv root)/plugins/rbenv-default-gems
 cp ~/dotfiles/packages/gems.list $(rbenv root)/default-gems
 
@@ -78,6 +78,9 @@ ruby -v
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 nvm install 16
 nvm use node
+
+# Setup Npm libraries
+sh ~/dotfiles/packages/npm.list
 
 # Setup Erlang
 brew install autoconf@2.69
@@ -100,9 +103,6 @@ cd ~/kerl/elvis
 rebar3 compile
 rebar3 escriptize
 cp _build/default/bin/elvis /usr/local/bin
-
-# Setup Npm libraries
-sh ~/dotfiles/packages/npm.list
 
 # Setup crontab for history backup
 (crontab -l && echo "0 12 * * * ~/dotfiles/cron/history_backup") | crontab -
