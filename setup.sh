@@ -54,7 +54,7 @@ cd ~/powerline-fonts
 ./install
 
 # Setup Brew
-cd ~/dotfiles/Mac
+cd ~/dotfiles/Brew
 brew bundle
 
 # Setup SDKMAN
