@@ -13,8 +13,6 @@ export HASTE_SERVER="https://satnami-hastebin.herokuapp.com"
 #}
 #export PS1="\e[0;32m\u@\h \[\033[32m\]\w\[\033[33m\]\$(parse_git_branch)\[\033[00m\] $\e[m"
 
-export PATH=$PATH:$(npm prefix -g)/lib/node_modules
-
 export GOPATH=$HOME/go
 export GOROOT=/usr/local/opt/go/libexec
 export PATH=$PATH:$GOPATH/bin:$GOROOT/bin
@@ -53,6 +51,12 @@ export PATH=$PATH:$PYENV_ROOT/shims
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export PATH=$PATH:$(npm prefix --location=global)/lib/node_modules
 
 #export ANT_HOME=/usr/share/ant
 
