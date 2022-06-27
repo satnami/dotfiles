@@ -98,3 +98,6 @@ cp _build/default/bin/elvis /usr/local/bin
 
 # Setup Npm libraries
 sh ~/dotfiles/packages/npm.list
+
+# Setup crontab for history backup
+(crontab -l && echo "0 12 * * * ~/dotfiles/cron/history_backup") | crontab -
