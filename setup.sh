@@ -74,6 +74,11 @@ rbenv install 3.0.2
 rbenv global 3.0.2
 ruby -v
 
+# Setup Node
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+nvm install 16
+nvm use node
+
 # Setup Erlang
 brew install autoconf@2.69
 brew link --overwrite autoconf@2.69
