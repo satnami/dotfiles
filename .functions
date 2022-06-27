@@ -74,3 +74,10 @@ function title() {
     ;;
   esac
 }
+
+function loop_file() {
+  echo 'To Read a file line by line and execute commands use:\n'
+  echo '  for i in *.txt; do command "$i"; done'
+  echo '  OR'
+  echo '  while read line; do command "$line"; done < file.txt'
+}
