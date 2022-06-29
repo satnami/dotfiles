@@ -55,6 +55,16 @@ elif [ -f /etc/bash_completion ]; then
 	source /etc/bash_completion;
 fi;
 
+# useful only for Mac OS Silicon M1
+# still working but useless for the other platforms
+docker() {
+ if [[ `uname -m` == "arm64" ]] && [[ "$1" == "run" || "$1" == "build" ]]; then
+    /usr/local/bin/docker "$1" --platform linux/amd64 "${@:2}"
+  else
+     /usr/local/bin/docker "$@"
+  fi
+}
+
 eval $(thefuck --alias)
 eval "$(rbenv init -)"
 if command -v pyenv 1>/dev/null 2>&1; then eval "$(pyenv init -)"; fi
