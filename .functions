@@ -81,3 +81,10 @@ function loop_file() {
   echo '  OR'
   echo '  while read line; do command "$line"; done < file.txt'
 }
+
+function kotlinr() {
+  timestamp=$(date +%s)
+  kotlinc $1 -include-runtime -d $timestamp_$1.jar
+  java -jar $timestamp_$1.jar
+  rm $timestamp_$1.jar
+}
