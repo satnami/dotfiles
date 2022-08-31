@@ -5,7 +5,14 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-export TERM="xterm-256color"
+case "$TERM" in
+    xterm)
+        export TERM=xterm-256color
+        ;;
+    screen)
+        export TERM=screen-256color
+        ;;
+esac
 
 #PS1="tada:~$ "
 
@@ -71,7 +78,7 @@ COMPLETION_WAITING_DOTS="true"
 
 # Which plugins would you like to load?
 plugins=(
-  colorize zsh-syntax-highlighting zsh-autosuggestions ssh-agent notify
+  zsh-syntax-highlighting zsh-autosuggestions ssh-agent notify
 )
 
 zstyle :omz:plugins:ssh-agent agent-forwarding on
