@@ -2,10 +2,15 @@
 
 NOW=$(date +"%d_%m_%Y")
 TABS="mobile_tabs_$NOW.md"
+PORT=9333
+
+# Wireless debugging -> Pair device with pairing code
+# adb pair ip:port code
+
 adb devices -l
 
-adb forward tcp:9222 localabstract:chrome_devtools_remote
+adb forward tcp:$PORT localabstract:chrome_devtools_remote
 
-curl http://localhost:9222/json/list | jq -r ".[] | \"[\" + .title + \"](\" + .url + \")\"" > "$HOME/$TABS"
+curl http://localhost:$PORT/json/list | jq -r ".[] | \"[\" + .title + \"](\" + .url + \")\"" > "$HOME/$TABS"
 
 #cat "$HOME/$TABS"  | ruby -ne 'puts $_.chomp.split("](").last' | ruby -ne 'puts $_.chomp.gsub(")", "")' > "$HOME/$TABS"
