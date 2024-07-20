@@ -6,32 +6,27 @@ terminal-notifier
 colorls
 
 # UML
-railroad
-railroady
-jekyll
+#railroad
+#railroady
+#jekyll
 
 # Code smell & analyzer
-reek
-rubocop
-solargraph
+#reek
+#rubocop
+#solargraph
 
 # Development
-pry
+#pry
 yaml-lint
-aescrypt
-httparty
-puma 3.10.0
-
-# Debug
-debase
-ruby-debug-ide
+#aescrypt
+#httparty
+#puma 3.10.0
 
 # Framework
-thin
-foreman
-sinatra
+#thin
+#foreman
+#sinatra
 rails
 
 # Haste Client
-haste
-
+#haste

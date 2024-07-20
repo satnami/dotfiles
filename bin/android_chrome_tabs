@@ -5,6 +5,7 @@ TABS="mobile_tabs_$NOW.md"
 PORT=9333
 
 # Wireless debugging -> Pair device with pairing code
+# adb connect ip:port
 # adb pair ip:port code
 
 adb devices -l
