@@ -20,7 +20,7 @@ unset file;
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 # HISTSUFFIX=`tty | sed 's/\///g;s/^dev//g'`
 # HISTFILE=".$0_history"
-HISTSIZE=100000
+HISTSIZE=500
 HISTFILESIZE=$HISTSIZE
 # don't put duplicate lines or lines starting with space in the history in bash(1)
 HISTCONTROL=ignoreboth
@@ -55,7 +55,7 @@ elif [ -f /etc/bash_completion ]; then
 	source /etc/bash_completion;
 fi;
 
-eval $(thefuck --alias)
+# eval $(thefuck --alias)
 eval "$(rbenv init -)"
 if command -v pyenv 1>/dev/null 2>&1; then eval "$(pyenv init -)"; fi
 if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
@@ -63,6 +63,6 @@ if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -
 #eval $(minishift docker-env)
 
 # fortune | cowsay -f stegosaurus | lolcat
-cowsay -f stegosaurus "Now I Am Become Death, The Destroyer Of Worlds"
+# cowsay -f stegosaurus "Now I Am Become Death, The Destroyer Of Worlds"
 # echo 'Now I Am Become Death, The Destroyer Of Worlds' | parrotsay
 # espeak "Hey folks!"
