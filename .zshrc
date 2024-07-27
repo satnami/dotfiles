@@ -1,3 +1,5 @@
+# zmodload zsh/zprof
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -81,9 +83,9 @@ plugins=(
   zsh-syntax-highlighting zsh-autosuggestions ssh-agent notify
 )
 
-zstyle :omz:plugins:ssh-agent agent-forwarding on
+#zstyle :omz:plugins:ssh-agent agent-forwarding on
 #zstyle :omz:plugins:ssh-agent identities id_rsa id_dsa id_rsa_sla id_rsa_bot
-zstyle :omz:plugins:ssh-agent lifetime
+#zstyle :omz:plugins:ssh-agent lifetime
 
 zstyle ':notify:*' enable-on-ssh yes
 zstyle ':notify:*' command-complete-timeout 5
@@ -119,11 +121,9 @@ export EDITOR='micro'
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
-[ -f "$HOME/.fzf.zsh" ] && source "$HOME/.fzf.zsh"
+source <(fzf --zsh)
 
 [ -f "$HOME/.config/up/up.sh" ] && source "$HOME/.config/up/up.sh"
-
-[ -f "$HOME/.zplug/init.zsh" ] && source "$HOME/.zplug/init.zsh"
 
 [ -f "$(brew --prefix asdf)/libexec/asdf.sh" ] && source "$(brew --prefix asdf)/libexec/asdf.sh"
 
@@ -131,14 +131,15 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 
 [ -f $(dirname $(gem which colorls))/tab_complete.sh ] && source $(dirname $(gem which colorls))/tab_complete.sh
 
-source ~/.zplug/init.zsh
-
+[ -f "$HOME/.zplug/init.zsh" ] && source "$HOME/.zplug/init.zsh"
 zplug "changyuheng/fz", defer:1
 zplug "rupa/z", use:z.sh
 
-autoload -Uz compinit && compinit
-autoload -U +X bashcompinit && bashcompinit
+# autoload -Uz compinit && compinit
+# autoload -U +X bashcompinit && bashcompinit
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 #[[ ! -f ~/.p9k.zsh ]] || source ~/.p9k.zsh
+
+# zprof
