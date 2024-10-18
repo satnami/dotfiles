@@ -29,8 +29,6 @@ alias ddesktop="cd ~/Desktop"
 alias ddotfiles="cd ~/dotfiles"
 alias dapps="cd ~/Apps"
 alias dsource="cd ~/Source"
-alias dsla="cd ~/Sla-Projects"
-alias dalacrity="cd ~/Sla-Projects/Alacrity"
 alias dhistory="cd ~/history_logs"
 
 ## Pipe Aliases (Global)
@@ -125,33 +123,27 @@ alias railsc='bundle exec rails c'
 alias bxrspec='bundle exec rspec'
 alias railsbin='bundle exec rails app:update:bin && bundle binstubs bundler --force'
 alias rails4bin='bundle exec rake rails:update:bin && bundle binstubs bundler --force'
-
 function __cap(){ bundle exec cap $1 deploy; }
 alias capd='__cap'
-
 function __cap_patch(){ bundle exec cap $1 deploy:patch; }
 alias cap_patch='__cap_patch'
-
 function __cap_minor(){ bundle exec cap $1 deploy:minor; }
 alias cap_minor='__cap_minor'
-
 function __cap_major(){ bundle exec cap $1 deploy:major; }
 alias cap_major='__cap_major'
-
 function __cap_rollback() { bundle exec cap $1 deploy:rollback; }
 alias cap_rollback='__cap_rollback'
-
 function __puma_start(){ bundle exec cap $1 puma:start; }
 alias puma_start='__puma_start'
-
 function __puma_stop(){ bundle exec cap $1 puma:stop; }
 alias puma_stop='__puma_stop'
-
 function __puma_smartstop(){ bundle exec cap $1 puma:smart_stop; };
 alias puma_smartstop='__puma_smartstop'
-
 function __puma_restart(){ bundle exec cap $1 puma:stop && bundle exec cap $1 puma:start; };
 alias puma_restart='__puma_restart'
+
+funcion __aws_dynamo_local(){aws dynamodb $@ --endpoint-url http://localhost:8000}
+alias aws_dynamo_local='__aws_dynamo_local'
 
 alias lookbusy="cat /dev/urandom | hexdump -C | grep \"34 32\""
 
@@ -182,12 +174,11 @@ alias instalb='brew install'
 alias process='ps -aux'
 alias disk='df -h'
 
+# Docker
 function __dockersh(){ docker exec -it $1 /bin/sh; }
 alias dockersh='__dockersh'
-
 function __dockerbash(){ docker exec -it $1 /bin/bash; }
 alias dockerbash='__dockerbash'
-
 function __dockerpasswd(){ docker exec -itu $2 $1 passwd; } # $2 user, $1 container name
 alias dockerpasswd='__dockerpasswd'
 
