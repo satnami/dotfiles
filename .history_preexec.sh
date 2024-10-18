@@ -58,7 +58,6 @@ preexec() {
 		SELECT last_insert_rowid();
 		EOD
 	)"
-
 	#echo "$cmd" >> ~/.testlog
 }
 
