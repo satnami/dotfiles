@@ -83,6 +83,7 @@ alias httpt='wuzz'
 alias diffchecker='diffchecker --expires day'
 
 alias duplicates='echo "Start finding duplicates" && find . ! -empty -type f -exec md5sum {} + | sort | uniq -w32 -dD'
+alias duplicates2='echo "Start finding duplicates" && fdupes -r .'
 
 # Stopwatch
 alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date'
@@ -187,3 +188,5 @@ alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resource
 
 # Recursively remove .DS_Store files
 alias cleanupds="find . -type f -name '*.DS_Store' -ls -delete"
+
+alias cleanup_node_modules="npx npkill"

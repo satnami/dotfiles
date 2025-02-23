@@ -3,7 +3,7 @@
 [user]
 	name = Mhd Sami Al Mouhtaseb
 	email = mssatnami@gmail.com
-	signingkey = C7975D90478090F9
+	signingkey = F36B80357B0B658A
 [color]
 	ui = true
 [core]
@@ -52,3 +52,5 @@
 	clean = git-lfs clean -- %f
 [tag]
 	gpgsign = true
+[gpg]
+	program = /usr/local/bin/gpg
