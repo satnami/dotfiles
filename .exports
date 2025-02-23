@@ -116,3 +116,4 @@ export TESTCONTAINERS_HOST_OVERRIDE=$(rdctl shell ip a show vznat | awk '/inet /
 export TESTCONTAINERS_RYUK_DISABLED=true
 
 export HOMEBREW_NO_AUTO_UPDATE=1
+export HOMEBREW_DEVELOPER=1
