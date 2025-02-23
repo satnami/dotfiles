@@ -81,9 +81,9 @@ plugins=(
   zsh-syntax-highlighting zsh-autosuggestions ssh-agent notify
 )
 
-zstyle :omz:plugins:ssh-agent agent-forwarding on
+#zstyle :omz:plugins:ssh-agent agent-forwarding on
 #zstyle :omz:plugins:ssh-agent identities id_rsa id_dsa id_rsa_sla id_rsa_bot
-zstyle :omz:plugins:ssh-agent lifetime
+#zstyle :omz:plugins:ssh-agent lifetime
 
 zstyle ':notify:*' enable-on-ssh yes
 zstyle ':notify:*' command-complete-timeout 5
@@ -130,8 +130,6 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 [ -f "$HOME/.history_preexec.sh" ] && source "$HOME/.history_preexec.sh"
 
 [ -f $(dirname $(gem which colorls))/tab_complete.sh ] && source $(dirname $(gem which colorls))/tab_complete.sh
-
-source ~/.zplug/init.zsh
 
 zplug "changyuheng/fz", defer:1
 zplug "rupa/z", use:z.sh

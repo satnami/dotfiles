@@ -96,6 +96,8 @@ export PATH=$PATH:$FLUTTER_HOME/bin
 
 export PATH="$PATH:$HOME/.fabric8/bin"
 
+[ -f "$HOME/.cargo/env" ] && source "$HOME/.cargo/env"
+
 #export PATH="$PATH:$HOME/jruby-9.1.7.0/bin/"
 
 #export _JAVA_OPTIONS="-Xms1024m -Xmx2G -Xss256m -XX:MaxPermSize=4G"
