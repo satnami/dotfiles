@@ -75,4 +75,3 @@ if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -
 cowsay -f stegosaurus "Now I Am Become Death, The Destroyer Of Worlds"
 # echo 'Now I Am Become Death, The Destroyer Of Worlds' | parrotsay
 # espeak "Hey folks!"
-. "$HOME/.cargo/env"
