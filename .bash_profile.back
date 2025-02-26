@@ -16,6 +16,7 @@ for file in ~/.{path,bash_prompt,exports,aliases,functions,extra}; do
 done;
 unset file;
 
+
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 # HISTSUFFIX=`tty | sed 's/\///g;s/^dev//g'`
 # HISTFILE=".$0_history"
@@ -36,16 +37,30 @@ PROMPT_COMMAND="history -a"
 # If set, the pattern "**" used in a pathname expansion context will match all files and zero or more directories and subdirectories.
 # shopt -s globstar
 
-# (zsh) append history to the history file (no overwriting)
-setopt appendhistory
-# (zsh) share history across terminals
-setopt sharehistory
-# (zsh) immediately append to the history file, not just when a term is killed
-setopt incappendhistory
-# (zsh) don't show duplicates in search
-setopt histfindnodups
-# (zsh) add additional data to history like timestamp
-setopt extendedhistory
+# (zsh) Write the history file in the ':start:elapsed;command' format.
+setopt EXTENDED_HISTORY
+# (zsh) Write to the history file immediately, not when the shell exits.
+setopt INC_APPEND_HISTORY
+# (zsh) Share history between all sessions.
+setopt SHARE_HISTORY
+# (zsh) Expire a duplicate event first when trimming history.
+#setopt HIST_EXPIRE_DUPS_FIRST
+# (zsh) Do not record an event that was just recorded again.
+#setopt HIST_IGNORE_DUPS
+# (zsh) Delete an old recorded event if a new event is a duplicate.
+setopt HIST_IGNORE_ALL_DUPS
+# (zsh) Do not display a previously found event.
+#setopt HIST_FIND_NO_DUPS
+# (zsh) Do not record an event starting with a space.
+#setopt HIST_IGNORE_SPACE
+# (zsh) Do not write a duplicate event to the history file.
+#setopt HIST_SAVE_NO_DUPS
+# (zsh) Do not execute immediately upon history expansion.
+#setopt HIST_VERIFY
+# (zsh) append to history file
+setopt APPEND_HISTORY
+# (zsh) Don't store history commands
+#setopt HIST_NO_STORE
 
 # Add tab completion for many Bash commands
 if which brew &> /dev/null && [ -f "$(brew --prefix)/share/bash-completion/bash_completion" ]; then
@@ -56,15 +71,13 @@ fi;
 
 # useful only for Mac OS Silicon M1
 # still working but useless for the other platforms
-dockerx() {
+docker() {
  if [[ `uname -m` == "arm64" ]] && [[ "$1" == "run" || "$1" == "build" ]]; then
     /usr/local/bin/docker "$1" --platform linux/amd64 "${@:2}"
   else
      /usr/local/bin/docker "$@"
   fi
 }
-
-code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $* ;}
 
 eval $(thefuck --alias)
 eval "$(rbenv init -)"
