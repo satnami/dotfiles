@@ -5,14 +5,17 @@
 # SSH
 ssh -T git@github.com
 
-# Install HomeBrew
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+# HomeBrew
+if ! command -v brew >/dev/null 2>&1; then
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
 
-## ZSH
-# Install ZSH
-brew install zsh
-# ZSH to be the default
-sudo sh -c "echo $(which zsh) >> /etc/shells" && chsh -s $(which zsh)
+
+# ZSH
+if ! command -v zsh >/dev/null 2>&1; then
+    brew install zsh
+    sudo sh -c "echo $(which zsh) >> /etc/shells" && chsh -s $(which zsh)
+fi
 
 # Get the config
 git clone https://github.com/satnami/dotfiles ~/dotfiles
@@ -20,7 +23,7 @@ git clone https://github.com/satnami/dotfiles ~/dotfiles
 # Setup dotfiles
 sh ~/dotfiles/dot_import.sh
 
-##OhmyZSH
+#  OhmyZSH
 # Setup OhmyZSH
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 # Setup OhMyZSH Theme
@@ -56,7 +59,7 @@ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 vim +PluginInstall +qall
 vim +PluginUpdate +qall
 
-## Ruby
+# Ruby
 # Setup Ruby default gems
 git clone https://github.com/rbenv/rbenv-default-gems.git $(rbenv root)/plugins/rbenv-default-gems
 cp ~/dotfiles/packages/gems.list $(rbenv root)/default-gems
@@ -65,7 +68,7 @@ rbenv install 3.0.2
 rbenv global 3.0.2
 ruby -v
 
-## Node
+# Node
 # Setup Node
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
 nvm install 20
@@ -74,7 +77,7 @@ nvm use node
 sh ~/dotfiles/packages/npm.list
 
 :'
-## Erlang
+# Erlang
 # Setup Erlang
 brew install autoconf@2.69
 brew link --overwrite autoconf@2.69
