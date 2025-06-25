@@ -78,18 +78,17 @@ COMPLETION_WAITING_DOTS="true"
 
 # Which plugins would you like to load?
 plugins=(
-  zsh-syntax-highlighting zsh-autosuggestions ssh-agent notify
+  zsh-syntax-highlighting zsh-autosuggestions ssh-agent
 )
 
-#zstyle :omz:plugins:ssh-agent agent-forwarding on
+zstyle :omz:plugins:ssh-agent agent-forwarding on
 #zstyle :omz:plugins:ssh-agent identities id_rsa id_dsa id_rsa_sla id_rsa_bot
-#zstyle :omz:plugins:ssh-agent lifetime
+zstyle :omz:plugins:ssh-agent lifetime
 
-zstyle ':notify:*' enable-on-ssh yes
-zstyle ':notify:*' command-complete-timeout 5
-
-zstyle ':notify:*' error-title "Command failed (in #{time_elapsed} seconds)"
-zstyle ':notify:*' success-title "Command finished (in #{time_elapsed} seconds)"
+#zstyle ':notify:*' enable-on-ssh yes
+#zstyle ':notify:*' command-complete-timeout 5
+#zstyle ':notify:*' error-title "Command failed (in #{time_elapsed} seconds)"
+#zstyle ':notify:*' success-title "Command finished (in #{time_elapsed} seconds)"
 #OR
 #zstyle ':notify:*' error-icon "https://media3.giphy.com/media/10ECejNtM1GyRy/200_s.gif"
 #zstyle ':notify:*' error-title "wow such #fail"

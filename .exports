@@ -108,6 +108,8 @@ export PATH="$PATH:/usr/local/opt/libxml2/bin"
 
 [ -f "$HOME/kerl/default/activate" ] && source "$HOME/kerl/default/activate"
 
+export PATH="$PATH:$HOME/.lmstudio/bin"
+
 ### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
 export PATH="$PATH:$HOME/.rd/bin"
 ### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
