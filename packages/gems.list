@@ -4,6 +4,7 @@ bundler
 lolcat
 terminal-notifier
 colorls
+nokogiri
 
 # UML
 #railroad
