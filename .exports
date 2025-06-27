@@ -108,6 +108,8 @@ export PATH="$PATH:/usr/local/opt/libxml2/bin"
 
 [ -f "$HOME/kerl/default/activate" ] && source "$HOME/kerl/default/activate"
 
+[ -f "$(brew --prefix)/opt/gitstatus/gitstatus.prompt.zsh" ] && source "$(brew --prefix)/opt/gitstatus/gitstatus.prompt.zsh"
+
 export PATH="$PATH:$HOME/.lmstudio/bin"
 
 ### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)

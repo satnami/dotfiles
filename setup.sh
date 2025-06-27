@@ -41,6 +41,9 @@ curl -L https://iterm2.com/shell_integration/install_shell_integration_and_utili
 # Setup Up
 curl --create-dirs -o ~/.config/up/up.sh https://raw.githubusercontent.com/shannonmoeller/up/master/up.sh
 
+# Setup Zplug
+curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+
 # Setup Fonts
 git clone https://github.com/powerline/fonts.git ~/powerline-fonts
 cd ~/powerline-fonts
