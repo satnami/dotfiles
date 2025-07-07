@@ -74,7 +74,7 @@ export PATH=$PATH:$(npm prefix --location=global)/lib/node_modules
 #export LD_LIBRARY_PATH=$ORACLE_HOME/lib:$LD_LIBRARY_PATH
 #export PATH=$PATH:$ORACLE_HOME/bin
 
-export ANDROID_HOME="/usr/local/share/android-sdk"
+#export ANDROID_HOME="/usr/local/share/android-sdk"
 export ANDROID_HOME="$HOME/Library/Android/sdk"
 export PATH="$PATH:$ANDROID_HOME/tools"
 export PATH="$PATH:$ANDROID_HOME/tools/bin"
