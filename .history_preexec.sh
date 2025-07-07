@@ -38,7 +38,7 @@ preexec() {
 
 	#atomic create file if not exist
 	__create_histdb
-	
+
 	local quotedloginsession
 	if [[ -v LOGINSESSION ]]; then
 		quotedloginsession=$(__quote_str "$LOGINSESSION")
@@ -58,6 +58,7 @@ preexec() {
 		SELECT last_insert_rowid();
 		EOD
 	)"
+
 	#echo "$cmd" >> ~/.testlog
 }
 
