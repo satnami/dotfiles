@@ -15,34 +15,34 @@ if [ "$CI_MODE" = "false" ]; then
   TIMESTAMP=$(date +"%Y-%m-%d_%H-%M-%S")
   LOGFILE="$HOME/setup_$TIMESTAMP.log"
   exec > >(tee -a "$LOGFILE") 2>&1
-  echo "?? Log: $LOGFILE"
-  echo "?? Started at $(date)"
+  echo "[LOG] Log: $LOGFILE"
+  echo "[START] Started at $(date)"
   echo "----------------------------------------"
 else
-  echo "?? Running in CI mode"
+  echo "[CI] Running in CI mode"
   LOGFILE="$HOME/setup_ci.log"
   # In CI, we want output to go to both stdout and log file
   exec > >(tee -a "$LOGFILE") 2>&1
-  echo "?? CI Log: $LOGFILE"
-  echo "?? Started at $(date)"
+  echo "[LOG] CI Log: $LOGFILE"
+  echo "[START] Started at $(date)"
   echo "----------------------------------------"
   # Don't use set -x in CI as it interferes with echo output
   # set -x
 fi
 
-echo "?? Starting setup"
+echo "[SETUP] Starting setup"
 
-echo "?? CI mode: $CI_MODE"
-echo "?? CI env var: ${CI:-not_set}"
-echo "?? GITHUB_ACTIONS: ${GITHUB_ACTIONS:-not_set}"
-echo "?? PWD: $PWD"
-echo "?? HOME: $HOME"
+echo "[CONFIG] CI mode: $CI_MODE"
+echo "[CONFIG] CI env var: ${CI:-not_set}"
+echo "[CONFIG] GITHUB_ACTIONS: ${GITHUB_ACTIONS:-not_set}"
+echo "[CONFIG] PWD: $PWD"
+echo "[CONFIG] HOME: $HOME"
 
 # ----------------------------------------
 # macOS check
 # ----------------------------------------
 if [ "$(uname)" != "Darwin" ]; then
-  echo "? This script is macOS-only."
+  echo "[ERROR] This script is macOS-only."
   exit 1
 fi
 
@@ -62,19 +62,19 @@ fi
 # SSH check (skip in CI)
 # ----------------------------------------
 if [ "$CI_MODE" = "false" ]; then
-  ssh -T git@github.com || echo "?? SSH authentication failed"
+  ssh -T git@github.com || echo "[WARN] SSH authentication failed"
 else
-  echo "?? Skipping SSH check in CI mode"
+  echo "[SKIP] Skipping SSH check in CI mode"
 fi
 
 # ----------------------------------------
 # Homebrew
 # ----------------------------------------
 if ! command -v brew >/dev/null 2>&1; then
-  echo "?? Installing Homebrew..."
+  echo "[BREW] Installing Homebrew..."
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 else
-  echo "? Homebrew already installed"
+  echo "[OK] Homebrew already installed"
 fi
 
 # ----------------------------------------
@@ -89,22 +89,22 @@ if ! command -v zsh >/dev/null 2>&1; then
   if [ "$CI_MODE" = "false" ]; then
     chsh -s "$ZSH_PATH"
   else
-    echo "?? Skipping shell change in CI mode"
+    echo "[SKIP] Skipping shell change in CI mode"
   fi
 else
-  echo "? Zsh already installed"
+  echo "[OK] Zsh already installed"
 fi
 
 # ----------------------------------------
 # Dotfiles
 # ----------------------------------------
 if [ "$CI_MODE" = "true" ]; then
-  echo "? Repo already checked out by GitHub Actions"
+  echo "[OK] Repo already checked out by GitHub Actions"
   DOTFILES_DIR="$PWD"
   # Verify we're in the right directory
   if [ ! -f "$DOTFILES_DIR/dot_import.sh" ]; then
-    echo "? ERROR: dot_import.sh not found in $DOTFILES_DIR"
-    echo "? Expected to be in dotfiles directory but files are missing"
+    echo "[ERROR] dot_import.sh not found in $DOTFILES_DIR"
+    echo "[ERROR] Expected to be in dotfiles directory but files are missing"
     exit 1
   fi
 else
@@ -112,14 +112,14 @@ else
   if [ ! -d "$DOTFILES_DIR" ]; then
     git clone https://github.com/satnami/dotfiles "$DOTFILES_DIR"
   else
-    echo "?? dotfiles already installed"
+    echo "[SKIP] dotfiles already installed"
   fi
   
   # Only run dot_import.sh if the expected dotfiles exist
   if [ -f "$DOTFILES_DIR/.zshrc" ] && [ -f "$DOTFILES_DIR/.vimrc" ]; then
     sh "$DOTFILES_DIR/dot_import.sh"
   else
-    echo "?? Some dotfiles are missing, skipping import"
+    echo "[WARN] Some dotfiles are missing, skipping import"
   fi
 fi
 
@@ -129,7 +129,7 @@ fi
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
   RUNZSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 else
-  echo "? Oh My Zsh already installed"
+  echo "[OK] Oh My Zsh already installed"
 fi
 
 # ----------------------------------------
@@ -160,9 +160,9 @@ curl -L https://iterm2.com/shell_integration/install_shell_integration_and_utili
 UP_PATH="$HOME/.config/up/up.sh"
 if [ ! -f "$UP_PATH" ]; then
   curl --create-dirs -o "$UP_PATH" https://raw.githubusercontent.com/shannonmoeller/up/master/up.sh
-  [ -f "$UP_PATH" ] && chmod +x "$UP_PATH" && echo "? up.sh installed"
+  [ -f "$UP_PATH" ] && chmod +x "$UP_PATH" && echo "[OK] up.sh installed"
 else
-  echo "?? up.sh already exists"
+  echo "[SKIP] up.sh already exists"
 fi
 
 # ----------------------------------------
@@ -170,9 +170,9 @@ fi
 # ----------------------------------------
 if [ ! -d "$HOME/.zplug" ]; then
   curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
-  [ -d "$HOME/.zplug" ] && echo "? zplug installed"
+  [ -d "$HOME/.zplug" ] && echo "[OK] zplug installed"
 else
-  echo "?? zplug already installed"
+  echo "[SKIP] zplug already installed"
 fi
 
 if ! grep -q 'zplug/init.zsh' "$HOME/.zshrc"; then
@@ -193,9 +193,9 @@ if [ -f "$FONTS_DIR/install" ]; then
   pushd "$FONTS_DIR"
   ./install
   popd
-else
-  echo "? Font installer not found in $FONTS_DIR — skipping"
-fi
+  else
+    echo "[ERROR] Font installer not found in $FONTS_DIR — skipping"
+  fi
 
 # ----------------------------------------
 # Brewfile
@@ -226,7 +226,7 @@ if [ "$CI_MODE" = "false" ]; then
   vim +PluginInstall +qall
   vim +PluginUpdate +qall
 else
-  echo "?? Skipping vim plugin setup in CI mode"
+  echo "[SKIP] Skipping vim plugin setup in CI mode"
 fi
 
 # ----------------------------------------
@@ -242,8 +242,8 @@ fi
       git clone https://github.com/rbenv/rbenv-default-gems.git "$(rbenv root)/plugins/rbenv-default-gems"
     fi
     cp "$DOTFILES_DIR/packages/gems.list" "$(rbenv root)/default-gems"
-    rbenv install -s 3.0.2
-    rbenv global 3.0.2
+    rbenv install -s 3.0.0
+    rbenv global 3.0.0
     ruby -v
   fi
 
@@ -300,15 +300,15 @@ popd
 if [ "$CI_MODE" = "false" ]; then
   (crontab -l 2>/dev/null; echo "0 12 * * * $DOTFILES_DIR/cron/history_backup") | crontab -
 else
-  echo "?? Skipping crontab setup in CI mode"
+  echo "[SKIP] Skipping crontab setup in CI mode"
 fi
 
 # ----------------------------------------
 # Done
 # ----------------------------------------
-echo "? Setup complete at $(date)"
+echo "[SUCCESS] Setup complete at $(date)"
 if [ "$CI_MODE" = "true" ]; then
-  echo "?? CI Log file saved to: $LOGFILE"
+  echo "[LOG] CI Log file saved to: $LOGFILE"
 else
-  echo "?? Log file saved to: $LOGFILE"
+  echo "[LOG] Log file saved to: $LOGFILE"
 fi
