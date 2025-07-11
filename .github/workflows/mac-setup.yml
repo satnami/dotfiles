@@ -18,8 +18,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Grant execute permission to setup.sh
-        run: chmod +x ./setup.sh
+      - name: Grant execute permission to setup-ci.sh
+        run: chmod +x ./setup-ci.sh
 
-      - name: Run setup.sh
-        run: ./setup.sh
+      - name: Run setup-ci.sh
+        run: ./setup-ci.sh

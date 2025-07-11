@@ -86,7 +86,11 @@ if ! command -v zsh >/dev/null 2>&1; then
   if ! grep -q "$ZSH_PATH" /etc/shells; then
     echo "$ZSH_PATH" | sudo tee -a /etc/shells
   fi
-  chsh -s "$ZSH_PATH"
+  if [ "$CI_MODE" = "false" ]; then
+    chsh -s "$ZSH_PATH"
+  else
+    echo "?? Skipping shell change in CI mode"
+  fi
 else
   echo "? Zsh already installed"
 fi
@@ -97,6 +101,12 @@ fi
 if [ "$CI_MODE" = "true" ]; then
   echo "? Repo already checked out by GitHub Actions"
   DOTFILES_DIR="$PWD"
+  # Verify we're in the right directory
+  if [ ! -f "$DOTFILES_DIR/dot_import.sh" ]; then
+    echo "? ERROR: dot_import.sh not found in $DOTFILES_DIR"
+    echo "? Expected to be in dotfiles directory but files are missing"
+    exit 1
+  fi
 else
   DOTFILES_DIR="$HOME/dotfiles"
   if [ ! -d "$DOTFILES_DIR" ]; then
@@ -104,7 +114,13 @@ else
   else
     echo "?? dotfiles already installed"
   fi
-  sh ~/dotfiles/dot_import.sh
+  
+  # Only run dot_import.sh if the expected dotfiles exist
+  if [ -f ~/dotfiles/.zshrc ] && [ -f ~/dotfiles/.vimrc ]; then
+    sh ~/dotfiles/dot_import.sh
+  else
+    echo "?? Some dotfiles are missing, skipping import"
+  fi
 fi
 
 # ----------------------------------------
@@ -131,7 +147,7 @@ PLUG_DIR="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins"
 [ ! -d "$PLUG_DIR/zsh-syntax-highlighting" ] && git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$PLUG_DIR/zsh-syntax-highlighting"
 [ ! -d "$PLUG_DIR/zsh-autosuggestions" ] && git clone https://github.com/zsh-users/zsh-autosuggestions "$PLUG_DIR/zsh-autosuggestions"
 # Optional: zsh-notify plugin (commented out)
-# git clone git@github.com:marzocchi/zsh-notify.git "$PLUG_DIR/notify"
+# git clone https://github.com/marzocchi/zsh-notify.git "$PLUG_DIR/notify"
 
 # ----------------------------------------
 # iTerm Integration
@@ -203,8 +219,12 @@ if [ ! -d "$HOME/.vim/bundle/Vundle.vim" ]; then
   git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 fi
 
-vim +PluginInstall +qall
-vim +PluginUpdate +qall
+if [ "$CI_MODE" = "false" ]; then
+  vim +PluginInstall +qall
+  vim +PluginUpdate +qall
+else
+  echo "?? Skipping vim plugin setup in CI mode"
+fi
 
 # ----------------------------------------
 # Ruby via rbenv
@@ -269,12 +289,20 @@ popd
 '
 
 # ----------------------------------------
-# Crontab for history backup
+# Crontab for history backup (skip in CI)
 # ----------------------------------------
-(crontab -l 2>/dev/null; echo "0 12 * * * ~/dotfiles/cron/history_backup") | crontab -
+if [ "$CI_MODE" = "false" ]; then
+  (crontab -l 2>/dev/null; echo "0 12 * * * ~/dotfiles/cron/history_backup") | crontab -
+else
+  echo "?? Skipping crontab setup in CI mode"
+fi
 
 # ----------------------------------------
 # Done
 # ----------------------------------------
 echo "? Setup complete at $(date)"
-echo "?? Log file saved to: $LOGFILE"
+if [ "$CI_MODE" = "true" ]; then
+  echo "?? CI Log file saved to: $LOGFILE"
+else
+  echo "?? Log file saved to: $LOGFILE"
+fi
