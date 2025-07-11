@@ -20,12 +20,13 @@ if [ "$CI_MODE" = "false" ]; then
   echo "----------------------------------------"
 else
   echo "?? Running in CI mode"
-  # LOGFILE="$HOME/setup_ci.log"
-  # exec >"$LOGFILE" 2>&1
-  # echo "?? CI Log: $LOGFILE"
-  # echo "?? Started at $(date)"
-  # echo "----------------------------------------"
-  # trap 'cat "$LOGFILE"' EXIT
+  LOGFILE="$HOME/setup_ci.log"
+  # In CI, we want output to go to both stdout and log file
+  exec > >(tee -a "$LOGFILE") 2>&1
+  echo "?? CI Log: $LOGFILE"
+  echo "?? Started at $(date)"
+  echo "----------------------------------------"
+  trap 'cat "$LOGFILE"' EXIT
   set -x
 fi
 
@@ -42,10 +43,16 @@ if [ "$(uname)" != "Darwin" ]; then
 fi
 
 # ----------------------------------------
-# Alias pushd/popd (quiet)
+# Alias pushd/popd (quiet in non-CI mode)
 # ----------------------------------------
-alias pushd='pushd > /dev/null'
-alias popd='popd > /dev/null'
+if [ "$CI_MODE" = "false" ]; then
+  alias pushd='pushd > /dev/null'
+  alias popd='popd > /dev/null'
+else
+  # In CI mode, keep pushd/popd output visible
+  alias pushd='pushd'
+  alias popd='popd'
+fi
 
 # ----------------------------------------
 # SSH check
@@ -85,7 +92,7 @@ if [ "$CI_MODE" = "true" ]; then
 else
   DOTFILES_DIR="$HOME/dotfiles"
   if [ ! -d "$DOTFILES_DIR" ]; then
-    git https://github.com/satnami/dotfiles "$DOTFILES_DIR"
+    git clone https://github.com/satnami/dotfiles "$DOTFILES_DIR"
   else
     echo "?? dotfiles already installed"
   fi
@@ -153,13 +160,17 @@ fi
 # ----------------------------------------
 # Fonts
 # ----------------------------------------
-if [ ! -d "$HOME/powerline-fonts" ]; then
-  git clone https://github.com/powerline/fonts.git ~/powerline-fonts
-  pushd ~/powerline-fonts || exit
+FONTS_DIR="$HOME/powerline-fonts"
+if [ ! -d "$FONTS_DIR" ]; then
+  git clone https://github.com/powerline/fonts.git "$FONTS_DIR"
+fi
+
+if [ -f "$FONTS_DIR/install" ]; then
+  pushd "$FONTS_DIR"
   ./install
   popd
 else
-  echo "?? Fonts already installed"
+  echo "? Font installer not found in $FONTS_DIR — skipping"
 fi
 
 # ----------------------------------------
