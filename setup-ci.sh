@@ -2,15 +2,6 @@
 
 set -euo pipefail
 
-echo "?? Starting setup"
-
-CI_MODE="${CI_MODE:-false}"
-# Enable CI mode if environment variable CI is set by the system
-if [ "${CI:-}" = "true" ]; then
-  CI_MODE=true
-fi
-echo "?? CI mode: $CI_MODE"
-
 # ----------------------------------------
 # Log to timestamped file + stdout
 # ----------------------------------------
@@ -23,13 +14,23 @@ if [ "$CI_MODE" = "false" ]; then
   echo "----------------------------------------"
 else
   echo "?? Running in CI mode"
-  LOGFILE="$HOME/setup_ci.log"
-  exec >"$LOGFILE" 2>&1
-  echo "?? CI Log: $LOGFILE"
-  echo "?? Started at $(date)"
-  echo "----------------------------------------"
-  trap 'cat "$LOGFILE"' EXIT
+  # LOGFILE="$HOME/setup_ci.log"
+  # exec >"$LOGFILE" 2>&1
+  # echo "?? CI Log: $LOGFILE"
+  # echo "?? Started at $(date)"
+  # echo "----------------------------------------"
+  # trap 'cat "$LOGFILE"' EXIT
+  set -x
 fi
+
+echo "?? Starting setup"
+
+CI_MODE="${CI_MODE:-false}"
+# Enable CI mode if environment variable CI is set by the system
+if [ "${CI:-}" = "true" ]; then
+  CI_MODE=true
+fi
+echo "?? CI mode: $CI_MODE"
 
 # ----------------------------------------
 # macOS check

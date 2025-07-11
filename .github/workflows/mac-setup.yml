@@ -12,6 +12,9 @@ jobs:
     timeout-minutes: 45
 
     steps:
+      - name: Show environment
+        run: env
+
       - name: Checkout repository
         uses: actions/checkout@v3
 
