@@ -79,16 +79,17 @@ fi
 # ----------------------------------------
 # Dotfiles
 # ----------------------------------------
-if [ "$CI_MODE" = "false" ]; then
-  if [ ! -d "$HOME/dotfiles" ]; then
-    git clone https://github.com/satnami/dotfiles ~/dotfiles
+if [ "$CI_MODE" = "true" ]; then
+  echo "? Repo already checked out by GitHub Actions"
+  DOTFILES_DIR="$PWD"
+else
+  DOTFILES_DIR="$HOME/dotfiles"
+  if [ ! -d "$DOTFILES_DIR" ]; then
+    git https://github.com/satnami/dotfiles "$DOTFILES_DIR"
   else
     echo "?? dotfiles already installed"
   fi
-
   sh ~/dotfiles/dot_import.sh
-else
-  echo "?? Skipping dotfiles installation in CI mode"
 fi
 
 # ----------------------------------------
