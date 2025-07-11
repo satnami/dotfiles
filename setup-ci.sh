@@ -14,12 +14,14 @@ echo "?? CI mode: $CI_MODE"
 # ----------------------------------------
 # Log to timestamped file + stdout
 # ----------------------------------------
-TIMESTAMP=$(date +"%Y-%m-%d_%H-%M-%S")
-LOGFILE="$HOME/setup_$TIMESTAMP.log"
-exec > >(tee -a "$LOGFILE") 2>&1
-echo "?? Log: $LOGFILE"
-echo "?? Started at $(date)"
-echo "----------------------------------------"
+if [ "$CI_MODE" = "false" ]; then
+  TIMESTAMP=$(date +"%Y-%m-%d_%H-%M-%S")
+  LOGFILE="$HOME/setup_$TIMESTAMP.log"
+  exec > >(tee -a "$LOGFILE") 2>&1
+  echo "?? Log: $LOGFILE"
+  echo "?? Started at $(date)"
+  echo "----------------------------------------"
+fi
 
 # ----------------------------------------
 # macOS check
