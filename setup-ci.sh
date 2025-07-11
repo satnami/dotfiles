@@ -163,9 +163,11 @@ fi
 # ----------------------------------------
 # Brewfile
 # ----------------------------------------
-pushd ~/dotfiles/Brew || exit
-brew bundle
-popd
+if [ "$CI_MODE" = "false" ]; then
+  pushd ~/dotfiles/Brew || exit
+  brew bundle
+  popd
+fi
 
 # ----------------------------------------
 # SDKMAN
