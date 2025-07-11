@@ -1,5 +1,9 @@
 #!/bin/sh
 
+set -euo pipefail
+
+echo "?? Starting setup"
+
 CI_MODE="${CI_MODE:-false}"
 # Enable CI mode if environment variable CI is set by the system
 if [ "${CI:-}" = "true" ]; then
