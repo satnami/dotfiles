@@ -4,7 +4,7 @@ set -euo pipefail
 
 CI_MODE="${CI_MODE:-false}"
 # Enable CI mode if environment variable CI is set by the system
-if [ "${CI:-}" = "true" ]; then
+if [ "${CI:-}" = "true" ] || [ "${GITHUB_ACTIONS:-}" = "true" ]; then
   CI_MODE=true
 fi
 
@@ -26,13 +26,17 @@ else
   echo "?? CI Log: $LOGFILE"
   echo "?? Started at $(date)"
   echo "----------------------------------------"
-  trap 'cat "$LOGFILE"' EXIT
-  set -x
+  # Don't use set -x in CI as it interferes with echo output
+  # set -x
 fi
 
 echo "?? Starting setup"
 
 echo "?? CI mode: $CI_MODE"
+echo "?? CI env var: ${CI:-not_set}"
+echo "?? GITHUB_ACTIONS: ${GITHUB_ACTIONS:-not_set}"
+echo "?? PWD: $PWD"
+echo "?? HOME: $HOME"
 
 # ----------------------------------------
 # macOS check
@@ -55,9 +59,13 @@ else
 fi
 
 # ----------------------------------------
-# SSH check
+# SSH check (skip in CI)
 # ----------------------------------------
-ssh -T git@github.com || echo "?? SSH authentication failed"
+if [ "$CI_MODE" = "false" ]; then
+  ssh -T git@github.com || echo "?? SSH authentication failed"
+else
+  echo "?? Skipping SSH check in CI mode"
+fi
 
 # ----------------------------------------
 # Homebrew
