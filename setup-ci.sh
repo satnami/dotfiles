@@ -2,6 +2,12 @@
 
 set -euo pipefail
 
+CI_MODE="${CI_MODE:-false}"
+# Enable CI mode if environment variable CI is set by the system
+if [ "${CI:-}" = "true" ]; then
+  CI_MODE=true
+fi
+
 # ----------------------------------------
 # Log to timestamped file + stdout
 # ----------------------------------------
@@ -25,11 +31,6 @@ fi
 
 echo "?? Starting setup"
 
-CI_MODE="${CI_MODE:-false}"
-# Enable CI mode if environment variable CI is set by the system
-if [ "${CI:-}" = "true" ]; then
-  CI_MODE=true
-fi
 echo "?? CI mode: $CI_MODE"
 
 # ----------------------------------------
