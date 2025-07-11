@@ -21,6 +21,14 @@ if [ "$CI_MODE" = "false" ]; then
   echo "?? Log: $LOGFILE"
   echo "?? Started at $(date)"
   echo "----------------------------------------"
+else
+  echo "?? Running in CI mode"
+  LOGFILE="$HOME/setup_ci.log"
+  exec >"$LOGFILE" 2>&1
+  echo "?? CI Log: $LOGFILE"
+  echo "?? Started at $(date)"
+  echo "----------------------------------------"
+  trap 'cat "$LOGFILE"' EXIT
 fi
 
 # ----------------------------------------
