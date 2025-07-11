@@ -210,7 +210,10 @@ fi
 # SDKMAN
 # ----------------------------------------
 curl -s "https://get.sdkman.io" | bash
+# Temporarily disable 'set -u' for SDKMAN initialization
+set +u
 source "$HOME/.sdkman/bin/sdkman-init.sh"
+set -u
 
 # ----------------------------------------
 # Vim with Vundle
@@ -249,7 +252,10 @@ fi
 # ----------------------------------------
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
 export NVM_DIR="$HOME/.nvm"
+# Temporarily disable 'set -u' for NVM initialization
+set +u
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+set -u
 nvm install 20
 nvm use node
 sh ~/dotfiles/packages/npm.list
