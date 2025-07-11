@@ -116,8 +116,8 @@ else
   fi
   
   # Only run dot_import.sh if the expected dotfiles exist
-  if [ -f ~/dotfiles/.zshrc ] && [ -f ~/dotfiles/.vimrc ]; then
-    sh ~/dotfiles/dot_import.sh
+  if [ -f "$DOTFILES_DIR/.zshrc" ] && [ -f "$DOTFILES_DIR/.vimrc" ]; then
+    sh "$DOTFILES_DIR/dot_import.sh"
   else
     echo "?? Some dotfiles are missing, skipping import"
   fi
@@ -201,7 +201,7 @@ fi
 # Brewfile
 # ----------------------------------------
 if [ "$CI_MODE" = "false" ]; then
-  pushd ~/dotfiles/Brew || exit
+  pushd "$DOTFILES_DIR/Brew" || exit
   brew bundle
   popd
 fi
@@ -237,15 +237,15 @@ if ! command -v rbenv >/dev/null 2>&1; then
   eval "$(rbenv init -)"
 fi
 
-if command -v rbenv >/dev/null 2>&1; then
-  if [ ! -d "$(rbenv root)/plugins/rbenv-default-gems" ]; then
-    git clone https://github.com/rbenv/rbenv-default-gems.git "$(rbenv root)/plugins/rbenv-default-gems"
+  if command -v rbenv >/dev/null 2>&1; then
+    if [ ! -d "$(rbenv root)/plugins/rbenv-default-gems" ]; then
+      git clone https://github.com/rbenv/rbenv-default-gems.git "$(rbenv root)/plugins/rbenv-default-gems"
+    fi
+    cp "$DOTFILES_DIR/packages/gems.list" "$(rbenv root)/default-gems"
+    rbenv install -s 3.0.2
+    rbenv global 3.0.2
+    ruby -v
   fi
-  cp ~/dotfiles/packages/gems.list "$(rbenv root)/default-gems"
-  rbenv install -s 3.0.2
-  rbenv global 3.0.2
-  ruby -v
-fi
 
 # ----------------------------------------
 # Node via NVM
@@ -258,7 +258,7 @@ set +u
 set -u
 nvm install 20
 nvm use node
-sh ~/dotfiles/packages/npm.list
+sh "$DOTFILES_DIR/packages/npm.list"
 
 # ----------------------------------------
 # Erlang (Optional, Commented)
@@ -298,7 +298,7 @@ popd
 # Crontab for history backup (skip in CI)
 # ----------------------------------------
 if [ "$CI_MODE" = "false" ]; then
-  (crontab -l 2>/dev/null; echo "0 12 * * * ~/dotfiles/cron/history_backup") | crontab -
+  (crontab -l 2>/dev/null; echo "0 12 * * * $DOTFILES_DIR/cron/history_backup") | crontab -
 else
   echo "?? Skipping crontab setup in CI mode"
 fi
