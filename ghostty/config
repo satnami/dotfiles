@@ -1,1 +1,119 @@
-/Users/sami.almouhtaseb/Library/Application Support/com.mitchellh.ghostty/config
+# This is the configuration file for Ghostty.
+#
+# This template file has been automatically created at the following
+# path since Ghostty couldn't find any existing config files on your system:
+#
+#   {[path]s}
+#
+# The template does not set any default options, since Ghostty ships
+# with sensible defaults for all options.
+# Note that you should not paste the output of `ghostty +show-config
+# --default` into your config: some default options actually conflict with each other
+# when explicitly set in a configuration file. Instead, only set the
+# options you actually need.
+#
+# Run `ghostty +show-config --default --docs` to view a list of
+# all available config options and their default values.
+#
+# Additionally, each config option is also explained in detail
+# on Ghostty's website, at https://ghostty.org/docs/config.
+#
+# Ghostty can reload the configuration while running by using the menu
+# options or the bound key (default: Command + Shift + comma on macOS and
+# Control + Shift + comma on other platforms). Not all config options can be
+# reloaded while running; some only apply to new windows and others may require
+# a full restart to take effect.
+
+# Config syntax crash course
+# ==========================
+# # The config file consists of simple key-value pairs,
+# # separated by equals signs.
+# font-family = Iosevka
+# window-padding-x = 2
+#
+# # Spacing around the equals sign does not matter.
+# # All of these are identical:
+# key=value
+# key= value
+# key =value
+# key = value
+#
+# # Any line beginning with a # is a comment. It's not possible to put
+# # a comment after a config option, since it would be interpreted as a
+# # part of the value. For example, this will have a value of "#123abc":
+# background = #123abc
+#
+# # Empty values are used to reset config keys to default.
+# key =
+#
+# # Some config options have unique syntaxes for their value,
+# # which is explained in the docs for that config option.
+# # Just for example:
+# resize-overlay-duration = 4s 200ms
+
+# Theme & Color
+theme = Dracula+
+
+# Background
+background-opacity = 0.9
+background-blur-radius = 20
+
+# Font
+font-family = "MesloLGS NF"
+# font-family = "Hack Nerd Font Mono"
+# font-family = "JetBrainsMono Nerd Font Mono"
+font-size = 14
+
+# Mouse & Scrolling
+mouse-hide-while-typing = true
+cursor-style = block
+cursor-style-blink = false
+shell-integration-features = no-cursor
+scrollback-limit = 10000
+
+# Automatic Update
+auto-update = check
+
+# Other
+shell-integration = zsh
+# macos-hidden = always
+# macos-option-as-alt = true
+
+# Style of Titlebar - MacOS specific
+macos-titlebar-style = transparent
+
+# Window Settings
+window-padding-x = 10
+window-padding-y = 10
+window-padding-balance = true
+
+# Custom Keybinds & Config (supor == command key on mac)
+# global means overrides all other apps
+# Userful Keybinds
+keybind = super+i=inspector:toggle
+keybind = global:shift+escape=toggle_quick_terminal
+quick-terminal-position = bottom
+
+# Vim mode Custom Keybinds
+# # Unbind default keybinds
+# keybind = super+alt+left=unbind
+# keybind = super+alt+down=unbind
+# keybind = super+alt+up=unbind
+# keybind = super+alt+right=unbind
+# # Custom keybinds for navigation
+# keybind = super+alt+h=goto_split:left
+# keybind = super+alt+j=goto_split:down
+# keybind = super+alt+k=goto_split:up
+# keybind = super+alt+l=goto_split:right
+
+# Resize window
+# # Unbind default keybinds
+# keybind = super+ctrl+left=unbind
+# keybind = super+ctrl+down=unbind
+# keybind = super+ctrl+up=unbind
+# keybind = super+ctrl+right=unbind
+# # Custom keybinds for resizing window
+# keybind = super+ctrl+h=resize_split:left,10
+# keybind = super+ctrl+j=resize_split:down,10
+# keybind = super+ctrl+k=resize_split:up,10
+# keybind = super+ctrl+l=resize_split:right,10
