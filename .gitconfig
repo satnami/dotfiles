@@ -12,12 +12,13 @@
 	excludesfile = ~/.gitignore_global
 	ignorecase = false
 [alias]
-	pl = push
+	pl = pull
 	ps = push
 	l = log --pretty=oneline -n 20 --graph --abbrev-commit
 	aa = add --all
 	co = checkout
 	br = branch
+	brn = "!f() { git checkout -b satnami/$1; }; f"
 	cm = commit -v -S -m
 	st = status
 	discard = reset --hard HEAD
