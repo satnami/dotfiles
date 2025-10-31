@@ -93,6 +93,13 @@ keybind = super+i=inspector:toggle
 keybind = global:shift+escape=toggle_quick_terminal
 quick-terminal-position = bottom
 
+# Tab navigation (iTerm-like: Command + Right / Command + Left)
+keybind = super+right=next_tab
+keybind = super+left=previous_tab
+
+# Optional: reload config quickly (handy while tuning)
+keybind = super+r=reload_config
+
 # Vim mode Custom Keybinds
 # # Unbind default keybinds
 # keybind = super+alt+left=unbind
