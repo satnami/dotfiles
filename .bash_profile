@@ -35,16 +35,18 @@ PROMPT_COMMAND="history -a"
 # If set, the pattern "**" used in a pathname expansion context will match all files and zero or more directories and subdirectories.
 # shopt -s globstar
 
-# (zsh) append history to the history file (no overwriting)
-setopt appendhistory
-# (zsh) share history across terminals
-setopt sharehistory
-# (zsh) immediately append to the history file, not just when a term is killed
-setopt incappendhistory
-# (zsh) don't show duplicates in search
-setopt histfindnodups
-# (zsh) add additional data to history like timestamp
-setopt extendedhistory
+if [ -n "$ZSH_VERSION" ]; then
+	# (zsh) append history to the history file (no overwriting)
+	setopt appendhistory
+	# (zsh) share history across terminals
+	setopt sharehistory
+	# (zsh) immediately append to the history file, not just when a term is killed
+	setopt incappendhistory
+	# (zsh) don't show duplicates in search
+	setopt histfindnodups
+	# (zsh) add additional data to history like timestamp
+	setopt extendedhistory
+fi
 
 # Add tab completion for many Bash commands
 if which brew &> /dev/null && [ -f "$(brew --prefix)/share/bash-completion/bash_completion" ]; then

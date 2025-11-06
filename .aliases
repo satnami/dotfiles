@@ -71,8 +71,8 @@ alias sdump='genact -m memdump'
 alias scrcpy='scrcpy -m 1920 -S'
 
 alias pubkey="cat ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
-alias pubkey_gen_pem"ssh-keygen -f  ~/.ssh/id_rsa.pub -m 'PEM' -e >  ~/.ssh/id_rsa_pkcs8.pem"
-alias pubkey_gen_pem8"ssh-keygen -f  ~/.ssh/id_rsa.pub -m 'pkcs8' -e >  ~/.ssh/id_rsa_pkcs8.pem"
+alias pubkey_gen_pem="ssh-keygen -f  ~/.ssh/id_rsa.pub -m 'PEM' -e >  ~/.ssh/id_rsa_pkcs8.pem"
+alias pubkey_gen_pem8="ssh-keygen -f  ~/.ssh/id_rsa.pub -m 'pkcs8' -e >  ~/.ssh/id_rsa_pkcs8.pem"
 
 alias top='htop'
 alias file_manager='mc'
@@ -112,7 +112,7 @@ alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
-function __word_grep(){ word123456789="$1|$" && grep -E --color=auto $word123456789 $2 && unset word123456789 }
+function __word_grep(){ local word123456789="$1|$"; grep -E --color=auto "$word123456789" "$2"; }
 alias wgrep='__word_grep'
 
 # Ruby & Rails
@@ -138,12 +138,12 @@ function __puma_start(){ bundle exec cap $1 puma:start; }
 alias puma_start='__puma_start'
 function __puma_stop(){ bundle exec cap $1 puma:stop; }
 alias puma_stop='__puma_stop'
-function __puma_smartstop(){ bundle exec cap $1 puma:smart_stop; };
+function __puma_smartstop(){ bundle exec cap $1 puma:smart_stop; }
 alias puma_smartstop='__puma_smartstop'
-function __puma_restart(){ bundle exec cap $1 puma:stop && bundle exec cap $1 puma:start; };
+function __puma_restart(){ bundle exec cap $1 puma:stop && bundle exec cap $1 puma:start; }
 alias puma_restart='__puma_restart'
 
-funcion __aws_dynamo_local(){aws dynamodb $@ --endpoint-url http://localhost:8000}
+function __aws_dynamo_local(){ aws dynamodb $@ --endpoint-url http://localhost:8000; }
 alias aws_dynamo_local='__aws_dynamo_local'
 
 alias lookbusy="cat /dev/urandom | hexdump -C | grep \"34 32\""
@@ -152,8 +152,8 @@ alias lookbusy="cat /dev/urandom | hexdump -C | grep \"34 32\""
 alias sniff="sudo ngrep -d 'en1' -t '^(GET|POST) ' 'tcp and port 80'"
 alias httpdump="sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\\: .*|GET \\/.*\""
 
-function __nmap_ciphers(){ nmap -sV --script ssl-enum-ciphers -p $2 $1; };
-alias nmap_ciphers="__nmap_ciphers"
+function __nmap_ciphers(){ nmap -sV --script ssl-enum-ciphers -p $2 $1; }
+alias nmap_ciphers='__nmap_ciphers'
 
 alias ipl="dig +short myip.opendns.com @resolver1.opendns.com" # or ip="curl ipinfo.io/ip"
 alias iplocate='function locate(){ curl https://www.iplocate.io/api/lookup/$1; echo; }; locate'
