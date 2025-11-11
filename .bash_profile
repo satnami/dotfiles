@@ -67,9 +67,9 @@ dockerx() {
 
 code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $* ;}
 
-eval $(thefuck --alias)
-eval "$(rbenv init -)"
-if command -v pyenv 1>/dev/null 2>&1; then eval "$(pyenv init -)"; fi
+if command -v thefuck >/dev/null 2>&1; then eval "$(thefuck --alias)"; fi
+if command -v rbenv >/dev/null 2>&1; then eval "$(rbenv init -)"; fi
+if command -v pyenv >/dev/null 2>&1; then eval "$(pyenv init -)"; fi
 if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 #eval $(minishift oc-env)
 #eval $(minishift docker-env)
