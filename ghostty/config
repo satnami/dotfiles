@@ -1,5 +1,6 @@
 # Theme & Color
 theme = Dracula+
+# theme = Catppuccin Mocha
 
 # Background
 background-opacity = 0.9
@@ -8,7 +9,9 @@ background-blur-radius = 20
 # Font
 font-family = "MesloLGS NF"
 # font-family = "Hack Nerd Font Mono"
+# font-family = "0xProto Nerd Font Mono"
 font-size = 14
+font-thicken = true
 
 # Mouse & Scrolling
 mouse-hide-while-typing = true
@@ -39,6 +42,7 @@ window-padding-balance = true
 keybind = super+i=inspector:toggle
 keybind = global:shift+escape=toggle_quick_terminal
 quick-terminal-position = bottom
+# quick-terminal-size = 40%
 
 # Tab navigation (iTerm-like: Command + Right / Command + Left)
 keybind = super+right=next_tab
