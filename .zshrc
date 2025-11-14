@@ -119,7 +119,7 @@ export EDITOR='micro'
 
 [ -f "$HOME/.bash_profile" ] && source "$HOME/.bash_profile"
 
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+# test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 [ -f "$HOME/.fzf.zsh" ] && source "$HOME/.fzf.zsh"
 
@@ -131,13 +131,17 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 
 [ -f "$HOME/.history_preexec.sh" ] && source "$HOME/.history_preexec.sh"
 
-[ -f $(dirname $(gem which colorls))/tab_complete.sh ] && source $(dirname $(gem which colorls))/tab_complete.sh
+# [ -f $(dirname $(gem which colorls))/tab_complete.sh ] && source $(dirname $(gem which colorls))/tab_complete.sh
 
 zplug "changyuheng/fz", defer:1
 zplug "rupa/z", use:z.sh
 
 # autoload -Uz compinit && compinit
 # autoload -U +X bashcompinit && bashcompinit
+
+# export POWERLEVEL9K_DISABLE_RPROMPT=true
+# typeset -g POWERLEVEL9K_VCS_MAX_INDEXED_REPOS_SIZE=104857600  # 100MB
+# typeset -g POWERLEVEL9K_VCS_GITSTATUS_MAX_REPO_SIZE=200000000 # 200MB
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

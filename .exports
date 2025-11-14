@@ -23,7 +23,7 @@ export GPG_TTY=$(tty)
 
 export PATH=$PATH:/usr/local/opt/inetutils/libexec/gnubin
 
-# Minishift #
+# Minishift
 # export MINISHIFT_USERNAME=
 # export MINISHIFT_PASSWORD=
 
