@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-#notify-send Announcements "I'm starting to backup your history"
+# notify-send Announcements "I'm starting to backup your history"
 
 NOW=$(date +"%d_%m_%Y")
 FILE="history_$NOW.log"
@@ -10,13 +10,13 @@ mkdir -p $LOCATION
 
 copy_history() {
 sudo -u $USER bash << EOF
- cp "$HOME/$1" "$LOCATION/$USER_$1_$FILE"
+  cp "$HOME/$1" "$LOCATION/$USER_$1_$FILE"
 EOF
 }
 
-#sudo -u satnami bash << EOF
-# cp "$HOME/.bash_history" "$LOCATION/satnami_bash_$FILE"
-# cp "$HOME/.zsh_history" "$LOCATION/satnami_zsh_$FILE"
-#EOF
+# sudo -u satnami bash << EOF
+#   cp "$HOME/.bash_history" "$LOCATION/satnami_bash_$FILE"
+#   cp "$HOME/.zsh_history" "$LOCATION/satnami_zsh_$FILE"
+# EOF
 
 find -E ~ -regex '.*(zsh|bash|redis|psql|python|rediscli|guard|node_repl)(.|-|_)(history).*$' -maxdepth 1 -type f -print0 | xargs -0 basename $1 | while read -r line; do copy_history "$line"; done

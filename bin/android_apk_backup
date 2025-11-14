@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 for APP in $(adb shell pm list packages -3 -f)                                                      ─╯
 do

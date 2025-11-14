@@ -1,10 +1,10 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 docker run --name portainer -p 9000:9000 --restart=always -v "/var/run/docker.sock:/var/run/docker.sock" -v "/var/lib/portainer:/data" -d portainer/portainer
 
-#docker run --name satnami-wallabag -p 8044:80 -v /opt/wallabag:/var/www/wallabag/data -d wallabag/wallabag
+# docker run --name satnami-wallabag -p 8044:80 -v /opt/wallabag:/var/www/wallabag/data -d wallabag/wallabag
 
-#docker run --name satnami-localstack -p 4567-4580:4567-4580 -p 8097:8080 -d  atlassianlabs/localstack
+# docker run --name satnami-localstack -p 4567-4580:4567-4580 -p 8097:8080 -d  atlassianlabs/localstack
 
 docker run --name satnami-memcached -p 11211:11211 -d memcached:latest
 
@@ -17,9 +17,9 @@ docker run --name satnami-rethinkdb -p 29015:29015 -p 8015:8080 -v /var/lib/reth
 docker run --name satanmi-mongo -p 27017:27017 -v /var/lib/mongo:/data/db -d mongo:latest
 
 docker run --name satnami-postgres -p 5432:5432 -e POSTGRES_PASSWORD=postgres -v /var/lib/postgresql/9.6-docker/data:/var/lib/postgresql/data -d postgres:latest
-#docker run --name satnami-psql -it --rm --link satnami-postgres:postgres postgres psql -h postgres -U postgres
+# docker run --name satnami-psql -it --rm --link satnami-postgres:postgres postgres psql -h postgres -U postgres
 
-#docker run --name satnami-netdata -p 19999:19999 --privileged --restart=always --cap-add SYS_PTRACE -v /proc:/host/proc:ro -v /sys:/host/sys:ro -d titpetric/netdata
+# docker run --name satnami-netdata -p 19999:19999 --privileged --restart=always --cap-add SYS_PTRACE -v /proc:/host/proc:ro -v /sys:/host/sys:ro -d titpetric/netdata
 
 docker run --name satnami-yopass -p 1337:1337 -e 'MEMCACHED=memcache:11211' --link satnami-memcached:memcache -d jhaals/yopass
 

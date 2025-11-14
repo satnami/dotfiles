@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # header guard
 [ -n "$_SQLITE_HIST" ] && return || readonly _SQLITE_HIST=1
@@ -36,7 +36,7 @@ preexec() {
 	local cmd
 	cmd="$1"
 
-	#atomic create file if not exist
+	# atomic create file if not exist
 	__create_histdb
 
 	local quotedloginsession
@@ -59,7 +59,7 @@ preexec() {
 		EOD
 	)"
 
-	#echo "$cmd" >> ~/.testlog
+	# echo "$cmd" >> ~/.testlog
 }
 
 precmd() {

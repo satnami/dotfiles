@@ -1,17 +1,17 @@
 #!/usr/bin/env bash
 
-#export TERM="screen-256color"
+# export TERM="screen-256color"
 
 export PATH=$PATH:/usr/local/opt/postgresql@11/bin
 
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 
-export HASTE_SERVER="https://satnami-hastebin.herokuapp.com"
+# export HASTE_SERVER="https://satnami-hastebin.herokuapp.com"
 
-#parse_git_branch() {
+# parse_git_branch() {
 #     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
-#}
-#export PS1="\e[0;32m\u@\h \[\033[32m\]\w\[\033[33m\]\$(parse_git_branch)\[\033[00m\] $\e[m"
+# }
+# export PS1="\e[0;32m\u@\h \[\033[32m\]\w\[\033[33m\]\$(parse_git_branch)\[\033[00m\] $\e[m"
 
 export GOPATH=$HOME/go
 export GOROOT=/usr/local/opt/go/libexec
@@ -23,22 +23,22 @@ export GPG_TTY=$(tty)
 
 export PATH=$PATH:/usr/local/opt/inetutils/libexec/gnubin
 
-#Minishift#
-#export MINISHIFT_USERNAME=
-#export MINISHIFT_PASSWORD=
+# Minishift #
+# export MINISHIFT_USERNAME=
+# export MINISHIFT_PASSWORD=
 
 # Maven
-#export M2_HOME=/opt/maven
-#export PATH=${PATH}:${M2_HOME}/bin
+# export M2_HOME=/opt/maven
+# export PATH=${PATH}:${M2_HOME}/bin
 
 # Added by the Heroku Toolbelt
-#export PATH="$PATH:/usr/local/heroku/bin"
+# export PATH="$PATH:/usr/local/heroku/bin"
 
 # Add Rbenv PATH for scripting.
 export RBENV_ROOT="$HOME/.rbenv"
 export RBENV_ROOT=$(rbenv root)
 export PATH=$PATH:$RBENV_ROOT/shims
-#export PATH="$PATH:$RBENV_ROOT/plugins/ruby-build/bin"
+# export PATH="$PATH:$RBENV_ROOT/plugins/ruby-build/bin"
 
 # Add Pyenv PATH for scripting.
 # export PYENV_ROOT="$HOME/.pyenv"
@@ -46,9 +46,9 @@ export PYENV_ROOT=$(pyenv root)
 export PATH=$PATH:$PYENV_ROOT/shims
 
 # Add RVM to PATH for scripting.
-#export PATH="$PATH:$HOME/.rvm/bin"
+# export PATH="$PATH:$HOME/.rvm/bin"
 
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+# THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
 
@@ -58,23 +58,23 @@ export NVM_DIR="$HOME/.nvm"
 
 export PATH=$PATH:$(npm prefix --location=global)/lib/node_modules
 
-#export ANT_HOME=/usr/share/ant
+# export ANT_HOME=/usr/share/ant
 
-#export JAVA_HOME=/usr/lib/jvm/java-1.6.0-openjdk-amd64
-#export JAVA_HOME=/usr/lib/jvm/java-8-oracle
-#export JAVA_HOME=/usr/lib/jvm/java-6-oracle
+# export JAVA_HOME=/usr/lib/jvm/java-1.6.0-openjdk-amd64
+# export JAVA_HOME=/usr/lib/jvm/java-8-oracle
+# export JAVA_HOME=/usr/lib/jvm/java-6-oracle
 
-#export JBOSS_HOME=/usr/local/share/jboss/jboss-5.0.1-GA
+# export JBOSS_HOME=/usr/local/share/jboss/jboss-5.0.1-GA
 
-#export ORACLE_HOME=/u01/app/oracle/product/11.2.0/xe
+# export ORACLE_HOME=/u01/app/oracle/product/11.2.0/xe
 
-#export ORACLE_SID=XE
-#export NLS_LANG=`$ORACLE_HOME/bin/nls_lang.sh`
-#export ORACLE_BASE=/u01/app/oracle
-#export LD_LIBRARY_PATH=$ORACLE_HOME/lib:$LD_LIBRARY_PATH
-#export PATH=$PATH:$ORACLE_HOME/bin
+# export ORACLE_SID=XE
+# export NLS_LANG=`$ORACLE_HOME/bin/nls_lang.sh`
+# export ORACLE_BASE=/u01/app/oracle
+# export LD_LIBRARY_PATH=$ORACLE_HOME/lib:$LD_LIBRARY_PATH
+# export PATH=$PATH:$ORACLE_HOME/bin
 
-#export ANDROID_HOME="/usr/local/share/android-sdk"
+# export ANDROID_HOME="/usr/local/share/android-sdk"
 export ANDROID_HOME="$HOME/Library/Android/sdk"
 export PATH="$PATH:$ANDROID_HOME/tools"
 export PATH="$PATH:$ANDROID_HOME/tools/bin"
@@ -84,29 +84,29 @@ export PATH="$PATH:$ANDROID_HOME/platform-tools"
 export FLUTTER_HOME="$HOME/Apps/flutter"
 export PATH=$PATH:$FLUTTER_HOME/bin
 
-#export PATH="$PATH:$HOME/.yarn/bin"
+# export PATH="$PATH:$HOME/.yarn/bin"
 
-#export PATH="$PATH:$HOME/.cargo/bin"
+# export PATH="$PATH:$HOME/.cargo/bin"
 
-#export SCALA_HOME=/usr/local/scala-2.12.2
-#export PATH="$PATH:$SCALA_HOME/bin"
+# export SCALA_HOME=/usr/local/scala-2.12.2
+# export PATH="$PATH:$SCALA_HOME/bin"
 
-#export GOOGLE_CLOUD_SDK_HOME=$HOME/google-cloud-sdk
-#export PATH="$PATH:$GOOGLE_CLOUD_SDK_HOME/bin"
+# export GOOGLE_CLOUD_SDK_HOME=$HOME/google-cloud-sdk
+# export PATH="$PATH:$GOOGLE_CLOUD_SDK_HOME/bin"
 
-export PATH="$PATH:$HOME/.fabric8/bin"
+# export PATH="$PATH:$HOME/.fabric8/bin"
 
-[ -f "$HOME/.cargo/env" ] && source "$HOME/.cargo/env"
+# [ -f "$HOME/.cargo/env" ] && source "$HOME/.cargo/env"
 
-#export PATH="$PATH:$HOME/jruby-9.1.7.0/bin/"
+# export PATH="$PATH:$HOME/jruby-9.1.7.0/bin/"
 
-#export _JAVA_OPTIONS="-Xms1024m -Xmx2G -Xss256m -XX:MaxPermSize=4G"
-#export ANT_OPTS="-Xmx2g -XX:MaxPermSize=512m"
+# export _JAVA_OPTIONS="-Xms1024m -Xmx2G -Xss256m -XX:MaxPermSize=4G"
+# export ANT_OPTS="-Xmx2g -XX:MaxPermSize=512m"
 export PATH="$PATH:/usr/local/opt/imagemagick@6/bin"
 export PKG_CONFIG_PATH="/opt/local/lib/pkgconfig:/usr/local/Cellar/imagemagick@6/6.9.12-3/lib/pkgconfig/:$PKG_CONFIG_PATH"
 export PATH="$PATH:/usr/local/opt/libxml2/bin"
 
-[ -f "$HOME/kerl/default/activate" ] && source "$HOME/kerl/default/activate"
+# [ -f "$HOME/kerl/default/activate" ] && source "$HOME/kerl/default/activate"
 
 # [ -f "$(brew --prefix)/opt/gitstatus/gitstatus.prompt.zsh" ] && source "$(brew --prefix)/opt/gitstatus/gitstatus.prompt.zsh"
 

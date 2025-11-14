@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Usage: ./split_csv.sh input.csv 100
 
 FILE=$1

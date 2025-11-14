@@ -92,12 +92,12 @@ zstyle :omz:plugins:ssh-agent lifetime
 
 # zstyle ':notify:*' error-title "Command failed (in #{time_elapsed} seconds)"
 # zstyle ':notify:*' success-title "Command finished (in #{time_elapsed} seconds)"
-#OR
+# OR
 # zstyle ':notify:*' error-icon "https://media3.giphy.com/media/10ECejNtM1GyRy/200_s.gif"
 # zstyle ':notify:*' error-title "wow such #fail"
 # zstyle ':notify:*' success-icon "https://s-media-cache-ak0.pinimg.com/564x/b5/5a/18/b55a1805f5650495a74202279036ecd2.jpg"
 # zstyle ':notify:*' success-title "very #success. wow"
-#OR
+# OR
 # zstyle ':notify:*' notifier #/dotfiles/bin/custom_terminal_notifier
 
 source $ZSH/oh-my-zsh.sh
@@ -141,6 +141,6 @@ zplug "rupa/z", use:z.sh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-#[[ ! -f ~/.p9k.zsh ]] || source ~/.p9k.zsh
+# [[ ! -f ~/.p9k.zsh ]] || source ~/.p9k.zsh
 
 # zprof

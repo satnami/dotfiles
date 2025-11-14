@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Usage: merge_csv.sh output.csv file1.csv file2.csv ...
 
 head -1 "$2" > "$1"

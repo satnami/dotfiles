@@ -1,7 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-#Diff using meld for better view
-
+# Diff using meld for better view
 if [ -z "$1" ] && [ -z "$2" ]
 then
   echo "Usage: difff x y";

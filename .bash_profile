@@ -71,10 +71,10 @@ if command -v thefuck >/dev/null 2>&1; then eval "$(thefuck --alias)"; fi
 if command -v rbenv >/dev/null 2>&1; then eval "$(rbenv init -)"; fi
 if command -v pyenv >/dev/null 2>&1; then eval "$(pyenv init -)"; fi
 if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
-#eval $(minishift oc-env)
-#eval $(minishift docker-env)
+# eval $(minishift oc-env)
+# eval $(minishift docker-env)
 
 # fortune | cowsay -f stegosaurus | lolcat
-cowsay -f stegosaurus "Now I Am Become Death, The Destroyer Of Worlds"
+# cowsay -f stegosaurus "Now I Am Become Death, The Destroyer Of Worlds"
 # echo 'Now I Am Become Death, The Destroyer Of Worlds' | parrotsay
 # espeak "Hey folks!"

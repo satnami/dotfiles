@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Usage: ./append_every_nth.sh 3 " 🚀" input.txt output.txt
 
 if [ "$#" -ne 4 ]; then
