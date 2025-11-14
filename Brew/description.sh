@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 echo "=== Formulae ==="
 brew info --json=v2 --installed --formula | jq -r '.formulae[] | "\(.name): \(.desc)"'

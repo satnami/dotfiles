@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 echo "=== Formulae ==="
 brew list --formula | while read -r f; do

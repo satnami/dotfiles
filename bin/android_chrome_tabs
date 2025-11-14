@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 NOW=$(date +"%d_%m_%Y")
 TABS="mobile_tabs_$NOW.md"
@@ -14,4 +14,4 @@ adb forward tcp:$PORT localabstract:chrome_devtools_remote
 
 curl http://localhost:$PORT/json/list | jq -r ".[] | \"[\" + .title + \"](\" + .url + \")\"" > "$HOME/$TABS"
 
-#cat "$HOME/$TABS"  | ruby -ne 'puts $_.chomp.split("](").last' | ruby -ne 'puts $_.chomp.gsub(")", "")' > "$HOME/$TABS"
+# cat "$HOME/$TABS"  | ruby -ne 'puts $_.chomp.split("](").last' | ruby -ne 'puts $_.chomp.gsub(")", "")' > "$HOME/$TABS"

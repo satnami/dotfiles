@@ -31,13 +31,13 @@ alias dapps="cd ~/Apps"
 alias dsource="cd ~/Source"
 alias dhistory="cd ~/history_logs"
 
-## Pipe Aliases (Global)
-alias -g L='|less'
-alias -g G='|grep'
-alias -g T='|tail'
-alias -g H='|head'
-alias -g W='|wc -l'
-alias -g S='|sort'
+# Pipe Aliases (Global)
+alias -g L='| less'
+alias -g G='| grep'
+alias -g T='| tail'
+alias -g H='| head'
+alias -g W='| wc -l'
+alias -g S='| sort'
 
 function __pbcopy_f(){ cat $1 | pbcopy; }
 alias pbcopy_f='__pbcopy_f'
@@ -67,7 +67,7 @@ alias makecpp='__makecpp'
 
 alias sdump='genact -m memdump'
 
-#alias scrcpy='docker run --rm -i -t --privileged --name satnami-scrcpy -v /dev/bus/usb:/dev/bus/usb  -v /tmp/.X11-unix:/tmp/.X11-unix  -e DISPLAY=$DISPLAY  pierlo1/scrcpy:intel'
+# alias scrcpy='docker run --rm -i -t --privileged --name satnami-scrcpy -v /dev/bus/usb:/dev/bus/usb  -v /tmp/.X11-unix:/tmp/.X11-unix  -e DISPLAY=$DISPLAY  pierlo1/scrcpy:intel'
 alias scrcpy='scrcpy -m 1920 -S'
 
 alias pubkey="cat ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"

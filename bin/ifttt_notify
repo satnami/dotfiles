@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 title=$(echo $1 | sed 's/ /%20/g')
 time_in_sec=$(echo $2 | sed 's/ /%20/g')

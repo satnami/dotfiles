@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Usage: ./split_with_header.sh input.csv 1000 8 csv
 #        $1 = input file
 #        $2 = lines per chunk (excluding header)

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Usage: rename_ext.sh oldext newext
 
 for f in *.$1; do

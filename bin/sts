@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 output=`aws sts get-session-token --serial-number $1 --token-code $2`
 
