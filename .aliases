@@ -183,6 +183,9 @@ alias dockerbash='__dockerbash'
 function __dockerpasswd(){ docker exec -itu $2 $1 passwd; } # $2 user, $1 container name
 alias dockerpasswd='__dockerpasswd'
 
+function __curljq(){ curl -sS --fail "$@" | jq; }
+alias curljq='__curljq'
+
 # Lock the screen (when going AFK)
 alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
 
