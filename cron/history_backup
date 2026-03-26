@@ -19,4 +19,4 @@ EOF
 #   cp "$HOME/.zsh_history" "$LOCATION/satnami_zsh_$FILE"
 # EOF
 
-find -E ~ -regex '.*(zsh|bash|redis|psql|python|rediscli|guard|node_repl)(.|-|_)(history).*$' -maxdepth 1 -type f -print0 | xargs -0 basename $1 | while read -r line; do copy_history "$line"; done
+find -E ~ -regex '.*(zsh|bash|redis|psql|python|rediscli|guard|node_repl|claude)(.|-|_)(history).*$' -maxdepth 1 -type f -print0 | xargs -0 basename $1 | while read -r line; do copy_history "$line"; done
