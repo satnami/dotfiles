@@ -5,12 +5,12 @@
 my %counts = () ;
 
 while ( my $cmd = <STDIN> ) {
-    chomp $cmd ;
-    if ( !$counts{ $cmd } ) { $counts{ $cmd }  = 1; }
-    else                    { $counts{ $cmd } += 1; }
+  chomp $cmd ;
+  if ( !$counts{ $cmd } ) { $counts{ $cmd }  = 1; }
+  else                    { $counts{ $cmd } += 1; }
 }
 
 foreach $k ( keys %counts ) {
-    my $count = $counts{ $k } ;
-    print "$count $k\n" ;
+  my $count = $counts{ $k } ;
+  print "$count $k\n" ;
 }

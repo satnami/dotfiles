@@ -27,38 +27,38 @@ function man() {
     LESS_TERMCAP_so=$(printf "\e[1;44;33m") \
     LESS_TERMCAP_ue=$(printf "\e[0m") \
     LESS_TERMCAP_us=$(printf "\e[1;32m") \
-      man "$@"
+    man "$@"
 }
 
 # Open man page as PDF
 function manpdf() {
- man -t "${1}" | open -f -a /Applications/Preview.app/
+  man -t "${1}" | open -f -a /Applications/Preview.app/
 }
 
 # Determine size of a file or total size of a directory
 function fs() {
-	if du -b /dev/null > /dev/null 2>&1; then
-		local arg=-sbh;
-	else
-		local arg=-sh;
-	fi
-	if [[ -n "$@" ]]; then
-		du $arg -- "$@";
-	else
-		du $arg .[^.]* ./*;
-	fi;
+  if du -b /dev/null > /dev/null 2>&1; then
+    local arg=-sbh;
+  else
+    local arg=-sh;
+  fi
+  if [[ -n "$@" ]]; then
+    du $arg -- "$@";
+  else
+    du $arg .[^.]* ./*;
+  fi;
 }
 
 # Change directories and view the contents at the same time
 function cl() {
-    DIR="$*";
-        # if no DIR given, go home
-        if [ $# -lt 1 ]; then
-                DIR=$HOME;
-    fi;
-    builtin cd "${DIR}" && \
-    # use your preferred ls command
-        ls -F --color=auto
+  DIR="$*";
+  # if no DIR given, go home
+  if [ $# -lt 1 ]; then
+    DIR=$HOME;
+  fi;
+  builtin cd "${DIR}" && \
+  # use your preferred ls command
+  ls -F --color=auto
 }
 
 # Sets the window title nicely no matter where you are
@@ -88,9 +88,9 @@ function loop_file() {
 
 function kotlinr() {
   timestamp=$(date +%s)
-  kotlinc $1 -include-runtime -d $timestamp_$1.jar
-  java -jar $timestamp_$1.jar
-  rm $timestamp_$1.jar
+  kotlinc "$1" -include-runtime -d "${timestamp}_${1}.jar"
+  java -jar "${timestamp}_${1}.jar"
+  rm "${timestamp}_${1}.jar"
 }
 
 function curl_cert() {

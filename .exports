@@ -17,7 +17,10 @@ export GOPATH=$HOME/go
 export GOROOT=/usr/local/opt/go/libexec
 export PATH=$PATH:$GOPATH/bin:$GOROOT/bin
 
-export PATH=$PATH:$(brew --prefix openvpn)/sbin
+if command -v brew >/dev/null 2>&1; then
+  OPENVPN_PREFIX="$(brew --prefix openvpn 2>/dev/null)"
+  [ -n "$OPENVPN_PREFIX" ] && export PATH=$PATH:$OPENVPN_PREFIX/sbin
+fi
 
 export GPG_TTY=$(tty)
 
@@ -35,14 +38,20 @@ export PATH=$PATH:/usr/local/opt/inetutils/libexec/gnubin
 # export PATH="$PATH:/usr/local/heroku/bin"
 
 # Add Rbenv PATH for scripting.
-export RBENV_ROOT="$HOME/.rbenv"
-export RBENV_ROOT=$(rbenv root)
+if command -v rbenv >/dev/null 2>&1; then
+  export RBENV_ROOT="$(rbenv root)"
+else
+  export RBENV_ROOT="$HOME/.rbenv"
+fi
 export PATH=$PATH:$RBENV_ROOT/shims
 # export PATH="$PATH:$RBENV_ROOT/plugins/ruby-build/bin"
 
 # Add Pyenv PATH for scripting.
-# export PYENV_ROOT="$HOME/.pyenv"
-export PYENV_ROOT=$(pyenv root)
+if command -v pyenv >/dev/null 2>&1; then
+  export PYENV_ROOT="$(pyenv root)"
+else
+  export PYENV_ROOT="$HOME/.pyenv"
+fi
 export PATH=$PATH:$PYENV_ROOT/shims
 
 # Add RVM to PATH for scripting.
@@ -56,7 +65,9 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-export PATH=$PATH:$(npm prefix --location=global)/lib/node_modules
+if command -v npm >/dev/null 2>&1; then
+  export PATH=$PATH:$(npm prefix --location=global)/lib/node_modules
+fi
 
 # export ANT_HOME=/usr/share/ant
 
@@ -103,7 +114,7 @@ export PATH=$PATH:$FLUTTER_HOME/bin
 # export _JAVA_OPTIONS="-Xms1024m -Xmx2G -Xss256m -XX:MaxPermSize=4G"
 # export ANT_OPTS="-Xmx2g -XX:MaxPermSize=512m"
 export PATH="$PATH:/usr/local/opt/imagemagick@6/bin"
-export PKG_CONFIG_PATH="/opt/local/lib/pkgconfig:/usr/local/Cellar/imagemagick@6/6.9.12-3/lib/pkgconfig/:$PKG_CONFIG_PATH"
+export PKG_CONFIG_PATH="/opt/local/lib/pkgconfig:$PKG_CONFIG_PATH"
 export PATH="$PATH:/usr/local/opt/libxml2/bin"
 
 # [ -f "$HOME/kerl/default/activate" ] && source "$HOME/kerl/default/activate"
@@ -118,10 +129,10 @@ export PATH="$PATH:$HOME/.rd/bin"
 
 if command -v rdctl >/dev/null 2>&1
 then
-	export DOCKER_HOST=unix://$HOME/.rd/docker.sock
-	export TESTCONTAINERS_DOCKER_SOCKET_OVERRIDE=/var/run/docker.sock
-	export TESTCONTAINERS_HOST_OVERRIDE=$(rdctl shell ip a show vznat | awk '/inet / {sub("/.*",""); print $2}')
-	export TESTCONTAINERS_RYUK_DISABLED=true
+  export DOCKER_HOST=unix://$HOME/.rd/docker.sock
+  export TESTCONTAINERS_DOCKER_SOCKET_OVERRIDE=/var/run/docker.sock
+  export TESTCONTAINERS_HOST_OVERRIDE=$(rdctl shell ip a show vznat | awk '/inet / {sub("/.*",""); print $2}')
+  export TESTCONTAINERS_RYUK_DISABLED=true
 fi
 
 export HOMEBREW_NO_AUTO_UPDATE=1

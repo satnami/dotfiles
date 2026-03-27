@@ -14,7 +14,9 @@ alias lcount='find . -type f | wc -l'
 alias lswatch='watch ls -a -ltrh -C'
 alias grep='grep --color=auto'
 
-alias clear='clear; echo; echo; seq 1 $(tput cols) | sort -R | spark | lolcat; echo; echo'
+if command -v spark >/dev/null 2>&1 && command -v lolcat >/dev/null 2>&1; then
+  alias clear='clear; echo; echo; seq 1 $(tput cols) | sort -R | spark | lolcat; echo; echo'
+fi
 alias c="clear"
 alias x="exit"
 alias mkdir="mkdir -p"
@@ -39,8 +41,7 @@ alias -g H='| head'
 alias -g W='| wc -l'
 alias -g S='| sort'
 
-function __pbcopy_f(){ cat $1 | pbcopy; }
-alias pbcopy_f='__pbcopy_f'
+function pbcopy_f(){ cat "$1" | pbcopy; }
 
 alias cpv='rsync -ah --info=progress2'
 
@@ -59,11 +60,9 @@ alias doodles.birthday="docker run -it --rm docker/doodle:birthday2019"
 alias doodles.halloween="docker run -it --rm docker/doodle:halloween2019"
 alias doodles.summer="docker run -it --rm docker/doodle:summer2019"
 
-function __hdi(){ howdoi $* -c -n 5; }
-alias h='__hdi'
+function h(){ howdoi "$@" -c -n 5; }
 
-function __makecpp(){ g++ $1 -o $2; }
-alias makecpp='__makecpp'
+function makecpp(){ g++ "$1" -o "$2"; }
 
 alias sdump='genact -m memdump'
 
@@ -107,13 +106,10 @@ alias aa="a -message Done"
 alias trunc='truncate -s 0'
 
 # Always enable colored `grep` output
-# Note: `GREP_OPTIONS="--color=auto"` is deprecated, hence the alias usag
-alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
+# Note: `GREP_OPTIONS="--color=auto"` is deprecated, hence the alias usage
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
-function __word_grep(){ local word123456789="$1|$"; grep -E --color=auto "$word123456789" "$2"; }
-alias wgrep='__word_grep'
+function wgrep(){ local word123456789="$1|$"; grep -E --color=auto "$word123456789" "$2"; }
 
 # Ruby & Rails
 alias bx='bundle exec'
@@ -124,27 +120,17 @@ alias railsc='bundle exec rails c'
 alias bxrspec='bundle exec rspec'
 alias railsbin='bundle exec rails app:update:bin && bundle binstubs bundler --force'
 alias rails4bin='bundle exec rake rails:update:bin && bundle binstubs bundler --force'
-function __cap(){ bundle exec cap $1 deploy; }
-alias capd='__cap'
-function __cap_patch(){ bundle exec cap $1 deploy:patch; }
-alias cap_patch='__cap_patch'
-function __cap_minor(){ bundle exec cap $1 deploy:minor; }
-alias cap_minor='__cap_minor'
-function __cap_major(){ bundle exec cap $1 deploy:major; }
-alias cap_major='__cap_major'
-function __cap_rollback() { bundle exec cap $1 deploy:rollback; }
-alias cap_rollback='__cap_rollback'
-function __puma_start(){ bundle exec cap $1 puma:start; }
-alias puma_start='__puma_start'
-function __puma_stop(){ bundle exec cap $1 puma:stop; }
-alias puma_stop='__puma_stop'
-function __puma_smartstop(){ bundle exec cap $1 puma:smart_stop; }
-alias puma_smartstop='__puma_smartstop'
-function __puma_restart(){ bundle exec cap $1 puma:stop && bundle exec cap $1 puma:start; }
-alias puma_restart='__puma_restart'
+function capd(){ bundle exec cap "$1" deploy; }
+function cap_patch(){ bundle exec cap "$1" deploy:patch; }
+function cap_minor(){ bundle exec cap "$1" deploy:minor; }
+function cap_major(){ bundle exec cap "$1" deploy:major; }
+function cap_rollback(){ bundle exec cap "$1" deploy:rollback; }
+function puma_start(){ bundle exec cap "$1" puma:start; }
+function puma_stop(){ bundle exec cap "$1" puma:stop; }
+function puma_smartstop(){ bundle exec cap "$1" puma:smart_stop; }
+function puma_restart(){ bundle exec cap "$1" puma:stop && bundle exec cap "$1" puma:start; }
 
-function __aws_dynamo_local(){ aws dynamodb $@ --endpoint-url http://localhost:8000; }
-alias aws_dynamo_local='__aws_dynamo_local'
+function aws_dynamo_local(){ aws dynamodb "$@" --endpoint-url http://localhost:8000; }
 
 alias lookbusy="cat /dev/urandom | hexdump -C | grep \"34 32\""
 
@@ -152,23 +138,19 @@ alias lookbusy="cat /dev/urandom | hexdump -C | grep \"34 32\""
 alias sniff="sudo ngrep -d 'en1' -t '^(GET|POST) ' 'tcp and port 80'"
 alias httpdump="sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\\: .*|GET \\/.*\""
 
-function __nmap_ciphers(){ nmap -sV --script ssl-enum-ciphers -p $2 $1; }
-alias nmap_ciphers='__nmap_ciphers'
+function nmap_ciphers(){ nmap -sV --script ssl-enum-ciphers -p "$2" "$1"; }
 
 alias ipl="dig +short myip.opendns.com @resolver1.opendns.com" # or ip="curl ipinfo.io/ip"
-alias iplocate='function locate(){ curl https://www.iplocate.io/api/lookup/$1; echo; }; locate'
+function iplocate(){ curl "https://www.iplocate.io/api/lookup/$1"; echo; }
 alias local_ip="hostname -I | awk '{print $1}'" # for mac local_ip="ipconfig getifaddr en0"
 
-alias all_hosts_on_network="sudo nmap -sP $1"
+function all_hosts_on_network(){ sudo nmap -sP "$1"; }
 
-function __find_in_pdf(){ find * -iname '*.pdf' -exec pdfgrep $1 {} +; }
-alias find_in_pdf='__find_in_pdf'
+function find_in_pdf(){ pdfgrep -rin --color=auto "$@" .; }
 
-function __wifi_pass(){ security find-generic-password -D "AirPort network password" -a $1 -g; }
-alias wifi_password='__wifi_pass'
+function wifi_password(){ security find-generic-password -D "AirPort network password" -a "$1" -g; }
 
-function __cheatsh(){ curl cht.sh/$1/$2; echo; }
-alias cheat='__cheatsh'
+function cheat(){ curl "cht.sh/$1/$2"; echo; }
 
 alias instalg='sudo apt-get install -y'
 alias instalb='brew install'
@@ -176,15 +158,11 @@ alias process='ps -aux'
 alias disk='df -h'
 
 # Docker
-function __dockersh(){ docker exec -it $1 /bin/sh; }
-alias dockersh='__dockersh'
-function __dockerbash(){ docker exec -it $1 /bin/bash; }
-alias dockerbash='__dockerbash'
-function __dockerpasswd(){ docker exec -itu $2 $1 passwd; } # $2 user, $1 container name
-alias dockerpasswd='__dockerpasswd'
+function dockersh(){ docker exec -it "$1" /bin/sh; }
+function dockerbash(){ docker exec -it "$1" /bin/bash; }
+function dockerpasswd(){ docker exec -itu "$2" "$1" passwd; } # $2 user, $1 container name
 
-function __curljq(){ curl -sS --fail "$@" | jq; }
-alias curljq='__curljq'
+function curljq(){ curl -sS --fail "$@" | jq; }
 
 # Lock the screen (when going AFK)
 alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"

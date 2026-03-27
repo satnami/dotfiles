@@ -32,6 +32,7 @@ indent_style = tab
 trim_trailing_whitespace = false
 
 [*.{sh,markdown}]
+indent_style = space
 indent_size = 2
 
 [*.go]

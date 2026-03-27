@@ -8,12 +8,12 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 case "$TERM" in
-    xterm)
-        export TERM=xterm-256color
-        ;;
-    screen)
-        export TERM=screen-256color
-        ;;
+  xterm)
+    export TERM=xterm-256color
+    ;;
+  screen)
+    export TERM=screen-256color
+    ;;
 esac
 
 #PS1="tada:~$ "
@@ -85,7 +85,7 @@ plugins=(
 
 zstyle :omz:plugins:ssh-agent agent-forwarding on
 # zstyle :omz:plugins:ssh-agent identities id_rsa id_dsa id_rsa_sla id_rsa_bot
-zstyle :omz:plugins:ssh-agent lifetime
+zstyle :omz:plugins:ssh-agent lifetime 4h
 
 # zstyle ':notify:*' enable-on-ssh yes
 # zstyle ':notify:*' command-complete-timeout 5
@@ -119,15 +119,16 @@ export EDITOR='micro'
 
 [ -f "$HOME/.bash_profile" ] && source "$HOME/.bash_profile"
 
-# test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
 [ -f "$HOME/.fzf.zsh" ] && source "$HOME/.fzf.zsh"
 
 [ -f "$HOME/.config/up/up.sh" ] && source "$HOME/.config/up/up.sh"
 
 [ -f "$HOME/.zplug/init.zsh" ] && source "$HOME/.zplug/init.zsh"
 
-[ -f "$(brew --prefix asdf)/libexec/asdf.sh" ] && source "$(brew --prefix asdf)/libexec/asdf.sh"
+if command -v brew >/dev/null 2>&1; then
+  ASDF_PREFIX="$(brew --prefix asdf 2>/dev/null)"
+  [ -f "$ASDF_PREFIX/libexec/asdf.sh" ] && source "$ASDF_PREFIX/libexec/asdf.sh"
+fi
 
 [ -f "$HOME/.history_preexec.sh" ] && source "$HOME/.history_preexec.sh"
 

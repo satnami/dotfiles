@@ -1,7 +1,7 @@
 # If not running interactively, don't do anything
 case $- in
-    *i*) ;;
-      *) return;;
+  *i*) ;;
+  *) return;;
 esac
 
 export PATH=$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH
@@ -11,7 +11,7 @@ export PATH=$HOME/dotfiles/bin:$PATH
 # Load the shell dotfiles, and then some:
 # * ~/.extra can be used for other settings you don’t want to commit.
 for file in ~/.{path,bash_prompt,exports,aliases,functions,extra}; do
-	[ -r "$file" ] && [ -f "$file" ] && source "$file";
+  [ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;
 
@@ -36,41 +36,41 @@ PROMPT_COMMAND="history -a"
 # shopt -s globstar
 
 if [ -n "$ZSH_VERSION" ]; then
-	# (zsh) append history to the history file (no overwriting)
-	setopt appendhistory
-	# (zsh) share history across terminals
-	setopt sharehistory
-	# (zsh) immediately append to the history file, not just when a term is killed
-	setopt incappendhistory
-	# (zsh) don't show duplicates in search
-	setopt histfindnodups
-	# (zsh) add additional data to history like timestamp
-	setopt extendedhistory
+  # (zsh) append history to the history file (no overwriting)
+  setopt appendhistory
+  # (zsh) share history across terminals
+  setopt sharehistory
+  # (zsh) immediately append to the history file, not just when a term is killed
+  setopt incappendhistory
+  # (zsh) don't show duplicates in search
+  setopt histfindnodups
+  # (zsh) add additional data to history like timestamp
+  setopt extendedhistory
 fi
 
 # Add tab completion for many Bash commands
-if which brew &> /dev/null && [ -f "$(brew --prefix)/share/bash-completion/bash_completion" ]; then
-	source "$(brew --prefix)/share/bash-completion/bash_completion";
+if command -v brew >/dev/null 2>&1 && [ -f "$(brew --prefix)/share/bash-completion/bash_completion" ]; then
+  source "$(brew --prefix)/share/bash-completion/bash_completion";
 elif [ -f /etc/bash_completion ]; then
-	source /etc/bash_completion;
+  source /etc/bash_completion;
 fi;
 
 # useful only for Mac OS Silicon M1
 # still working but useless for the other platforms
 dockerx() {
- if [[ `uname -m` == "arm64" ]] && [[ "$1" == "run" || "$1" == "build" ]]; then
+  if [[ $(uname -m) == "arm64" ]] && [[ "$1" == "run" || "$1" == "build" ]]; then
     /usr/local/bin/docker "$1" --platform linux/amd64 "${@:2}"
   else
-     /usr/local/bin/docker "$@"
+    /usr/local/bin/docker "$@"
   fi
 }
 
-code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $* ;}
+code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args "$@" ;}
 
 if command -v thefuck >/dev/null 2>&1; then eval "$(thefuck --alias)"; fi
 if command -v rbenv >/dev/null 2>&1; then eval "$(rbenv init -)"; fi
 if command -v pyenv >/dev/null 2>&1; then eval "$(pyenv init -)"; fi
-if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
+if command -v pyenv-virtualenv-init >/dev/null 2>&1; then eval "$(pyenv virtualenv-init -)"; fi
 # eval $(minishift oc-env)
 # eval $(minishift docker-env)
 

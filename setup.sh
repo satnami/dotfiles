@@ -2,30 +2,31 @@
 
 # Download Item2
 
-# SSH
-ssh -T git@github.com
+# SSH (non-fatal check — ssh -T returns 1 even on success)
+ssh -T git@github.com 2>&1 || true
 
 # HomeBrew
 if ! command -v brew >/dev/null 2>&1; then
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
 
 # ZSH
 if ! command -v zsh >/dev/null 2>&1; then
-    brew install zsh
-    sudo sh -c "echo $(which zsh) >> /etc/shells" && chsh -s $(which zsh)
+  brew install zsh
+  ZSH_PATH="$(command -v zsh)"
+  echo "$ZSH_PATH" | sudo tee -a /etc/shells >/dev/null && chsh -s "$ZSH_PATH"
 fi
 
 # Get the config
 git clone https://github.com/satnami/dotfiles ~/dotfiles
 
+#  OhmyZSH
+# Setup OhmyZSH (before dot_import so our .zshrc doesn't get overwritten)
+RUNZSH=no KEEP_ZSHRC=yes sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+
 # Setup dotfiles
 sh ~/dotfiles/dot_import.sh
-
-#  OhmyZSH
-# Setup OhmyZSH
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 # Setup OhMyZSH Theme
 # git clone https://github.com/bhilburn/powerlevel9k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel9k
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
@@ -33,10 +34,6 @@ git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 # git clone git@github.com:marzocchi/zsh-notify.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/notify
-
-# Setup Iterm itegrations
-cd ~/.
-curl -L https://iterm2.com/shell_integration/install_shell_integration_and_utilities.sh | bash
 
 # Setup Up
 curl --create-dirs -o ~/.config/up/up.sh https://raw.githubusercontent.com/shannonmoeller/up/master/up.sh
@@ -102,5 +99,7 @@ rebar3 escriptize
 cp _build/default/bin/elvis /usr/local/bin
 '
 
-# Setup crontab for history backup
-(crontab -l && echo "0 12 * * * ~/dotfiles/cron/history_backup") | crontab -
+# Setup crontab for history backup (idempotent)
+if ! crontab -l 2>/dev/null | grep -q "history_backup"; then
+  (crontab -l 2>/dev/null; echo ""; echo "0 12 * * * ~/dotfiles/cron/history_backup") | crontab -
+fi
