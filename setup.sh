@@ -22,11 +22,11 @@ fi
 git clone https://github.com/satnami/dotfiles ~/dotfiles
 
 #  OhmyZSH
-# Setup OhmyZSH (before dot_import so our .zshrc doesn't get overwritten)
+# Setup OhmyZSH
 RUNZSH=no KEEP_ZSHRC=yes sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
 # Setup dotfiles
-sh ~/dotfiles/dot_import.sh
+sh ~/dotfiles/dot.sh import
 # Setup OhMyZSH Theme
 # git clone https://github.com/bhilburn/powerlevel9k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel9k
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
