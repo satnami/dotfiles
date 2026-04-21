@@ -18,12 +18,6 @@ esac
 
 #PS1="tada:~$ "
 
-# If you come from bash you might have to change your $PATH.
-#export PATH=$HOME/bin:/usr/local/bin:$PATH
-if [[ "$(uname -m)" == "arm64" ]]; then
-  export PATH="/opt/homebrew/bin:${PATH}"
-fi
-
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -100,11 +94,11 @@ zstyle :omz:plugins:ssh-agent lifetime 4h
 # OR
 # zstyle ':notify:*' notifier #/dotfiles/bin/custom_terminal_notifier
 
-source $ZSH/oh-my-zsh.sh
+[ -f "$ZSH/oh-my-zsh.sh" ] && source "$ZSH/oh-my-zsh.sh"
 
 # User configuration
 
-# export MANPATH="/usr/local/man:$MANPATH"
+# [ -d "/usr/local/man" ] && export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -115,7 +109,7 @@ export EDITOR='micro'
 # export ARCHFLAGS="-arch x86_64"
 
 # ssh
-# export SSH_KEY_PATH="$HOME/.ssh/id_rsa"
+# [ -f "$HOME/.ssh/id_rsa" ] && export SSH_KEY_PATH="$HOME/.ssh/id_rsa"
 
 [ -f "$HOME/.bash_profile" ] && source "$HOME/.bash_profile"
 
@@ -132,10 +126,15 @@ fi
 
 [ -f "$HOME/.history_preexec.sh" ] && source "$HOME/.history_preexec.sh"
 
-# [ -f $(dirname $(gem which colorls))/tab_complete.sh ] && source $(dirname $(gem which colorls))/tab_complete.sh
+# if command -v colorls >/dev/null 2>&1; then
+#   COLORLS_DIR="$(dirname "$(gem which colorls)")"
+#   [ -f "$COLORLS_DIR/tab_complete.sh" ] && source "$COLORLS_DIR/tab_complete.sh"
+# fi
 
-zplug "changyuheng/fz", defer:1
-zplug "rupa/z", use:z.sh
+if command -v zplug >/dev/null 2>&1; then
+  zplug "changyuheng/fz", defer:1
+  zplug "rupa/z", use:z.sh
+fi
 
 # autoload -Uz compinit && compinit
 # autoload -U +X bashcompinit && bashcompinit

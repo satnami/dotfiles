@@ -2,8 +2,6 @@
 
 # export TERM="screen-256color"
 
-export PATH=$PATH:/usr/local/opt/postgresql@11/bin
-
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 
 # export HASTE_SERVER="https://satnami-hastebin.herokuapp.com"
@@ -13,9 +11,10 @@ export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 # }
 # export PS1="\e[0;32m\u@\h \[\033[32m\]\w\[\033[33m\]\$(parse_git_branch)\[\033[00m\] $\e[m"
 
-export GOPATH=$HOME/go
-export GOROOT=/usr/local/opt/go/libexec
-export PATH=$PATH:$GOPATH/bin:$GOROOT/bin
+if [ -d "$HOME/go" ]; then
+  export GOPATH="$HOME/go"
+  export PATH="$PATH:$GOPATH/bin"
+fi
 
 if command -v brew >/dev/null 2>&1; then
   OPENVPN_PREFIX="$(brew --prefix openvpn 2>/dev/null)"
@@ -24,18 +23,17 @@ fi
 
 export GPG_TTY=$(tty)
 
-export PATH=$PATH:/usr/local/opt/inetutils/libexec/gnubin
+[ -d "/usr/local/opt/inetutils/libexec/gnubin" ] && export PATH="$PATH:/usr/local/opt/inetutils/libexec/gnubin"
 
 # Minishift
 # export MINISHIFT_USERNAME=
 # export MINISHIFT_PASSWORD=
 
 # Maven
-# export M2_HOME=/opt/maven
-# export PATH=${PATH}:${M2_HOME}/bin
-
-# Added by the Heroku Toolbelt
-# export PATH="$PATH:/usr/local/heroku/bin"
+# if [ -d "/opt/maven" ]; then
+#   export M2_HOME=/opt/maven
+#   export PATH="${PATH}:${M2_HOME}/bin"
+# fi
 
 # Add Rbenv PATH for scripting.
 if command -v rbenv >/dev/null 2>&1; then
@@ -43,8 +41,8 @@ if command -v rbenv >/dev/null 2>&1; then
 else
   export RBENV_ROOT="$HOME/.rbenv"
 fi
-export PATH=$PATH:$RBENV_ROOT/shims
-# export PATH="$PATH:$RBENV_ROOT/plugins/ruby-build/bin"
+[ -d "$RBENV_ROOT/shims" ] && export PATH="$PATH:$RBENV_ROOT/shims"
+# [ -d "$RBENV_ROOT/plugins/ruby-build/bin" ] && export PATH="$PATH:$RBENV_ROOT/plugins/ruby-build/bin"
 
 # Add Pyenv PATH for scripting.
 if command -v pyenv >/dev/null 2>&1; then
@@ -52,10 +50,10 @@ if command -v pyenv >/dev/null 2>&1; then
 else
   export PYENV_ROOT="$HOME/.pyenv"
 fi
-export PATH=$PATH:$PYENV_ROOT/shims
+[ -d "$PYENV_ROOT/shims" ] && export PATH="$PATH:$PYENV_ROOT/shims"
 
 # Add RVM to PATH for scripting.
-# export PATH="$PATH:$HOME/.rvm/bin"
+# [ -d "$HOME/.rvm/bin" ] && export PATH="$PATH:$HOME/.rvm/bin"
 
 # THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
@@ -69,63 +67,42 @@ if command -v npm >/dev/null 2>&1; then
   export PATH=$PATH:$(npm prefix --location=global)/lib/node_modules
 fi
 
-# export ANT_HOME=/usr/share/ant
+if [ -d "$HOME/Library/Android/sdk" ]; then
+  export ANDROID_HOME="$HOME/Library/Android/sdk"
+  [ -d "$ANDROID_HOME/tools" ] && export PATH="$PATH:$ANDROID_HOME/tools"
+  [ -d "$ANDROID_HOME/tools/bin" ] && export PATH="$PATH:$ANDROID_HOME/tools/bin"
+  [ -d "$ANDROID_HOME/platform-tools" ] && export PATH="$PATH:$ANDROID_HOME/platform-tools"
+fi
 
-# export JAVA_HOME=/usr/lib/jvm/java-1.6.0-openjdk-amd64
-# export JAVA_HOME=/usr/lib/jvm/java-8-oracle
-# export JAVA_HOME=/usr/lib/jvm/java-6-oracle
+if [ -d "$HOME/flutter" ]; then
+  export FLUTTER_HOME="$HOME/flutter"
+  export PATH="$PATH:$FLUTTER_HOME/bin"
+fi
 
-# export JBOSS_HOME=/usr/local/share/jboss/jboss-5.0.1-GA
+# [ -d "$HOME/.yarn/bin" ] && export PATH="$PATH:$HOME/.yarn/bin"
 
-# export ORACLE_HOME=/u01/app/oracle/product/11.2.0/xe
+# [ -d "$HOME/.cargo/bin" ] && export PATH="$PATH:$HOME/.cargo/bin"
 
-# export ORACLE_SID=XE
-# export NLS_LANG=`$ORACLE_HOME/bin/nls_lang.sh`
-# export ORACLE_BASE=/u01/app/oracle
-# export LD_LIBRARY_PATH=$ORACLE_HOME/lib:$LD_LIBRARY_PATH
-# export PATH=$PATH:$ORACLE_HOME/bin
-
-# export ANDROID_HOME="/usr/local/share/android-sdk"
-export ANDROID_HOME="$HOME/Library/Android/sdk"
-export PATH="$PATH:$ANDROID_HOME/tools"
-export PATH="$PATH:$ANDROID_HOME/tools/bin"
-export PATH="$PATH:$ANDROID_HOME/platform-tools"
-
-
-export FLUTTER_HOME="$HOME/Apps/flutter"
-export PATH=$PATH:$FLUTTER_HOME/bin
-
-# export PATH="$PATH:$HOME/.yarn/bin"
-
-# export PATH="$PATH:$HOME/.cargo/bin"
-
-# export SCALA_HOME=/usr/local/scala-2.12.2
-# export PATH="$PATH:$SCALA_HOME/bin"
-
-# export GOOGLE_CLOUD_SDK_HOME=$HOME/google-cloud-sdk
-# export PATH="$PATH:$GOOGLE_CLOUD_SDK_HOME/bin"
-
-# export PATH="$PATH:$HOME/.fabric8/bin"
+# if [ -d "$HOME/google-cloud-sdk" ]; then
+#   export GOOGLE_CLOUD_SDK_HOME="$HOME/google-cloud-sdk"
+#   export PATH="$PATH:$GOOGLE_CLOUD_SDK_HOME/bin"
+# fi
 
 # [ -f "$HOME/.cargo/env" ] && source "$HOME/.cargo/env"
 
-# export PATH="$PATH:$HOME/jruby-9.1.7.0/bin/"
-
 # export _JAVA_OPTIONS="-Xms1024m -Xmx2G -Xss256m -XX:MaxPermSize=4G"
 # export ANT_OPTS="-Xmx2g -XX:MaxPermSize=512m"
-export PATH="$PATH:/usr/local/opt/imagemagick@6/bin"
-export PKG_CONFIG_PATH="/opt/local/lib/pkgconfig:$PKG_CONFIG_PATH"
-export PATH="$PATH:/usr/local/opt/libxml2/bin"
+# [ -d "/usr/local/opt/imagemagick@6/bin" ] && export PATH="$PATH:/usr/local/opt/imagemagick@6/bin"
+[ -d "/opt/local/lib/pkgconfig" ] && export PKG_CONFIG_PATH="/opt/local/lib/pkgconfig:$PKG_CONFIG_PATH"
+[ -d "/usr/local/opt/libxml2/bin" ] && export PATH="$PATH:/usr/local/opt/libxml2/bin"
 
 # [ -f "$HOME/kerl/default/activate" ] && source "$HOME/kerl/default/activate"
 
-# [ -f "$(brew --prefix)/opt/gitstatus/gitstatus.prompt.zsh" ] && source "$(brew --prefix)/opt/gitstatus/gitstatus.prompt.zsh"
+[ -d "$HOME/dotfiles/yazi" ] && export YAZI_CONFIG_HOME="$HOME/dotfiles/yazi"
 
-export PATH="$PATH:$HOME/.lmstudio/bin"
+[ -d "$HOME/.lmstudio/bin" ] && export PATH="$PATH:$HOME/.lmstudio/bin"
 
-### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
-export PATH="$PATH:$HOME/.rd/bin"
-### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
+[ -d "$HOME/.rd/bin" ] && export PATH="$PATH:$HOME/.rd/bin"
 
 if command -v rdctl >/dev/null 2>&1
 then

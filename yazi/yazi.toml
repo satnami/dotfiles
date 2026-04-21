@@ -1,0 +1,7 @@
+# yazi.toml
+[mgr]
+show_hidden = true
+sort_by = "mtime"
+
+[preview]
+wrap = "yes"

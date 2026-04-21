@@ -4,9 +4,13 @@ case $- in
   *) return;;
 esac
 
-export PATH=$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH
-
-export PATH=$HOME/dotfiles/bin:$PATH
+[ -d "$HOME/bin" ] && PATH="$HOME/bin:$PATH"
+[ -d "/usr/local/bin" ] && PATH="/usr/local/bin:$PATH"
+[ -d "/usr/local/sbin" ] && PATH="/usr/local/sbin:$PATH"
+[ -d "/opt/homebrew/sbin" ] && PATH="/opt/homebrew/sbin:$PATH"
+[[ "$(uname -m)" == "arm64" ]] && [ -d "/opt/homebrew/bin" ] && PATH="/opt/homebrew/bin:$PATH"
+[ -d "$HOME/.local/bin" ] && PATH="$HOME/.local/bin:$PATH"
+[ -d "$HOME/dotfiles/bin" ] && export PATH="$HOME/dotfiles/bin:$PATH"
 
 # Load the shell dotfiles, and then some:
 # * ~/.extra can be used for other settings you don’t want to commit.
@@ -57,24 +61,43 @@ fi;
 
 # useful only for Mac OS Silicon M1
 # still working but useless for the other platforms
-dockerx() {
-  if [[ $(uname -m) == "arm64" ]] && [[ "$1" == "run" || "$1" == "build" ]]; then
-    /usr/local/bin/docker "$1" --platform linux/amd64 "${@:2}"
-  else
-    /usr/local/bin/docker "$@"
-  fi
-}
+if [ -x "/usr/local/bin/docker" ]; then
+  dockerx() {
+    if [[ $(uname -m) == "arm64" ]] && [[ "$1" == "run" || "$1" == "build" ]]; then
+      /usr/local/bin/docker "$1" --platform linux/amd64 "${@:2}"
+    else
+      /usr/local/bin/docker "$@"
+    fi
+  }
+fi
 
 code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args "$@" ;}
+
+if command -v safehouse >/dev/null 2>&1; then
+  safe() { safehouse --add-dirs-ro=~/Work "$@"; }
+  if command -v claude >/dev/null 2>&1; then
+    safe-claude() { safe claude --dangerously-skip-permissions "$@"; }
+  fi
+  if command -v codex >/dev/null 2>&1; then
+    safe-codex() { safe codex --dangerously-bypass-approvals-and-sandbox "$@"; }
+  fi
+  if command -v gemini >/dev/null 2>&1; then
+    gemini() { NO_BROWSER=true safe gemini --yolo "$@"; }
+  fi
+fi
 
 if command -v thefuck >/dev/null 2>&1; then eval "$(thefuck --alias)"; fi
 if command -v rbenv >/dev/null 2>&1; then eval "$(rbenv init -)"; fi
 if command -v pyenv >/dev/null 2>&1; then eval "$(pyenv init -)"; fi
 if command -v pyenv-virtualenv-init >/dev/null 2>&1; then eval "$(pyenv virtualenv-init -)"; fi
-# eval $(minishift oc-env)
-# eval $(minishift docker-env)
+# if command -v minishift >/dev/null 2>&1; then
+#   eval $(minishift oc-env)
+#   eval $(minishift docker-env)
+# fi
 
-# fortune | cowsay -f stegosaurus | lolcat
-# cowsay -f stegosaurus "Now I Am Become Death, The Destroyer Of Worlds"
-# echo 'Now I Am Become Death, The Destroyer Of Worlds' | parrotsay
-# espeak "Hey folks!"
+# if command -v fortune >/dev/null 2>&1 && command -v cowsay >/dev/null 2>&1 && command -v lolcat >/dev/null 2>&1; then
+#   fortune | cowsay -f stegosaurus | lolcat
+# fi
+# command -v cowsay >/dev/null 2>&1 && cowsay -f stegosaurus "Now I Am Become Death, The Destroyer Of Worlds"
+# echo 'Now I Am Become Death, The Destroyer Of Worlds' | command -v parrotsay >/dev/null 2>&1 && parrotsay
+# command -v espeak >/dev/null 2>&1 && espeak "Hey folks!"
