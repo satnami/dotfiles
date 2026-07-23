@@ -139,6 +139,7 @@ fi
 # autoload -Uz compinit && compinit
 # autoload -U +X bashcompinit && bashcompinit
 
+POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
 # export POWERLEVEL9K_DISABLE_RPROMPT=true
 # typeset -g POWERLEVEL9K_VCS_MAX_INDEXED_REPOS_SIZE=104857600  # 100MB
 # typeset -g POWERLEVEL9K_VCS_GITSTATUS_MAX_REPO_SIZE=200000000 # 200MB

@@ -86,6 +86,15 @@ if command -v safehouse >/dev/null 2>&1; then
   fi
 fi
 
+safe() {
+  SAFEHOUSE_APPEND_PROFILE="$HOME/.config/agent-safehouse/local-overrides.sb"
+  safehouse \
+    --add-dirs-ro="$HOME/server" \
+    --append-profile="$SAFEHOUSE_APPEND_PROFILE" \
+    "$@"
+}
+safe-claude() { safe claude --dangerously-skip-permissions "$@" }
+
 if command -v thefuck >/dev/null 2>&1; then eval "$(thefuck --alias)"; fi
 if command -v rbenv >/dev/null 2>&1; then eval "$(rbenv init -)"; fi
 if command -v pyenv >/dev/null 2>&1; then eval "$(pyenv init -)"; fi

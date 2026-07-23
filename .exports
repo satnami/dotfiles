@@ -2,6 +2,8 @@
 
 # export TERM="screen-256color"
 
+export PATH=$PATH:/usr/local/opt/postgresql@11/bin
+
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 
 # export HASTE_SERVER="https://satnami-hastebin.herokuapp.com"
@@ -111,6 +113,14 @@ then
   export TESTCONTAINERS_HOST_OVERRIDE=$(rdctl shell ip a show vznat | awk '/inet / {sub("/.*",""); print $2}')
   export TESTCONTAINERS_RYUK_DISABLED=true
 fi
+
+# pnpm
+export PNPM_HOME="/$HOME/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PATH:$PNPM_HOME" ;;
+esac
+# pnpm end
 
 export HOMEBREW_NO_AUTO_UPDATE=1
 export HOMEBREW_DEVELOPER=1

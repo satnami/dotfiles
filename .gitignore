@@ -1,0 +1,13 @@
+# Claude Code local config
+.claude/settings.local.json
+.claude/config.yml
+
+# Superpowers artifacts
+docs/superpowers/
+
+# Temp files
+/tmp/
+*.tmp
+
+# OpenWolf runtime (project-specific)
+.wolf/

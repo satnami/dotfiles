@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-brew bundle dump --all -f --describe
+brew bundle dump -f --no-vscode

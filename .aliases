@@ -33,6 +33,9 @@ alias dapps="cd ~/Apps"
 alias dsource="cd ~/Source"
 alias dhistory="cd ~/history_logs"
 
+alias wcount="pbpaste | wc -w"
+alias ccount="pbpaste | wc -m"
+
 # Pipe Aliases (Global)
 alias -g L='| less'
 alias -g G='| grep'
@@ -165,9 +168,11 @@ function dockerpasswd(){ docker exec -itu "$2" "$1" passwd; } # $2 user, $1 cont
 function curljq(){ curl -sS --fail "$@" | jq; }
 
 # Lock the screen (when going AFK)
-alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
+alias afk='osascript -e '\''tell application "System Events" to keystroke "q" using {control down, command down}'\'''
 
 # Recursively remove .DS_Store files
 alias cleanupds="find . -type f -name '*.DS_Store' -ls -delete"
 
 alias cleanup_node_modules="npx npkill"
+
+alias rclaude="claude -r"
