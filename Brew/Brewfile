@@ -37,7 +37,7 @@ brew "autoconf"
 # Use AWS IAM credentials to authenticate to Kubernetes
 brew "aws-iam-authenticator"
 # Securely store and access AWS credentials in development environments
-brew "aws-vault", link: false
+brew "aws-vault"
 # Library for command-line editing
 brew "readline", link: true
 # Official Amazon AWS command-line interface
@@ -76,12 +76,14 @@ brew "dbus"
 brew "diffutils"
 # View disk space usage and delete unwanted data, fast
 brew "dua-cli"
-# TIFF library and utilities
-brew "libtiff"
+# Cloud-native high-performance edge/middle/service proxy
+brew "envoy"
 # Simple, fast and user-friendly alternative to find
 brew "fd"
 # Identify or delete duplicate files
 brew "fdupes"
+# TIFF library and utilities
+brew "libtiff"
 # Play, record, convert, and stream many audio and video codecs
 brew "ffmpeg-full"
 # Collection of GNU find, xargs, and locate
@@ -94,6 +96,8 @@ brew "gemini-cli"
 brew "gh"
 # Distributed revision control system
 brew "git"
+# GNU Pretty Good Privacy (PGP) package
+brew "gnupg"
 # Syntax-highlighting pager for git and diff output
 brew "git-delta"
 # Alternative to top/htop
@@ -104,6 +108,8 @@ brew "gnu-tar"
 brew "go"
 # GNU grep, egrep and fgrep
 brew "grep"
+# Like cURL, but for gRPC
+brew "grpcurl"
 # Package compiler and linker metadata toolkit
 brew "pkgconf"
 # <hr />, for your terminal window
@@ -252,16 +258,10 @@ brew "yazi"
 brew "zlib"
 # Shell extension to navigate your filesystem faster
 brew "zoxide"
-# Next-generation plugin manager for zsh
-brew "zplug"
 # UNIX shell (command interpreter)
 brew "zsh"
-# Fish-like fast/unobtrusive autosuggestions for zsh
-brew "zsh-autosuggestions"
 # Additional completion definitions for zsh
 brew "zsh-completions"
-# Fish shell like syntax highlighting for zsh
-brew "zsh-syntax-highlighting"
 # The AI coding agent built for the terminal.
 brew "anomalyco/tap/opencode", trusted: true
 # Coding agent with the IDE wired in
@@ -297,7 +297,8 @@ cask "coconutbattery"
 cask "codex"
 # OpenAI's Codex desktop app for managing coding agents
 cask "codex-app"
-cask "codexbar"
+# Menu bar usage monitor for Codex and Claude
+cask "steipete/tap/codexbar", trusted: true
 # Brings the power of Copilot coding agent directly to your terminal
 cask "copilot-cli"
 # Write, edit, and chat about your code with AI
@@ -311,6 +312,8 @@ cask "expo-orbit"
 # Collaborative team software
 cask "figma"
 cask "font-hack-nerd-font"
+# MesloLGS NF — the font both terminal configs and Powerlevel10k use
+cask "font-meslo-for-powerlevel10k"
 cask "font-symbols-only-nerd-font"
 cask "font-ubuntu-nerd-font"
 # Set of tools to manage resources and applications hosted on Google Cloud
@@ -392,4 +395,3 @@ cask "vlc"
 # Weekly planner app focused on privacy
 cask "weektodo"
 npm "corepack"
-npm "openwolf"

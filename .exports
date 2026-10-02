@@ -2,7 +2,9 @@
 
 # export TERM="screen-256color"
 
-export PATH=$PATH:/usr/local/opt/postgresql@11/bin
+# Homebrew keg-only tools. HOMEBREW_PREFIX comes from `brew shellenv` (.zshrc / .bash_profile).
+BREW_OPT="${HOMEBREW_PREFIX:-/opt/homebrew}/opt"
+[ -d "$BREW_OPT/postgresql@15/bin" ] && export PATH="$PATH:$BREW_OPT/postgresql@15/bin"
 
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 
@@ -18,14 +20,11 @@ if [ -d "$HOME/go" ]; then
   export PATH="$PATH:$GOPATH/bin"
 fi
 
-if command -v brew >/dev/null 2>&1; then
-  OPENVPN_PREFIX="$(brew --prefix openvpn 2>/dev/null)"
-  [ -n "$OPENVPN_PREFIX" ] && export PATH=$PATH:$OPENVPN_PREFIX/sbin
-fi
+[ -d "$BREW_OPT/openvpn/sbin" ] && export PATH="$PATH:$BREW_OPT/openvpn/sbin"
 
 export GPG_TTY=$(tty)
 
-[ -d "/usr/local/opt/inetutils/libexec/gnubin" ] && export PATH="$PATH:/usr/local/opt/inetutils/libexec/gnubin"
+[ -d "$BREW_OPT/inetutils/libexec/gnubin" ] && export PATH="$PATH:$BREW_OPT/inetutils/libexec/gnubin"
 
 # Minishift
 # export MINISHIFT_USERNAME=
@@ -62,12 +61,28 @@ export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-if command -v npm >/dev/null 2>&1; then
-  export PATH=$PATH:$(npm prefix --location=global)/lib/node_modules
+if [ -s "$NVM_DIR/nvm.sh" ]; then
+  # --no-use skips nvm's automatic `nvm use default`, which costs ~1s per shell start.
+  \. "$NVM_DIR/nvm.sh" --no-use
+  # Put the default node on PATH ourselves by resolving the alias from nvm's files.
+  _nvm_default_bin() {
+    local v="default" hops=0 node_dir="$NVM_DIR/versions/node"
+    while [ -f "$NVM_DIR/alias/$v" ] && [ "$hops" -lt 5 ]; do
+      v="$(cat "$NVM_DIR/alias/$v")"; hops=$((hops + 1))
+    done
+    case "$v" in
+      node|stable|default|'') v="$(ls "$node_dir" 2>/dev/null | sort -V | tail -1)" ;;
+      v*) [ -d "$node_dir/$v" ] || v="$(ls "$node_dir" 2>/dev/null | grep "^${v%%.*}\." | sort -V | tail -1)" ;;
+      *) v="$(ls "$node_dir" 2>/dev/null | grep "^v$v" | sort -V | tail -1)" ;;
+    esac
+    [ -d "$node_dir/$v/bin" ] && printf '%s' "$node_dir/$v/bin"
+  }
+  _nvm_bin="$(_nvm_default_bin)"
+  [ -n "$_nvm_bin" ] && export PATH="$_nvm_bin:$PATH"
+  unset _nvm_bin
+  unset -f _nvm_default_bin
 fi
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 if [ -d "$HOME/Library/Android/sdk" ]; then
   export ANDROID_HOME="$HOME/Library/Android/sdk"
@@ -96,7 +111,7 @@ fi
 # export ANT_OPTS="-Xmx2g -XX:MaxPermSize=512m"
 # [ -d "/usr/local/opt/imagemagick@6/bin" ] && export PATH="$PATH:/usr/local/opt/imagemagick@6/bin"
 [ -d "/opt/local/lib/pkgconfig" ] && export PKG_CONFIG_PATH="/opt/local/lib/pkgconfig:$PKG_CONFIG_PATH"
-[ -d "/usr/local/opt/libxml2/bin" ] && export PATH="$PATH:/usr/local/opt/libxml2/bin"
+[ -d "$BREW_OPT/libxml2/bin" ] && export PATH="$PATH:$BREW_OPT/libxml2/bin"
 
 # [ -f "$HOME/kerl/default/activate" ] && source "$HOME/kerl/default/activate"
 
@@ -115,7 +130,7 @@ then
 fi
 
 # pnpm
-export PNPM_HOME="/$HOME/Library/pnpm"
+export PNPM_HOME="$HOME/Library/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PATH:$PNPM_HOME" ;;

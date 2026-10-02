@@ -175,4 +175,8 @@ alias cleanupds="find . -type f -name '*.DS_Store' -ls -delete"
 
 alias cleanup_node_modules="npx npkill"
 
+alias nosleep-on='sudo pmset -a disabledsleep 1'
+alias nosleep-off='sudo pmset -a disablesleep 0'
+alias nosleep='caffeinate'
+
 alias rclaude="claude -r"

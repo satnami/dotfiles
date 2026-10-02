@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
 
-brew bundle dump -f --no-vscode
+# Dump installed Homebrew packages into Brew/Brewfile (works from any directory).
+brew bundle dump -f --describe --no-vscode --file="$(cd "$(dirname "$0")" && pwd)/Brewfile"

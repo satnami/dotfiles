@@ -1,34 +1,10 @@
 #!/usr/bin/env bash
 
-npm install --location=global awkward \
-	diff-so-fancy \
-	diffchecker \
-	eslint \
-	firebase-tools \
-	forever \
-	git-ssb \
-	git-unsaved \
-	gtop \
-	himawari \
-	horizon \
-	hotel \
-	http-server \
-	jshint \
-	json \
-	loadtest \
-	moeda \
-	newman \
+# Global npm tools worth installing permanently (daemons, daily-use CLIs).
+# Everything else: `npx <pkg>` on demand. setup.sh installs only the missing ones.
+npm install --location=global pm2 \
 	nodemon \
-	notifyme \
-	peerflix \
-	pm2 \
-	pure-prompt \
-	rtail \
-	sloc \
-	spoof \
-	tchannel-gen \
-	upbeat \
-	wifi-triangulate \
-	wt-cli \
-	yo	\
-	parrotsay
+	serve \
+	http-server \
+	json \
+	eslint

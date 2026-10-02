@@ -4,17 +4,23 @@ case $- in
   *) return;;
 esac
 
+# Homebrew — no-op when .zshrc already ran brew shellenv; needed for bash login shells
+if [ -z "$HOMEBREW_PREFIX" ]; then
+  if [ -x /opt/homebrew/bin/brew ]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+  elif [ -x /usr/local/bin/brew ]; then
+    eval "$(/usr/local/bin/brew shellenv)"
+  fi
+fi
+
 [ -d "$HOME/bin" ] && PATH="$HOME/bin:$PATH"
-[ -d "/usr/local/bin" ] && PATH="/usr/local/bin:$PATH"
-[ -d "/usr/local/sbin" ] && PATH="/usr/local/sbin:$PATH"
-[ -d "/opt/homebrew/sbin" ] && PATH="/opt/homebrew/sbin:$PATH"
-[[ "$(uname -m)" == "arm64" ]] && [ -d "/opt/homebrew/bin" ] && PATH="/opt/homebrew/bin:$PATH"
+[ -d "/usr/local/sbin" ] && PATH="$PATH:/usr/local/sbin"
 [ -d "$HOME/.local/bin" ] && PATH="$HOME/.local/bin:$PATH"
 [ -d "$HOME/dotfiles/bin" ] && export PATH="$HOME/dotfiles/bin:$PATH"
 
 # Load the shell dotfiles, and then some:
 # * ~/.extra can be used for other settings you don’t want to commit.
-for file in ~/.{path,bash_prompt,exports,aliases,functions,extra}; do
+for file in "${ZDOTDIR:-$HOME}"/.{path,bash_prompt,exports,aliases,functions,extra}; do
   [ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;
@@ -52,13 +58,6 @@ if [ -n "$ZSH_VERSION" ]; then
   setopt extendedhistory
 fi
 
-# Add tab completion for many Bash commands
-if command -v brew >/dev/null 2>&1 && [ -f "$(brew --prefix)/share/bash-completion/bash_completion" ]; then
-  source "$(brew --prefix)/share/bash-completion/bash_completion";
-elif [ -f /etc/bash_completion ]; then
-  source /etc/bash_completion;
-fi;
-
 # useful only for Mac OS Silicon M1
 # still working but useless for the other platforms
 if [ -x "/usr/local/bin/docker" ]; then
@@ -74,10 +73,16 @@ fi
 code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args "$@" ;}
 
 if command -v safehouse >/dev/null 2>&1; then
-  safe() { safehouse --add-dirs-ro=~/Work "$@"; }
-  if command -v claude >/dev/null 2>&1; then
-    safe-claude() { safe claude --dangerously-skip-permissions "$@"; }
-  fi
+  # Only pass paths that exist on this machine.
+  safe() {
+    local -a args
+    args=()
+    [ -d "$HOME/Work" ] && args+=(--add-dirs-ro="$HOME/Work")
+    [ -d "$HOME/server" ] && args+=(--add-dirs-ro="$HOME/server")
+    [ -f "$HOME/.config/agent-safehouse/local-overrides.sb" ] && args+=(--append-profile="$HOME/.config/agent-safehouse/local-overrides.sb")
+    safehouse "${args[@]}" "$@"
+  }
+  safe-claude() { safe claude --dangerously-skip-permissions "$@"; }
   if command -v codex >/dev/null 2>&1; then
     safe-codex() { safe codex --dangerously-bypass-approvals-and-sandbox "$@"; }
   fi
@@ -85,15 +90,6 @@ if command -v safehouse >/dev/null 2>&1; then
     gemini() { NO_BROWSER=true safe gemini --yolo "$@"; }
   fi
 fi
-
-safe() {
-  SAFEHOUSE_APPEND_PROFILE="$HOME/.config/agent-safehouse/local-overrides.sb"
-  safehouse \
-    --add-dirs-ro="$HOME/server" \
-    --append-profile="$SAFEHOUSE_APPEND_PROFILE" \
-    "$@"
-}
-safe-claude() { safe claude --dangerously-skip-permissions "$@" }
 
 if command -v thefuck >/dev/null 2>&1; then eval "$(thefuck --alias)"; fi
 if command -v rbenv >/dev/null 2>&1; then eval "$(rbenv init -)"; fi

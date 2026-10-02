@@ -48,7 +48,3 @@ nbproject
 ######
 sonar.sh
 .scannerwork
-
-# OpenWolf runtime (project-specific) #
-#######################################
-.wolf

@@ -9,5 +9,5 @@ docs/superpowers/
 /tmp/
 *.tmp
 
-# OpenWolf runtime (project-specific)
-.wolf/
+# Personal shell overrides sourced by .bash_profile, never committed
+.extra

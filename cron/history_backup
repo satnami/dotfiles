@@ -18,3 +18,11 @@ copy_history() {
 find -E ~ -regex '.*(zsh|bash|redis|psql|python|rediscli|guard|node_repl)(.|-|_)(history).*$' -maxdepth 1 -type f | while read -r filepath; do
   copy_history "$(basename "$filepath")"
 done
+
+if [ -f "$HOME/.history.db" ]; then
+  if command -v sqlite3 >/dev/null 2>&1; then
+    sqlite3 "$HOME/.history.db" ".backup '$LOCATION/${USER}_history_${NOW}.db'"
+  else
+    cp "$HOME/.history.db" "$LOCATION/${USER}_history_${NOW}.db"
+  fi
+fi

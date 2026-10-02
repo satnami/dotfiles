@@ -36,6 +36,15 @@
 	dummy = !git add . && git commit -m . && git push origin master
 	open = !vim `~/git-open.sh`
 	contributors = shortlog -e --summary --numbered
+	pull-default = "!f() { \
+	    branch=$(git symbolic-ref --short refs/remotes/origin/HEAD 2>/dev/null | sed 's#^origin/##'); \
+	    if [ -z \"$branch\" ]; then \
+	        if git show-ref --verify --quiet refs/remotes/origin/main; then branch=main; \
+	        elif git show-ref --verify --quiet refs/remotes/origin/master; then branch=master; \
+	        else echo 'Cannot determine default branch'; exit 1; fi; \
+	    fi; \
+	    git pull origin \"$branch\"; \
+	}; f"
 [commit]
 	gpgsign = true
 [push]

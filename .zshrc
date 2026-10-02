@@ -7,6 +7,12 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+if [[ -x /opt/homebrew/bin/brew ]]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+elif [[ -x /usr/local/bin/brew ]]; then
+  eval "$(/usr/local/bin/brew shellenv)"
+fi
+
 case "$TERM" in
   xterm)
     export TERM=xterm-256color
@@ -111,18 +117,11 @@ export EDITOR='micro'
 # ssh
 # [ -f "$HOME/.ssh/id_rsa" ] && export SSH_KEY_PATH="$HOME/.ssh/id_rsa"
 
-[ -f "$HOME/.bash_profile" ] && source "$HOME/.bash_profile"
+[ -f "${ZDOTDIR:-$HOME}/.bash_profile" ] && source "${ZDOTDIR:-$HOME}/.bash_profile"
 
 [ -f "$HOME/.fzf.zsh" ] && source "$HOME/.fzf.zsh"
 
 [ -f "$HOME/.config/up/up.sh" ] && source "$HOME/.config/up/up.sh"
-
-[ -f "$HOME/.zplug/init.zsh" ] && source "$HOME/.zplug/init.zsh"
-
-if command -v brew >/dev/null 2>&1; then
-  ASDF_PREFIX="$(brew --prefix asdf 2>/dev/null)"
-  [ -f "$ASDF_PREFIX/libexec/asdf.sh" ] && source "$ASDF_PREFIX/libexec/asdf.sh"
-fi
 
 [ -f "$HOME/.history_preexec.sh" ] && source "$HOME/.history_preexec.sh"
 
@@ -131,9 +130,9 @@ fi
 #   [ -f "$COLORLS_DIR/tab_complete.sh" ] && source "$COLORLS_DIR/tab_complete.sh"
 # fi
 
-if command -v zplug >/dev/null 2>&1; then
-  zplug "changyuheng/fz", defer:1
-  zplug "rupa/z", use:z.sh
+# z / zi (interactive, via fzf) — zoxide comes from the Brewfile
+if command -v zoxide >/dev/null 2>&1; then
+  eval "$(zoxide init zsh)"
 fi
 
 # autoload -Uz compinit && compinit

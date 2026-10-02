@@ -25,6 +25,7 @@ auto-update = check
 
 # Other
 shell-integration = zsh
+bell-features = no-audio
 # macos-hidden = always
 # macos-option-as-alt = true
 
