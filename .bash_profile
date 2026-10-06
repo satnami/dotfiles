@@ -14,7 +14,7 @@ if [ -z "$HOMEBREW_PREFIX" ]; then
 fi
 
 [ -d "$HOME/bin" ] && PATH="$HOME/bin:$PATH"
-[ -d "/usr/local/sbin" ] && PATH="$PATH:/usr/local/sbin"
+[ -d "/usr/local/sbin" ] && PATH="/usr/local/sbin:$PATH"
 [ -d "$HOME/.local/bin" ] && PATH="$HOME/.local/bin:$PATH"
 [ -d "$HOME/dotfiles/bin" ] && export PATH="$HOME/dotfiles/bin:$PATH"
 
