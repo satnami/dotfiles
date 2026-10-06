@@ -1,27 +1,28 @@
-tap "albertyw/albertyw"
+tap "albertyw/albertyw", trusted: true
 tap "anomalyco/tap"
-tap "argoproj/tap"
-tap "bramstein/webfonttools"
+tap "argoproj/tap", trusted: true
+tap "bramstein/webfonttools", trusted: true
 tap "can1357/tap"
-tap "cjbassi/gotop"
-tap "creditornot/wolt-dev-tools", "git@github.com:creditornot/homebrew-wolt-dev-tools.git"
-tap "cristianoliveira/tap"
-tap "dart-lang/dart"
-tap "denisidoro/tools"
-tap "derailed/k9s"
-tap "eugene1g/safehouse"
-tap "hashicorp/tap"
-tap "kilo-org/tap", "https://github.com/Kilo-Org/homebrew-tap"
-tap "manaflow-ai/cmux"
-tap "mekedron/tap"
-tap "mongodb/brew"
-tap "oven-sh/bun"
-tap "peonping/tap", "https://github.com/PeonPing/homebrew-tap"
-tap "remotemobprogramming/brew"
+tap "cjbassi/gotop", trusted: true
+tap "cockroachdb/tap", trusted: true
+tap "creditornot/wolt-dev-tools", "git@github.com:creditornot/homebrew-wolt-dev-tools.git", trusted: true
+tap "cristianoliveira/tap", trusted: true
+tap "dart-lang/dart", trusted: true
+tap "denisidoro/tools", trusted: true
+tap "derailed/k9s", trusted: true
+tap "eugene1g/safehouse", trusted: true
+tap "hashicorp/tap", trusted: true
+tap "kilo-org/tap", "https://github.com/Kilo-Org/homebrew-tap", trusted: true
+tap "manaflow-ai/cmux", trusted: true
+tap "mekedron/tap", trusted: true
+tap "mongodb/brew", trusted: true
+tap "oven-sh/bun", trusted: true
+tap "peonping/tap", "https://github.com/PeonPing/homebrew-tap", trusted: true
+tap "remotemobprogramming/brew", trusted: true
 tap "steipete/tap"
-tap "streamdal/tap", "https://github.com/streamdal/homebrew-tap.git"
+tap "streamdal/tap", "https://github.com/streamdal/homebrew-tap.git", trusted: true
 tap "supercmdlabs/supercmd", trusted: { casks: ["supercmd"] }
-tap "tabbyml/tabby"
+tap "tabbyml/tabby", trusted: true
 # Search tool like grep, but optimized for programmers
 brew "ack"
 # Run your GitHub Actions locally
@@ -258,14 +259,44 @@ brew "yazi"
 brew "zlib"
 # Shell extension to navigate your filesystem faster
 brew "zoxide"
+# Next-generation plugin manager for zsh
+brew "zplug"
 # UNIX shell (command interpreter)
 brew "zsh"
+# Fish-like fast/unobtrusive autosuggestions for zsh
+brew "zsh-autosuggestions"
 # Additional completion definitions for zsh
 brew "zsh-completions"
+# Fish shell like syntax highlighting for zsh
+brew "zsh-syntax-highlighting"
 # The AI coding agent built for the terminal.
 brew "anomalyco/tap/opencode", trusted: true
+# Kubectl Argo Rollouts Plugin.
+brew "argoproj/tap/kubectl-argo-rollouts"
 # Coding agent with the IDE wired in
 brew "can1357/tap/omp", trusted: true
+# A terminal based graphical activity monitor inspired by gtop and vtop
+brew "cjbassi/gotop/gotop"
+# Distributed SQL database shell
+brew "cockroachdb/tap/cockroach-sql"
+# Kubernetes CLI To Manage Your Clusters In Style!
+brew "derailed/k9s/k9s"
+# macOS sandbox wrapper for coding agents
+brew "eugene1g/safehouse/agent-safehouse", trusted: true
+# Vault
+brew "hashicorp/tap/vault"
+# The AI coding agent built for the terminal.
+brew "kilo-org/tap/kilo", trusted: true
+# Incredibly fast JavaScript runtime, bundler, transpiler and package manager - all in one.
+brew "oven-sh/bun/bun"
+# Sound effects and desktop notifications for AI coding agents
+brew "peonping/tap/peon-ping"
+# Swift handover for remote mobs using git. mob is a CLI tool written in GO. It keeps your master branch clean and creates WIP commits on mob-session branch.
+brew "remotemobprogramming/brew/mob"
+# A swiss army knife Cli tool for interacting with Kafka, RabbitMQ and other messaging systems.
+brew "streamdal/tap/plumber"
+# Tabby: AI Coding Assistant
+brew "tabbyml/tabby/tabby"
 # GPU-accelerated terminal emulator
 cask "alacritty"
 # Android SDK component
@@ -286,7 +317,6 @@ cask "chatgpt-atlas"
 cask "claude"
 # Terminal-based AI coding assistant
 cask "claude-code"
-cask "clipslop"
 # Free app that makes your Internet safer
 cask "cloudflare-warp"
 # Ghostty-based terminal with vertical tabs and notifications for AI coding agents
@@ -312,8 +342,6 @@ cask "expo-orbit"
 # Collaborative team software
 cask "figma"
 cask "font-hack-nerd-font"
-# MesloLGS NF — the font both terminal configs and Powerlevel10k use
-cask "font-meslo-for-powerlevel10k"
 cask "font-symbols-only-nerd-font"
 cask "font-ubuntu-nerd-font"
 # Set of tools to manage resources and applications hosted on Google Cloud
@@ -395,3 +423,4 @@ cask "vlc"
 # Weekly planner app focused on privacy
 cask "weektodo"
 npm "corepack"
+npm "openwolf"
