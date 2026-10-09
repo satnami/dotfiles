@@ -127,7 +127,7 @@ log "brew bundle"
 if [ -n "$DRY_RUN" ]; then
   brew bundle check --verbose --file="$DOTFILES/Brew/Brewfile"   # lists what is missing, installs nothing
 else
-  brew bundle --no-upgrade --file="$DOTFILES/Brew/Brewfile" || warn "brew bundle reported failures (see above); fix and re-run"
+  brew bundle --verbose --no-upgrade --file="$DOTFILES/Brew/Brewfile" || warn "brew bundle reported failures (see above); fix and re-run"
 fi
 
 # -------------------------------------------------------------------- iTerm2
