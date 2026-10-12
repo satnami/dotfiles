@@ -27,7 +27,6 @@ esac
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
-#ZSH_THEME="powerlevel9k/powerlevel9k"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
 export DEFAULT_USER="$USER"
@@ -102,49 +101,12 @@ zstyle :omz:plugins:ssh-agent lifetime 4h
 
 [ -f "$ZSH/oh-my-zsh.sh" ] && source "$ZSH/oh-my-zsh.sh"
 
-# User configuration
-
-# [ -d "/usr/local/man" ] && export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-export EDITOR='micro'
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# [ -f "$HOME/.ssh/id_rsa" ] && export SSH_KEY_PATH="$HOME/.ssh/id_rsa"
-
 [ -f "${ZDOTDIR:-$HOME}/.bash_profile" ] && source "${ZDOTDIR:-$HOME}/.bash_profile"
-
-[ -f "$HOME/.fzf.zsh" ] && source "$HOME/.fzf.zsh"
-
-[ -f "$HOME/.config/up/up.sh" ] && source "$HOME/.config/up/up.sh"
-
-[ -f "$HOME/.history_preexec.sh" ] && source "$HOME/.history_preexec.sh"
-
-# if command -v colorls >/dev/null 2>&1; then
-#   COLORLS_DIR="$(dirname "$(gem which colorls)")"
-#   [ -f "$COLORLS_DIR/tab_complete.sh" ] && source "$COLORLS_DIR/tab_complete.sh"
-# fi
-
-# z / zi (interactive, via fzf) — zoxide comes from the Brewfile
-if command -v zoxide >/dev/null 2>&1; then
-  eval "$(zoxide init zsh)"
-fi
 
 # autoload -Uz compinit && compinit
 # autoload -U +X bashcompinit && bashcompinit
 
-POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
-# export POWERLEVEL9K_DISABLE_RPROMPT=true
-# typeset -g POWERLEVEL9K_VCS_MAX_INDEXED_REPOS_SIZE=104857600  # 100MB
-# typeset -g POWERLEVEL9K_VCS_GITSTATUS_MAX_REPO_SIZE=200000000 # 200MB
-
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-# [[ ! -f ~/.p9k.zsh ]] || source ~/.p9k.zsh
 
 # zprof

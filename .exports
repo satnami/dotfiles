@@ -1,6 +1,40 @@
 #!/usr/bin/env bash
 
+export EDITOR='micro'
 # export TERM="screen-256color"
+
+# Compilation flags
+# export ARCHFLAGS="-arch x86_64"
+
+# User configuration
+# [ -d "/usr/local/man" ] && export MANPATH="/usr/local/man:$MANPATH"
+
+# You may need to manually set your language environment
+# export LANG=en_US.UTF-8
+
+# ssh
+# [ -f "$HOME/.ssh/id_rsa" ] && export SSH_KEY_PATH="$HOME/.ssh/id_rsa"
+
+source <(fzf --zsh)
+
+[ -f "$HOME/.config/up/up.sh" ] && source "$HOME/.config/up/up.sh"
+
+[ -f "$HOME/.history_preexec.sh" ] && source "$HOME/.history_preexec.sh"
+
+# if command -v colorls >/dev/null 2>&1; then
+#   COLORLS_DIR="$(dirname "$(gem which colorls)")"
+#   [ -f "$COLORLS_DIR/tab_complete.sh" ] && source "$COLORLS_DIR/tab_complete.sh"
+# fi
+
+# z / zi (interactive, via fzf) — zoxide comes from the Brewfile
+if command -v zoxide >/dev/null 2>&1; then
+  eval "$(zoxide init zsh)"
+fi
+
+POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
+# export POWERLEVEL9K_DISABLE_RPROMPT=true
+# typeset -g POWERLEVEL9K_VCS_MAX_INDEXED_REPOS_SIZE=104857600  # 100MB
+# typeset -g POWERLEVEL9K_VCS_GITSTATUS_MAX_REPO_SIZE=200000000 # 200MB
 
 # Homebrew keg-only tools. HOMEBREW_PREFIX comes from `brew shellenv` (.zshrc / .bash_profile).
 BREW_OPT="${HOMEBREW_PREFIX:-/opt/homebrew}/opt"
