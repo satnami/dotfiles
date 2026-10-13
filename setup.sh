@@ -142,6 +142,18 @@ fi
 log "Ghostty config"
 run sh "$DOTFILES/ghostty/setup.sh"
 
+# ------------------------------------------------------------ macOS defaults
+# Finder, Dock, screenshot and privacy preferences (idempotent `defaults write`).
+log "macOS defaults"
+if [ "$(uname)" = "Darwin" ]; then
+  # non-defaults first: macos/setup.sh ends with the Finder/Dock restart that
+  # makes both sets of writes take effect, so it runs last.
+  run sh "$DOTFILES/macos/non-defaults.sh"
+  run sh "$DOTFILES/macos/setup.sh"
+else
+  ok "not macOS, skipped"
+fi
+
 # -------------------------------------------------------------------- SDKMAN
 # rcupdate=false: the installer must not append to ~/.zshrc; .exports already sources sdkman-init.sh.
 log "SDKMAN"

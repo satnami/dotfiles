@@ -1,0 +1,62 @@
+# Keys that macos/backup.sh reads off this machine to regenerate
+# non-defaults.sh. One key per line:
+#
+#   [-currentHost] <domain> <key> | <comment for the generated file>
+#
+# `-currentHost` picks the per-machine preference store, which is where macOS
+# keeps trackpad and gesture state. `## <title>` starts a section in the output.
+# Keys missing from a domain are reported and skipped, so this list can also
+# hold settings that only exist on some machines.
+#
+# Nothing that macos/setup.sh already writes belongs here: that file is the
+# wanted-everywhere set, this one is whatever was changed by hand.
+
+## Appearance
+NSGlobalDomain AppleInterfaceStyle | Dark mode. Removing this key (not setting it to false) restores Light.
+NSGlobalDomain AppleAntiAliasingThreshold | Font smoothing threshold: no anti-aliasing at or below this point size.
+NSGlobalDomain AppleMiniaturizeOnDoubleClick | Double-clicking a title bar zooms instead of minimizing when false.
+NSGlobalDomain com.apple.sound.beep.flash | Flash the screen on system beep.
+
+## Scrolling and keys
+NSGlobalDomain com.apple.swipescrolldirection | Natural scrolling: content follows the fingers when true.
+NSGlobalDomain AppleEnableSwipeNavigateWithScrolls | Two-finger swipe to go back/forward in pages.
+NSGlobalDomain com.apple.keyboard.fnState | True: F1-F12 are standard function keys and fn gives brightness/volume.
+NSGlobalDomain com.apple.trackpad.forceClick | Force Touch.
+NSGlobalDomain NSAllowContinuousSpellChecking | As-you-type spell checking.
+
+## Trackpad
+# Two domains: AppleMultitouchTrackpad is the built-in trackpad, the Bluetooth
+# one is an external Magic Trackpad. The -currentHost keys below are the copies
+# the window server actually reads; they apply after the next logout.
+com.apple.AppleMultitouchTrackpad Clicking | Tap to click.
+com.apple.AppleMultitouchTrackpad Dragging | Tap-and-a-half dragging.
+com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking | Tap to click, external trackpad.
+com.apple.driver.AppleBluetoothMultitouch.trackpad Dragging | Tap-and-a-half dragging, external trackpad.
+com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRotate | Two-finger rotate gesture.
+com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerDrag | Three-finger window drag.
+com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerTapGesture | Three-finger tap (look up).
+com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadTwoFingerFromRightEdgeSwipeGesture | Right-edge two-finger swipe for Notification Center (3 = on).
+-currentHost NSGlobalDomain com.apple.trackpad.rotateGesture | Rotate gesture, per-machine copy.
+-currentHost NSGlobalDomain com.apple.trackpad.threeFingerDragGesture | Three-finger drag, per-machine copy.
+-currentHost NSGlobalDomain com.apple.trackpad.threeFingerTapGesture | Three-finger tap, per-machine copy.
+-currentHost NSGlobalDomain com.apple.trackpad.enableSecondaryClick | Two-finger right click.
+-currentHost NSGlobalDomain com.apple.trackpad.twoFingerFromRightEdgeSwipeGesture | Right-edge swipe, per-machine copy.
+-currentHost NSGlobalDomain com.apple.trackpad.scrollBehavior | 2 = momentum scrolling on both axes.
+
+## Dock
+com.apple.dock orientation | Dock edge: left, bottom or right.
+com.apple.dock tilesize | Icon size in points.
+com.apple.dock wvous-br-corner | Bottom-right hot corner. 1 off, 2 Mission Control, 3 app windows, 4 Desktop, 5 screen saver, 13 lock screen, 14 Quick Note.
+com.apple.dock wvous-bl-corner | Bottom-left hot corner, same values.
+com.apple.dock wvous-tr-corner | Top-right hot corner, same values.
+com.apple.dock wvous-tl-corner | Top-left hot corner, same values.
+
+## Finder
+com.apple.finder ShowRecentTags | Recent Tags section in the sidebar.
+
+## Menu bar
+com.apple.menuextra.clock ShowDate | Date next to the clock: 0 auto, 1 never, 2 always.
+com.apple.menuextra.clock ShowAMPM | AM/PM suffix.
+com.apple.menuextra.clock ShowDayOfWeek | Day of the week.
+com.apple.menuextra.clock FlashDateSeparators | Blink the time separators every second.
+com.apple.controlcenter NumberOfRecents | Recently-used items kept in Control Center.
