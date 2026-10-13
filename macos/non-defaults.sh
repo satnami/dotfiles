@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Backup of the macOS preferences that differ from Apple's defaults on this
-# machine, captured on 2026-10-09. Companion to macos/setup.sh: that file
+# machine, captured on 2026-10-13. Companion to macos/setup.sh: that file
 # holds the opinionated set we want on every machine, this one restores the
 # choices already made by hand in System Settings.
 #
@@ -31,7 +31,7 @@ defaults write NSGlobalDomain AppleEnableSwipeNavigateWithScrolls -bool false
 # True: F1-F12 are standard function keys and fn gives brightness/volume.
 defaults write NSGlobalDomain "com.apple.keyboard.fnState" -bool true
 # Force Touch.
-defaults write NSGlobalDomain "com.apple.trackpad.forceClick" -bool true
+defaults write NSGlobalDomain "com.apple.trackpad.forceClick" -bool false
 # As-you-type spell checking.
 defaults write NSGlobalDomain NSAllowContinuousSpellChecking -bool false
 
@@ -40,13 +40,13 @@ defaults write NSGlobalDomain NSAllowContinuousSpellChecking -bool false
 # one is an external Magic Trackpad. The -currentHost keys below are the copies
 # the window server actually reads; they apply after the next logout.
 # Tap to click.
-defaults write com.apple.AppleMultitouchTrackpad Clicking -int 0
+defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true
 # Tap-and-a-half dragging.
 defaults write com.apple.AppleMultitouchTrackpad Dragging -int 0
 # Tap to click, external trackpad.
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -int 0
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
 # Tap-and-a-half dragging, external trackpad.
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Dragging -int 0
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Dragging -bool false
 # Two-finger rotate gesture.
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRotate -bool false
 # Three-finger window drag.
