@@ -82,7 +82,7 @@ defaults write com.apple.finder NewWindowTargetPath -string "file://$HOME/"
 # Full POSIX path in the window title, so it can be copied out.
 defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
 # No confirmation when emptying the Trash.
-defaults write com.apple.finder WarnOnEmptyTrash -bool false
+defaults write com.apple.finder WarnOnEmptyTrash -bool true
 # Save dialogs and Get Info panels open expanded.
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
 defaults write com.apple.finder FXInfoPanesExpanded -dict General -bool true OpenWith -bool true
