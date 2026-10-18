@@ -92,9 +92,14 @@ if command -v safehouse >/dev/null 2>&1; then
 fi
 
 if command -v thefuck >/dev/null 2>&1; then eval "$(thefuck --alias)"; fi
-if command -v rbenv >/dev/null 2>&1; then eval "$(rbenv init -)"; fi
-if command -v pyenv >/dev/null 2>&1; then eval "$(pyenv init -)"; fi
-if command -v pyenv-virtualenv-init >/dev/null 2>&1; then eval "$(pyenv virtualenv-init -)"; fi
+
+if command -v mise >/dev/null 2>&1; then
+  [ -f "$HOME/dotfiles/mise.toml" ] && export MISE_GLOBAL_CONFIG_FILE="$HOME/dotfiles/mise.toml"
+  if [ -n "$ZSH_VERSION" ]; then eval "$(mise activate zsh)"
+  elif [ -n "$BASH_VERSION" ]; then eval "$(mise activate bash)"
+  fi
+fi
+
 # if command -v minishift >/dev/null 2>&1; then
 #   eval $(minishift oc-env)
 #   eval $(minishift docker-env)

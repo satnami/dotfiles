@@ -70,53 +70,6 @@ export GPG_TTY=$(tty)
 #   export PATH="${PATH}:${M2_HOME}/bin"
 # fi
 
-# Add Rbenv PATH for scripting.
-if command -v rbenv >/dev/null 2>&1; then
-  export RBENV_ROOT="$(rbenv root)"
-else
-  export RBENV_ROOT="$HOME/.rbenv"
-fi
-[ -d "$RBENV_ROOT/shims" ] && export PATH="$PATH:$RBENV_ROOT/shims"
-# [ -d "$RBENV_ROOT/plugins/ruby-build/bin" ] && export PATH="$PATH:$RBENV_ROOT/plugins/ruby-build/bin"
-
-# Add Pyenv PATH for scripting.
-if command -v pyenv >/dev/null 2>&1; then
-  export PYENV_ROOT="$(pyenv root)"
-else
-  export PYENV_ROOT="$HOME/.pyenv"
-fi
-[ -d "$PYENV_ROOT/shims" ] && export PATH="$PATH:$PYENV_ROOT/shims"
-
-# Add RVM to PATH for scripting.
-# [ -d "$HOME/.rvm/bin" ] && export PATH="$PATH:$HOME/.rvm/bin"
-
-# THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
-
-export NVM_DIR="$HOME/.nvm"
-if [ -s "$NVM_DIR/nvm.sh" ]; then
-  # --no-use skips nvm's automatic `nvm use default`, which costs ~1s per shell start.
-  \. "$NVM_DIR/nvm.sh" --no-use
-  # Put the default node on PATH ourselves by resolving the alias from nvm's files.
-  _nvm_default_bin() {
-    local v="default" hops=0 node_dir="$NVM_DIR/versions/node"
-    while [ -f "$NVM_DIR/alias/$v" ] && [ "$hops" -lt 5 ]; do
-      v="$(cat "$NVM_DIR/alias/$v")"; hops=$((hops + 1))
-    done
-    case "$v" in
-      node|stable|default|'') v="$(ls "$node_dir" 2>/dev/null | sort -V | tail -1)" ;;
-      v*) [ -d "$node_dir/$v" ] || v="$(ls "$node_dir" 2>/dev/null | grep "^${v%%.*}\." | sort -V | tail -1)" ;;
-      *) v="$(ls "$node_dir" 2>/dev/null | grep "^v$v" | sort -V | tail -1)" ;;
-    esac
-    [ -d "$node_dir/$v/bin" ] && printf '%s' "$node_dir/$v/bin"
-  }
-  _nvm_bin="$(_nvm_default_bin)"
-  [ -n "$_nvm_bin" ] && export PATH="$_nvm_bin:$PATH"
-  unset _nvm_bin
-  unset -f _nvm_default_bin
-fi
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 if [ -d "$HOME/Library/Android/sdk" ]; then
   export ANDROID_HOME="$HOME/Library/Android/sdk"

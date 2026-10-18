@@ -62,7 +62,7 @@ sh macos/backup.sh
 
 1. `.zshrc` — loads Oh My Zsh, Powerlevel10k theme, plugins (zsh-syntax-highlighting, zsh-autosuggestions, ssh-agent), then sources `.bash_profile`
 2. `.bash_profile` — adds `~/dotfiles/bin` to PATH, then sources `.exports`, `.aliases`, `.functions`, and `.extra` (gitignored personal overrides)
-3. `.exports` — PATH entries and environment variables (nvm, rbenv, pyenv, sdkman, Go, Android, etc.)
+3. `.exports` — PATH entries and environment variables (mise, Go, Android, etc.)
 4. `.aliases` — shell aliases (navigation, Docker, Ruby/Rails, networking, etc.)
 5. `.functions` — utility shell functions
 6. `.history_preexec.sh` — SQLite-based command history tracking (stores commands in `~/.history.db`)
@@ -76,7 +76,7 @@ sh macos/backup.sh
 - `iTerm/` — iTerm2 preferences, fonts, and themes
 - `macos/` — macOS system preferences via `defaults write`; `setup.sh` runs both scripts on Darwin only. `macos/setup.sh` is the hand-written opinionated set wanted on every machine (keyboard, Finder, Dock, screenshots, Safari). `macos/non-defaults.sh` backs up the settings changed by hand on the current machine and is **generated** — `sh macos/backup.sh` regenerates it by reading the keys in `macos/keys.list` off the live system, the way `Brew/backup.sh` regenerates the Brewfile. To track a new setting, add it to `keys.list` (`[-currentHost] <domain> <key> | <comment>`) and re-run the backup; never edit `non-defaults.sh` by hand.
 - `misc/` — one-off utility scripts (CSV splitting, file renaming, etc.)
-- `packages/` — `npm.list` (global npm tools, installed per missing package by `setup.sh`), `gems.list` (rbenv default gems), `pip.list` (legacy reference only, not restored)
+- `packages/` — `gems.list` (Ruby gems installed by `setup.sh`), `pip.list` (legacy reference only, not restored); global npm CLIs are listed in `mise.toml`
 
 ### Git Configuration
 

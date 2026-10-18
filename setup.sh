@@ -12,9 +12,6 @@
 #   DRY_RUN=1 sh ~/dotfiles/setup.sh      # show what a run would do, change nothing
 
 # Knobs
-RUBY_SERIES="4.0"      # a Ruby of this series gets installed when none is present
-NODE_VERSION="lts/*"   # nvm alias or version
-
 export DRY_RUN="${DRY_RUN:-}"
 
 DOTFILES="$HOME/dotfiles"
@@ -154,97 +151,52 @@ else
   ok "not macOS, skipped"
 fi
 
-# -------------------------------------------------------------------- SDKMAN
-# rcupdate=false: the installer must not append to ~/.zshrc; .exports already sources sdkman-init.sh.
-log "SDKMAN"
-if [ -d "$HOME/.sdkman" ]; then
-  ok "sdkman"
-else
-  run_sh 'curl -s "https://get.sdkman.io?rcupdate=false" | bash'
-fi
-
 # ----------------------------------------------------------------------- Vim
 log "Vim plugins"
 clone https://github.com/VundleVim/Vundle.vim.git "$HOME/.vim/bundle/Vundle.vim"
 run vim +PluginInstall +qall    # installs only the .vimrc plugins that are missing
 run vim +PluginUpdate +qall     # pulls updates for the installed ones
 
-# ---------------------------------------------------------------------- Ruby
-# rbenv + ruby-build come from the Brewfile.
-log "Ruby"
-if command -v rbenv >/dev/null 2>&1; then
-  clone https://github.com/rbenv/rbenv-default-gems.git "$(rbenv root)/plugins/rbenv-default-gems"
-  # default-gems is created once; a local copy is left alone even when it differs.
-  if [ -f "$(rbenv root)/default-gems" ]; then
-    ok "$(rbenv root)/default-gems"
-  else
-    run cp "$DOTFILES/packages/gems.list" "$(rbenv root)/default-gems"
-  fi
-  # Any installed Ruby of this series counts; only install when there is none.
-  RUBY_VERSION="$(rbenv versions --bare 2>/dev/null | grep -E "^${RUBY_SERIES}\.[0-9]+$" | sort -V | tail -1)"
-  if [ -n "$RUBY_VERSION" ]; then
-    ok "ruby $RUBY_VERSION"
-  else
-    RUBY_VERSION="$(rbenv install -l 2>/dev/null | grep -E "^${RUBY_SERIES}\.[0-9]+$" | tail -1)"
-    if [ -n "$RUBY_VERSION" ]; then
-      run rbenv install "$RUBY_VERSION" || RUBY_VERSION=""
-    else
-      warn "ruby-build knows no Ruby ${RUBY_SERIES}.x (brew upgrade ruby-build?)"
-    fi
-  fi
-  # Set the global Ruby only when none is configured yet.
-  if [ -n "$RUBY_VERSION" ] && [ "$(rbenv global 2>/dev/null)" = "system" ]; then
-    run rbenv global "$RUBY_VERSION"
-  fi
-else
-  warn "rbenv not installed (brew bundle failed?), skipping Ruby"
+# ---------------------------------------------------------------------- mise
+# All managed runtime versions live in mise.toml in the dotfiles checkout.
+log "mise runtimes"
+if ! command -v mise >/dev/null 2>&1 && [ -x "$HOME/.local/bin/mise" ]; then
+  PATH="$HOME/.local/bin:$PATH"; export PATH
 fi
-
-# ---------------------------------------------------------------------- Node
-log "Node"
-export NVM_DIR="$HOME/.nvm"
-if [ -s "$NVM_DIR/nvm.sh" ]; then
-  ok "nvm"
-else
-  # PROFILE=/dev/null: do not append to ~/.zshrc; .exports already loads nvm.
-  run_sh 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | PROFILE=/dev/null bash'
+if ! command -v mise >/dev/null 2>&1; then
+  if [ -n "$DRY_RUN" ]; then
+    printf '    would curl -fsSL https://mise.run | sh\n'
+  else
+    run_sh 'curl -fsSL https://mise.run | sh'
+    PATH="$HOME/.local/bin:$PATH"; export PATH
+  fi
 fi
-if [ -s "$NVM_DIR/nvm.sh" ]; then
-  # nvm is a shell function, not a binary: load it into this shell before calling it.
-  . "$NVM_DIR/nvm.sh" --no-use
-  if [ "$(nvm version "$NODE_VERSION")" = "N/A" ]; then
-    run nvm install "$NODE_VERSION"
+if command -v mise >/dev/null 2>&1; then
+  if [ -n "$DRY_RUN" ]; then
+    printf '    would (cd %s && mise install --yes)\n' "$DOTFILES"
   else
-    ok "node $(nvm version "$NODE_VERSION")"
+    (cd "$DOTFILES" && mise install --yes) || warn "mise could not install every configured runtime (see above); fix and re-run"
   fi
-  [ -f "$NVM_DIR/alias/default" ] || run nvm alias default "$NODE_VERSION"
 
-  # Global npm packages: install only the ones from packages/npm.list that are missing.
-  # nvm keeps globals per node version, so a new node starts with none of them.
-  if nvm use "$NODE_VERSION" --silent 2>/dev/null; then
-    # `nvm use` edits an existing nvm PATH entry in place, which can sit behind
-    # /opt/homebrew/bin (Homebrew node). Force nvm's node first so npm is nvm's npm.
-    PATH="$(dirname "$(nvm which "$NODE_VERSION")"):$PATH"; export PATH
-    NPM_ROOT="$(npm root -g)"
-    NPM_MISSING=""
-    for pkg in $(sed -e '/^#/d' -e 's/npm install --location=global//' -e 's/\\//g' "$DOTFILES/packages/npm.list"); do
-      [ -d "$NPM_ROOT/$pkg" ] || NPM_MISSING="$NPM_MISSING $pkg"
-    done
-    if [ -z "$NPM_MISSING" ]; then
-      ok "npm globals"
-    elif [ -n "$DRY_RUN" ]; then
-      printf '    would npm install --location=global:%s\n' "$NPM_MISSING"
-    else
-      # One package per call: npm rolls back the whole command when a single package fails.
-      for pkg in $NPM_MISSING; do
-        npm install --location=global "$pkg" || warn "npm: $pkg failed to install"
-      done
-    fi
+  # mise.toml manages global npm CLIs; preserve the Ruby gem package list.
+  if [ -n "$DRY_RUN" ]; then
+    printf '    would install missing Ruby gems from packages/gems.list\n'
   else
-    warn "node $NODE_VERSION not installed yet, npm globals come on the next run"
+    (cd "$DOTFILES" && mise exec -- sh -c '
+      if command -v gem >/dev/null 2>&1; then
+        for gem_name in $(sed "/^#/d" packages/gems.list); do
+          gem list -i "$gem_name" >/dev/null 2>&1 || gem install --no-document "$gem_name" || echo "WARN: gem: $gem_name failed to install" >&2
+        done
+      fi
+    ')
   fi
 else
-  warn "nvm not installed, skipping Node"
+  if [ -n "$DRY_RUN" ]; then
+    printf '    would (cd %s && mise install --yes)\n' "$DOTFILES"
+    printf '    would install missing Ruby gems from packages/gems.list\n'
+  else
+    warn "mise installer did not make mise available, skipping managed runtimes"
+  fi
 fi
 
 # ----------------------------------------------------------------------- GPG
@@ -257,15 +209,6 @@ if [ -n "$SIGNING_KEY" ] && gpg --list-secret-keys "$SIGNING_KEY" >/dev/null 2>&
 else
   warn "GPG secret key ${SIGNING_KEY:-(none in .gitconfig)} not found: gpg --import <your-key-backup.asc>"
 fi
-
-# ------------------------------------------------------------- Erlang (off)
-# Kept for reference; run by hand when needed.
-# brew install autoconf@2.69 && brew link --overwrite autoconf@2.69
-# kerl update && kerl build 22.3 22.3 && kerl install 22.3 ~/kerl/default
-# . ~/kerl/default/activate
-# brew install rebar3
-# git clone https://github.com/erlang-ls/erlang_ls ~/kerl/erlang-ls && (cd ~/kerl/erlang-ls && make && cp _build/default/bin/erlang_ls /usr/local/bin)
-# git clone https://github.com/inaka/elvis ~/kerl/elvis && (cd ~/kerl/elvis && rebar3 compile && rebar3 escriptize && cp _build/default/bin/elvis /usr/local/bin)
 
 # ---------------------------------------------------------------------- cron
 log "cron: daily history backup"

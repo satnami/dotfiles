@@ -31,8 +31,6 @@ brew "act"
 brew "openssl@3"
 # Companion library to apr, the Apache Portable Runtime library
 brew "apr-util"
-# Extendable version manager with support for Ruby, Node.js, Erlang & more
-brew "asdf"
 # Automatic configure script builder
 brew "autoconf"
 # Use AWS IAM credentials to authenticate to Kubernetes
@@ -105,8 +103,6 @@ brew "git-delta"
 brew "glances"
 # GNU version of the tar archiving utility
 brew "gnu-tar"
-# Open source programming language to build simple/reliable/efficient software
-brew "go"
 # GNU grep, egrep and fgrep
 brew "grep"
 # Like cURL, but for gRPC
@@ -137,8 +133,6 @@ brew "jfrog-cli"
 brew "jid"
 # Lightweight and flexible command-line JSON processor
 brew "jq"
-# Easy building and installing of Erlang/OTP instances
-brew "kerl"
 # Kubernetes command-line interface
 brew "kubernetes-cli"
 # Production Grade K8s Installation, Upgrades, and Management
@@ -171,8 +165,6 @@ brew "parallel"
 brew "pgcli"
 # Execute binaries from Python packages in isolated environments
 brew "pipx"
-# Fast, disk space efficient package manager
-brew "pnpm"
 # PDF rendering library (based on the xpdf-3.0 code base)
 brew "poppler"
 # Object-relational database system
@@ -181,24 +173,10 @@ brew "postgresql@15", link: true
 brew "pre-commit"
 # Monitor data's progress through a pipe
 brew "pv"
-# Python version management
-brew "pyenv"
-# Pyenv plugin to manage virtualenv
-brew "pyenv-virtualenv"
-# Alternative to pyenv for managing virtualenvs
-brew "pyenv-virtualenvwrapper"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
 # AI-powered command-line workflow tool for developers
 brew "qwen-code"
-# Install various Ruby versions and implementations
-brew "ruby-build"
-# Ruby version manager
-brew "rbenv"
-# Auto-installs gems for Ruby installs
-brew "rbenv-default-gems"
-# KISS yet powerful gem/set management for curious engineers and Ruby hackers
-brew "rbenv-gemset"
 # Reattach process (e.g., tmux) to background
 brew "reattach-to-user-namespace"
 # Erlang build tool
@@ -231,16 +209,12 @@ brew "stow"
 brew "subversion"
 # Send macOS User Notifications from the command-line
 brew "terminal-notifier"
-# Terraform version manager inspired by rbenv
-brew "tfenv"
 # Linter for Terraform files
 brew "tflint"
 # Text interface for Git repositories
 brew "tig"
 # Display directories as trees (with optional color/HTML output)
 brew "tree"
-# Extremely fast Python package installer and resolver, written in Rust
-brew "uv"
 # Vi 'workalike' with many additional features
 brew "vim"
 # Image processing library
@@ -287,8 +261,6 @@ brew "eugene1g/safehouse/agent-safehouse", trusted: true
 brew "hashicorp/tap/vault"
 # The AI coding agent built for the terminal.
 brew "kilo-org/tap/kilo", trusted: true
-# Incredibly fast JavaScript runtime, bundler, transpiler and package manager - all in one.
-brew "oven-sh/bun/bun"
 # Sound effects and desktop notifications for AI coding agents
 brew "peonping/tap/peon-ping"
 # Swift handover for remote mobs using git. mob is a CLI tool written in GO. It keeps your master branch clean and creates WIP commits on mob-session branch.
