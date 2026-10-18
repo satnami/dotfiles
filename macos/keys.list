@@ -43,6 +43,9 @@ com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadTwoFingerFromRightEdg
 -currentHost NSGlobalDomain com.apple.trackpad.twoFingerFromRightEdgeSwipeGesture | Right-edge swipe, per-machine copy.
 -currentHost NSGlobalDomain com.apple.trackpad.scrollBehavior | 2 = momentum scrolling on both axes.
 
+## Spaces
+NSGlobalDomain AppleSpacesSwitchOnActivate | Switching to an app jumps to a Space holding its windows when true; false stays on the current Space.
+
 ## Dock
 com.apple.dock orientation | Dock edge: left, bottom or right.
 com.apple.dock tilesize | Icon size in points.

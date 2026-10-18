@@ -68,6 +68,10 @@ defaults -currentHost write NSGlobalDomain "com.apple.trackpad.twoFingerFromRigh
 # 2 = momentum scrolling on both axes.
 defaults -currentHost write NSGlobalDomain "com.apple.trackpad.scrollBehavior" -int 2
 
+# ------------------------------------------------------------------ Spaces
+# Switching to an app jumps to a Space holding its windows when true; false stays on the current Space.
+defaults write NSGlobalDomain AppleSpacesSwitchOnActivate -bool false
+
 # -------------------------------------------------------------------- Dock
 # Dock edge: left, bottom or right.
 defaults write com.apple.dock orientation -string "left"

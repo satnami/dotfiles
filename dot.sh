@@ -6,7 +6,7 @@
 DOTFILES_DIR="$HOME/dotfiles"
 
 # Files that live at ~/.<name> (names without the leading dot)
-LOCATIONS="aliases bash_profile editorconfig exports functions gemrc gitconfig gitignore_global hushlogin psqlrc vimrc zshrc kerlrc history_preexec.sh"
+LOCATIONS="aliases bash_profile editorconfig exports functions gemrc gitconfig gitignore_global hushlogin psqlrc vimrc zprofile zshrc kerlrc history_preexec.sh"
 
 # Files that live elsewhere: "<path in repo>|<path in home>". Empty for now;
 # terminal configs are pointed at the repo by iTerm/setup.sh and ghostty/setup.sh.

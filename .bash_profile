@@ -1,3 +1,6 @@
+# Needed in non-interactive login shells too (e.g. Devbox), so set before the guard.
+[ -d "$HOME/.local/bin" ] && PATH="$HOME/.local/bin:$PATH"
+
 # If not running interactively, don't do anything
 case $- in
   *i*) ;;
@@ -16,7 +19,7 @@ fi
 [ -d "$HOME/bin" ] && PATH="$HOME/bin:$PATH"
 [ -d "/usr/local/sbin" ] && PATH="/usr/local/sbin:$PATH"
 [ -d "$HOME/.local/bin" ] && PATH="$HOME/.local/bin:$PATH"
-[ -d "$HOME/dotfiles/bin" ] && export PATH="$HOME/dotfiles/bin:$PATH"
+[ -d "$HOME/dotfiles/bin" ] && PATH="$HOME/dotfiles/bin:$PATH"
 
 # Load the shell dotfiles, and then some:
 # * ~/.extra can be used for other settings you don’t want to commit.
