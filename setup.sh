@@ -147,6 +147,7 @@ if [ "$(uname)" = "Darwin" ]; then
   # makes both sets of writes take effect, so it runs last.
   run sh "$DOTFILES/macos/non-defaults.sh"
   run sh "$DOTFILES/macos/setup.sh"
+  run sh "$DOTFILES/macos/touch-id-sudo.sh" || warn "Touch ID for sudo not enabled (see above); re-run macos/touch-id-sudo.sh"
 else
   ok "not macOS, skipped"
 fi
