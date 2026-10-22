@@ -78,7 +78,6 @@ alias pubkey_gen_pem8="ssh-keygen -f  ~/.ssh/id_rsa.pub -m 'pkcs8' -e >  ~/.ssh/
 
 alias top='htop'
 alias file_manager='mc'
-alias fm='nnn'
 
 alias httpt='wuzz'
 
