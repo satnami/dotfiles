@@ -127,6 +127,27 @@ else
   brew bundle --verbose --no-upgrade --file="$DOTFILES/Brew/Brewfile" || warn "brew bundle reported failures (see above); fix and re-run"
 fi
 
+# --------------------------------------------------------------- GPG agent
+# Keep the pinentry program and cache settings present without duplicating them.
+log "GPG agent"
+GPG_AGENT_CONF="$HOME/.gnupg/gpg-agent.conf"
+if [ -n "$DRY_RUN" ]; then
+  printf '    would ensure %s contains pinentry and cache settings\n' "$GPG_AGENT_CONF"
+else
+  mkdir -p "$HOME/.gnupg"
+  touch "$GPG_AGENT_CONF"
+  for GPG_SETTING in \
+    'pinentry-program /opt/homebrew/bin/pinentry-mac' \
+    'default-cache-ttl 86400' \
+    'max-cache-ttl 604800'; do
+    if ! grep -Fqx "$GPG_SETTING" "$GPG_AGENT_CONF"; then
+      printf '%s\n' "$GPG_SETTING" >> "$GPG_AGENT_CONF"
+    fi
+  done
+  chmod 700 "$HOME/.gnupg"
+  ok "$GPG_AGENT_CONF"
+fi
+
 # -------------------------------------------------------------------- iTerm2
 # Points iTerm2 at the prefs in the repo (idempotent `defaults write`).
 log "iTerm2 prefs"
